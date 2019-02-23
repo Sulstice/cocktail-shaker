@@ -5,11 +5,6 @@
 # ----------------------------------------------------------
 
 from rdkit import Chem
-from rdkit.Chem import AllChem
-from rdkit.Chem.Draw import IPythonConsole
-from rdkit.Chem.Draw import MolDrawing, DrawingOptions
-
-R_GROUP_LIST = ["Br", "Cl", "F", "O", "O=C", "OC=O", "N"]
 
 class RGroupMolObject(object):
     """
@@ -22,12 +17,13 @@ class RGroupMolObject(object):
     __version_parser__ = 1.0
     __allow_update__ = False
 
-    def __init__(self, molecule):
-        self.molecule = molecule
-        self.original_smiles = Chem.MolToSmiles(self.molecule)
-        self.validate_molecule()
+    def __init__(self, molecule=None):
+        if molecule != None:
+            self.molecule = molecule
+            self.original_smiles = Chem.MolToSmiles(self.molecule)
+            self.validate_molecule()
 
-    def validate_molecule(self):
+    def validate_molecule(self, smiles=None):
         """
 
         This method takes the smiles string and runs through the validation check of a smiles string.
@@ -37,8 +33,12 @@ class RGroupMolObject(object):
         # Use MolVS to validate the smiles to make sure enumeration and r group connections are correct
         # at least in the 1D Format.
         from molvs import validate_smiles
+
         try:
-            validate_smiles(self.original_smiles)
+            if smiles:
+                validate_smiles(smiles)
+            else:
+                validate_smiles(self.original_smiles)
         except RaiseMoleculeError:
             print ("Not a Valid Smiles, Please check the formatting: %s" % self.original_smiles)
 
