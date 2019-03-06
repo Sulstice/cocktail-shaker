@@ -5,6 +5,9 @@
 #
 # ------------------------------------------------
 
+# imports
+# -------
+
 
 # config
 # ------
@@ -15,8 +18,8 @@ except ImportError:
 
 # requirements
 # ------------
-with open('requirements.txt', 'r') as reqs:
-    REQUIREMENTS = map(lambda x: x.rstrip(), reqs.readlines())
+with open('requirements.txt') as f:
+    REQUIREMENTS = f.read().strip().split('\n')
 
 TEST_REQUIREMENTS = [
     'pytest',
