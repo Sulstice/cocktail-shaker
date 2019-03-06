@@ -14,7 +14,6 @@ conda==4.3.16
 coverage==3.7.1
 cryptography==2.5
 cycler==0.10.0
-Cython==0.29.2
 dask==1.0.0
 decorator==4.3.0
 docutils==0.14
