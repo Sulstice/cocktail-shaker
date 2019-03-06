@@ -40,4 +40,5 @@ before_script:
 - export RDBASE=$CONDA_PREFIX/Library/share/RDKit
 - echo $RDBASE
 script:
-- python tests/test.py
+-
+- python ../tests/test.py
