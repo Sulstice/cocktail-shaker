@@ -45,9 +45,9 @@ class RGroupMolObject(object):
         if molecule != None:
             self.molecule = molecule
             self.original_smiles = Chem.MolToSmiles(self.molecule)
-            self.validate_molecule()
+            self.validate_molecule(self.original_smiles)
 
-    def validate_molecule(self, smiles=None):
+    def validate_molecule(self, smiles):
         """
 
         This method takes the smiles string and runs through the validation check of a smiles string.
@@ -68,7 +68,7 @@ class RGroupMolObject(object):
         from molvs import validate_smiles
 
         try:
-            validate_smiles(self.original_smiles)
+            validate_smiles(smiles)
         except RaiseMoleculeError as RME:
             print ("Not a Valid Smiles, Please check the formatting: %s" % self.original_smiles)
             print ("MolVs Stacktrace %s" % RME)
@@ -87,9 +87,13 @@ class RGroupMolObject(object):
 
         for key, value in R_GROUPS.items():
             if value in self.original_smiles:
+
                 r_group_molecule = RGroupMolObject(Chem.MolFromSmiles(value))
+
                 # delete part of the molecule containing the structure.
                 truncated_molecule = Chem.DeleteSubstructs(self.molecule, r_group_molecule.molecule)
+
+                #Although this decreases performance, it ensures we don't have duplicates downstream.
                 filtered_r_groups = {filtered_key: filtered_value for filtered_key, filtered_value \
                                      in R_GROUPS.items() if not filtered_value == value }
 
@@ -100,12 +104,16 @@ class RGroupMolObject(object):
                     editable_combination = Chem.EditableMol(combination_molecule)
 
 
-                    for i in range(0, Chem.Mol.GetNumAtoms(truncated_molecule)):
+                # for i in range(0, Chem.Mol.GetNumAtoms(truncated_molecule)):
 
-                        editable_combination.AddBond(i, 9, order=Chem.rdchem.BondType.SINGLE)
+                    editable_combination.AddBond(5, 9, order=Chem.rdchem.BondType.SINGLE)
 
-                        molecule_returned = editable_combination.GetMol()
-                        CHEMICAL_SMILES.add(Chem.MolToSmiles(molecule_returned))
+                    molecule_returned = Chem.MolToSmiles(editable_combination.GetMol())
+                    print (self.validate_molecule(molecule_returned))
+                    if self.validate_molecule(molecule_returned) == None:
+                        CHEMICAL_SMILES_R_GROUPS.add(molecule_returned)
+
+        print (CHEMICAL_SMILES_R_GROUPS)
 
         return CHEMICAL_SMILES_R_GROUPS
 

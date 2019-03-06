@@ -1,46 +1,43 @@
 language: python
 python:
-  - 3.6
-matrix:
-  include:
-  - os: linux
-    env: PYTHON=3
-  - os: linux
-    env: CONDA=3
-  - os: osx
-    env: PYTHON=3
-  - os: osx
-    env: CONDA=3
+  - "3.6"
+
+# switch to new infrastructure
+sudo: false
+
 before_install:
-- |
-  if [ "$TRAVIS_OS_NAME" = "linux" ]; then export CXX=g++-4.8 CC=gcc-4.8; fi
-  if [ -n "$PYTHON" ]; then
-    if [ "$TRAVIS_OS_NAME" = "osx" ] && [ "${PYTHON:0:1}" = "3" ]; then
-      brew update; brew install python3;
-    fi
-    pip install --user --upgrade pip virtualenv
-    virtualenv -p python$PYTHON venv
-    source venv/bin/activate
-  elif [ -n "$CONDA" ]; then
-    if [ "$TRAVIS_OS_NAME" = "linux" ]; then OS=Linux-x86_64; else OS=MacOSX-x86_64; fi
-    wget -O miniconda.sh https://repo.continuum.io/miniconda/Miniconda${CONDA:0:1}-latest-$OS.sh
-    bash miniconda.sh -b -p $HOME/miniconda
-    export PATH="$HOME/miniconda/bin:$PATH"
-    conda config --set always_yes yes --set changeps1 no
-    conda config --add channels conda-forge
-    conda update -q conda
-    conda install -q conda-build
-    conda create -q -n test-environment python=$CONDA
-    source activate test-environment
-  fi
+# download and install miniconda
+- wget http://repo.continuum.io/miniconda/Miniconda3-4.1.11-Linux-x86_64.sh -O miniconda.sh;
+- bash miniconda.sh -b -p $HOME/conda
+- export PATH="$HOME/conda/bin:$PATH"
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+- conda update -q conda
+# Useful for debugging any issues with conda
+- conda info -a
+
+# create and activate the build/test environment
+- conda create -q -n tenv python=$TRAVIS_PYTHON_VERSION pip cmake
+- source activate tenv
+
+# additional .debs we need:
+addons:
+  apt:
+    packages:
+    - build-essential
+    - openjdk-7-jdk
+    - swig
+    - libjpeg-dev
+
 install:
-- |
-  if [ -n "$PYTHON" ]; then
-    python setup.py sdist
-    pip install --verbose dist/*.tar.gz
-  elif [ -n "$CONDA" ]; then
-    conda build conda.recipe
-    conda install --use-local python_example
-  fi
+- conda install -q scikit-learn numpy pillow pandas jupyter nbconvert matplotlib seaborn
+
+# install the most recent rdkit package from the RDKit anaconda channel.
+- conda install -q -c rdkit rdkit
+
+before_script:
+# RDKit
+- export RDBASE=$CONDA_PREFIX/Library/share/RDKit
+- echo $RDBASE
 script:
 - python tests/test.py

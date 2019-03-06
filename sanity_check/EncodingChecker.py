@@ -34,6 +34,12 @@ class LigandFile(object):
 
         Use the codecs package to check for UTf-8 Encoding.
 
+        Arguments:
+            self (Object): Ligand File Object
+
+        Exceptions:
+            UnicodeDecodeError: Detects whether a file is utf-8 encoded using string enforce.
+
         """
         import codecs
         try:

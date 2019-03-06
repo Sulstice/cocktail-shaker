@@ -21,6 +21,11 @@ SDF_PATHS = Path(str(HOME_SOURCE) + str(CHEM_DATA_SOURCE)).glob("**/*.sdf")
 MOLECULAR_WEIGHT_DISTRIBUTION = []
 p = 0
 
+class EnumerateSmiles(object):
+
+    def __init__(self, smiles):
+        self.smiles = smiles
+
 def convert_to_sdf():
     """
 
