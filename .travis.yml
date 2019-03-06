@@ -35,10 +35,12 @@ install:
 # install the most recent rdkit package from the RDKit anaconda channel.
 - conda install -q -c rdkit rdkit
 
+- python setup.py install
+
 before_script:
 # RDKit
 - export RDBASE=$CONDA_PREFIX/Library/share/RDKit
 - echo $RDBASE
+
 script:
--
-- python ../tests/test.py
+- python tests/sanity_check/test_sanity_check.py

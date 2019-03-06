@@ -34,20 +34,16 @@ with open('README.md') as fi:
 # exec
 # ----
 setup(
-    name=DEEP_CURE,
-    version=DEEP_CURE.__version__,
-    description=DEEP_CURE.__desc__,
+    name="Ligand Library Enumerator",
+    version="0.0.1",
+    description="Expand your ligand library with this amazing package!r",
     long_description=README,
-    author=DEEP_CURE.__author__,
-    author_email=DEEP_CURE.__email__,
-    url=DEEP_CURE.__url__,
-    packages=find_packages(include=[
-        'mol2check',
-    ]),
-    include_package_data=True,
+    author="Suliman Sharif",
+    author_email="sharifsuliman1@gmail.com",
+    url="www.github",
     install_requires=REQUIREMENTS,
     zip_safe=False,
-    keywords=['deepcure', 'chemistry', 'ligand-design'],
+    keywords=['ligand-loader', 'chemistry', 'ligand-design'],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
