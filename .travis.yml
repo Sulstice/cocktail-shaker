@@ -43,4 +43,4 @@ before_script:
 - echo $RDBASE
 
 script:
-- python tests/sanity_check/test_sanity_check.py
+- python -m pytest tests/sanity_check/test_sanity_check.py
