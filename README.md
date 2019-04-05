@@ -1,5 +1,8 @@
 
 ## Ligand Library Design
+![Build status](https://travis-ci.com/Sulstice/Ligand-Library-Creation.svg?branch=master)
+![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)
+
 
 **Background:** ML algorithms are capable of searching extensive chemical spaces
 for the best starting points for a drug development program. This leaves us with the question of
