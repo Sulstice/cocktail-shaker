@@ -9,7 +9,6 @@
 # -------
 import os
 import numpy as np
-import pandas as pd
 
 # RDKit Imports
 # -------
@@ -20,13 +19,10 @@ from rdkit.Chem import AllChem
 from rdkit.Chem import DataStructs
 from rdkit.Chem import rdRGroupDecomposition
 from rdkit.Chem import rdmolops
-from rdkit.Chem import RDConfig
-from rdkit.Chem import PandasTools
 from rdkit.Chem.Scaffolds import MurckoScaffold
 import igraph
 from collections import defaultdict
 from itertools import product
-from rdkit.Chem import Draw
 from rdkit.Chem import Descriptors
 
 # Strictly Python3 TODO: Does not support Python2 Currently

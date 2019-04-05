@@ -9,7 +9,6 @@
 from rdkit import Chem
 import ruamel.yaml as yaml
 
-
 # Load datasources
 # -------------
 with open("datasources/R_Groups.yaml") as stream:
@@ -42,12 +41,16 @@ class RGroupMolObject(object):
     __allow_update__ = False
 
     def __init__(self, molecule=None):
+        from molvs import Validator
         if molecule != None:
             self.molecule = molecule
             self.original_smiles = Chem.MolToSmiles(self.molecule)
-            self.validate_molecule(self.original_smiles)
 
-    def validate_molecule(self, smiles):
+            # Validation
+            validator_format = '%(asctime)s - %(levelname)s - %(validation)s - %(message)s'
+            self.validate = Validator(log_format=validator_format)
+
+    def validate_smiles(self, smiles):
         """
 
         This method takes the smiles string and runs through the validation check of a smiles string.
@@ -65,59 +68,63 @@ class RGroupMolObject(object):
 
         # Use MolVS to validate the smiles to make sure enumeration and r group connections are correct
         # at least in the 1D Format.
-        from molvs import validate_smiles
+        from molvs import validate_smiles as vs
 
         try:
-            validate_smiles(smiles)
+            vs(smiles)
         except RaiseMoleculeError as RME:
             print ("Not a Valid Smiles, Please check the formatting: %s" % self.original_smiles)
             print ("MolVs Stacktrace %s" % RME)
 
-    def r_group_enumerator(self):
+    def validate_molecule(self, molecule=None):
+
         """
 
-        This method will run through the R_Group List to generate smiles strings.
+        This function will be used to validate molecule objects
 
         Arguments:
             self (Object): Class RGroupMolObject
+            molecule (RDKit Object): Molecule object we need to sanitize.
+        Returns:
+            N / A
 
+        Exceptions:
+            RaiseMoleculeError (Exception): Raise the Raise Molcule Error if the molecule is not valid.
+
+        TODO: Verify Sanitize molcule that the validation works
         """
 
-        CHEMICAL_SMILES_R_GROUPS = set()
+        if not molecule:
+            try:
+                Chem.rdmolops.SanitizeMol(molecule)
+            except RaiseMoleculeError as RME:
+                print ("Not a valid molecule: %s" % RME)
+            finally:
+                return molecule
 
+    def r_group_enumerator(self):
+
+
+        # find one R Group
+
+        pattern = Chem.MolFromSmarts('[OX2H]')
+
+        print ("number of matches:", len(self.molecule.GetSubstructMatches(pattern,uniquify=False)))
+
+        # Enumerate through the R Groups stored in the system.
         for key, value in R_GROUPS.items():
-            if value in self.original_smiles:
+            modified_molecule = Chem.ReplaceSubstructs(self.molecule, pattern, Chem.MolFromSmiles(value),
+                                                       replaceAll=True)
 
-                r_group_molecule = RGroupMolObject(Chem.MolFromSmiles(value))
+            # Validate the molecule.
+            self.validate_molecule(molecule=modified_molecule[0])
 
-                # delete part of the molecule containing the structure.
-                truncated_molecule = Chem.DeleteSubstructs(self.molecule, r_group_molecule.molecule)
-
-                #Although this decreases performance, it ensures we don't have duplicates downstream.
-                filtered_r_groups = {filtered_key: filtered_value for filtered_key, filtered_value \
-                                     in R_GROUPS.items() if not filtered_value == value }
-
-                for filtered_key, filtered_value in filtered_r_groups.items():
-                    combination_molecule = Chem.CombineMols(
-                                                truncated_molecule,
-                                                RGroupMolObject(Chem.MolFromSmiles(filtered_value)).molecule)
-                    editable_combination = Chem.EditableMol(combination_molecule)
+            print (Chem.MolToSmiles(modified_molecule[0]))
 
 
-                # for i in range(0, Chem.Mol.GetNumAtoms(truncated_molecule)):
 
-                    editable_combination.AddBond(5, 9, order=Chem.rdchem.BondType.SINGLE)
 
-                    molecule_returned = Chem.MolToSmiles(editable_combination.GetMol())
-                    print (self.validate_molecule(molecule_returned))
-                    if self.validate_molecule(molecule_returned) == None:
-                        CHEMICAL_SMILES_R_GROUPS.add(molecule_returned)
-
-        print (CHEMICAL_SMILES_R_GROUPS)
-
-        return CHEMICAL_SMILES_R_GROUPS
 
 if __name__ == "__main__":
         scaffold_molecule = RGroupMolObject(Chem.MolFromSmiles('c1cc(CCCO)ccc1'))
         chemcials = scaffold_molecule.r_group_enumerator()
-        from enumeration import enumerate_smiles

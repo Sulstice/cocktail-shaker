@@ -3,7 +3,7 @@ R_Groups:
   Chlorine: Cl
   Fluorine: F
   Alcohol: O
-  Ketone: O=C
-  Carboxylic Acid: O=CO
+  Ketone: C(=O)OC
+  Carboxylic Acid: C(=O)O
   Amine: N
   Thiol: S

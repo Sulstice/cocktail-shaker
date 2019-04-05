@@ -13,7 +13,6 @@ from rdkit.Chem.ChemUtils import SDFToCSV
 from rdkit.Chem import Descriptors
 from progress.bar import Bar
 from pathlib import Path
-from tqdm import tqdm
 
 HOME_SOURCE = Path(__file__).resolve().parents[1]
 CHEM_DATA_SOURCE = "/molport_sdf_files"
