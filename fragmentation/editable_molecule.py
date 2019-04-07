@@ -179,6 +179,8 @@ class FileWriter(object):
         for i in self.molecules:
             writer.write(i)
 
+        writer.close()
+
 if __name__ == "__main__":
         scaffold_molecule = RGroupMolObject(Chem.MolFromSmiles('c1cc(CCCO)ccc1'))
         patterns_found = scaffold_molecule.find_r_groups()
