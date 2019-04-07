@@ -164,25 +164,77 @@ class FileWriter(object):
     __allow_update__ = False
 
 
-    def __init__(self, name, molecules, option):
+    def __init__(self, name, molecules, option, fragementation=None):
         self.molecules = molecules
         self.name = name
         self.option = option
+        self.fragmentation = fragementation # Determines if they would like the SDF split into fragments.
 
+        # Avoids the continuous "if" and "else" statements.
         option_decision = self.option + "_writer"
         method_to_call = getattr(FileWriter, option_decision)
         result = method_to_call(self)
 
     def sdf_writer(self):
 
-        writer = Chem.SDWriter(self.name + ".sdf")
-        for i in self.molecules:
-            writer.write(i)
+        """
 
-        writer.close()
+        Arguments:
+             self (Object): Parameters to write the files.
+
+        """
+
+        if not self.fragmentation:
+            writer = Chem.SDWriter(self.name + ".sdf")
+            for i in self.molecules:
+                writer.write(i)
+
+            writer.close()
+        else:
+            file_count = 1
+            writer = Chem.SDWriter(self.name + str(file_count) + ".sdf")
+            for i in self.molecules:
+                if writer.NumMols() == self.fragmentation:
+                    writer.close()
+                    file_count += 1
+                    writer = Chem.SDWriter(self.name + str(file_count) + ".sdf")
+
+                writer.write(i)
+
+            writer.close()
+
+    def txt_writer(self):
+
+        """
+
+        Arguments:
+             self (Object): Parameters to write the files.
+
+        """
+
+        if not self.fragmentation:
+            writer = Chem.SmilesWriter(self.name + ".txt")
+            for i in self.molecules:
+                writer.write(i)
+
+            writer.close()
+        else:
+            file_count = 1
+            writer = Chem.SmilesWriter(self.name + str(file_count) + ".txt")
+            for i in self.molecules:
+                if writer.NumMols() == self.fragmentation:
+                    writer.close()
+                    file_count += 1
+                    writer = Chem.SmilesWriter(self.name + str(file_count) + ".txt")
+
+                writer.write(i)
+
+            writer.close()
 
 if __name__ == "__main__":
         scaffold_molecule = RGroupMolObject(Chem.MolFromSmiles('c1cc(CCCO)ccc1'))
         patterns_found = scaffold_molecule.find_r_groups()
         modified_molecules =scaffold_molecule.r_group_enumerator(patterns_found=patterns_found)
-        FileWriter("test", modified_molecules, "sdf")
+        FileWriter("test", modified_molecules, "sdf", fragementation=1)
+        FileWriter("test", modified_molecules, "txt")
+
