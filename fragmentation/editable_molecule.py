@@ -120,28 +120,67 @@ class RGroupMolObject(object):
         for key, value in R_GROUPS.items():
             pattern = Chem.MolFromSmarts(value[1])
             if self.molecule.GetSubstructMatches(pattern,uniquify=False):
-                print ("Found pattern: %s" % len(self.molecule.GetSubstructMatches(pattern,uniquify=False)))
-                pattern_payload[value[1]] = len(self.molecule.GetSubstructMatches(pattern,uniquify=False))
+                print ("Found Functional Group: %s | Pattern Count: %s" % (key,
+                                                                           len(self.molecule.GetSubstructMatches(
+                                                                               pattern,uniquify=False))))
+                pattern_payload[key] = [value[0], value[1]]
 
-    def r_group_enumerator(self):
+        return pattern_payload
+
+    def r_group_enumerator(self, patterns_found):
+
+        """
+
+        TODO: Do this faster than O(n)^2 as this algorithm is not the most efficient.
+        """
+
+        modified_molecules = []
+
+        for key, value in patterns_found.items():
+            smarts_mol = Chem.MolFromSmarts(value[1])
+            for r_functional_group, r_data in R_GROUPS.items():
+                # Skip redundacies if the r group is already matched.
+                if r_data[1] == value[1]:
+                    continue
+
+                modified_molecule = Chem.ReplaceSubstructs(self.molecule, smarts_mol,
+                                                          Chem.MolFromSmiles(r_data[0]), replaceAll=True)
+
+                modified_molecules.append(modified_molecule[0])
+
+        return modified_molecules
+
+class FileWriter(object):
+
+    """
+
+    This object is used to manage file outputs dependent on the user of the file.
+
+    TODO: Support SDF, Mol2, Mol, Smiles (TXT) File, FASTA
+
+    """
+
+    __version_parser__ = 1.0
+    __allow_update__ = False
 
 
-        # find one R Group
+    def __init__(self, name, molecules, option):
+        self.molecules = molecules
+        self.name = name
+        self.option = option
 
-        pattern = Chem.MolFromSmarts('[OX2H]')
-        print ("number of matches:", len(self.molecule.GetSubstructMatches(pattern,uniquify=False)))
+        option_decision = self.option + "_writer"
+        method_to_call = getattr(FileWriter, option_decision)
+        result = method_to_call(self)
 
-        # Enumerate through the R Groups stored in the system.
-        for key, value in R_GROUPS.items():
-            modified_molecule = Chem.ReplaceSubstructs(self.molecule, pattern, Chem.MolFromSmiles(value[0]),
-                                                       replaceAll=True)
+    def sdf_writer(self):
 
-            # Validate the molecule.
-            self.validate_molecule(molecule=modified_molecule[0])
-
-            print (Chem.MolToSmiles(modified_molecule[0]))
+        writer = Chem.SDWriter(self.name + ".sdf")
+        for i in self.molecules:
+            writer.write(i)
 
 if __name__ == "__main__":
         scaffold_molecule = RGroupMolObject(Chem.MolFromSmiles('c1cc(CCCO)ccc1'))
-        chem = scaffold_molecule.find_r_groups()
-        # chemcials = scaffold_molecule.r_group_enumerator()
+        patterns_found = scaffold_molecule.find_r_groups()
+        modified_molecules =scaffold_molecule.r_group_enumerator(patterns_found=patterns_found)
+        FileWriter("test", modified_molecules, "sdf")

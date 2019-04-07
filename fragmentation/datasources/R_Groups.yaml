@@ -2,7 +2,7 @@ R_Groups:
   Bromine: [Br, '[Br]']
   Chlorine: [Cl, '[Cl]']
   Fluorine: [F, '[F]']
-  Alcohol: [O,  '[OX2H]']
+  Primary Alcohol: [O,  '[OX2H]']
 #  Ketone: C(=O)OC
 #  Carboxylic Acid: [C(=O)O]
 #  Amine: N
