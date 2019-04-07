@@ -26,7 +26,7 @@ TEST_REQUIREMENTS = [
     'pytest-runner'
 ]
 
-DEEP_CURE = "DeepCure"
+LIGAND_LIBRARY_LOADER = "Ligand Library Loader"
 
 # files
 # -----

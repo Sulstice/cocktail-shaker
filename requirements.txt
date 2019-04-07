@@ -23,3 +23,4 @@ tempora==1.14
 urllib3==1.24.1
 webencodings==0.5.1
 xhtml2pdf==0.2.3
+molvs==1.12.0
