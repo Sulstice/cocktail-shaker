@@ -1,9 +1,9 @@
 R_Groups:
-  Bromine: Br
-  Chlorine: Cl
-  Fluorine: F
-  Alcohol: O
-  Ketone: C(=O)OC
-  Carboxylic Acid: C(=O)O
-  Amine: N
-  Thiol: S
+  Bromine: [Br, '[Br]']
+  Chlorine: [Cl, '[Cl]']
+  Fluorine: [F, '[F]']
+  Alcohol: [O,  '[OX2H]']
+#  Ketone: C(=O)OC
+#  Carboxylic Acid: [C(=O)O]
+#  Amine: N
+#  Thiol: S

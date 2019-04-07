@@ -21,6 +21,9 @@ with open("datasources/R_Groups.yaml") as stream:
 
 class RaiseMoleculeError(Exception):
 
+    __version_error_parser__ = 1.0
+    __allow_update__ = False
+
     """
 
     Raise Molecule Error if for some reason we can't evaluate a SMILES, 2D, or 3D molecule.
@@ -102,18 +105,35 @@ class RGroupMolObject(object):
             finally:
                 return molecule
 
+    def find_r_groups(self):
+
+        """
+
+        Find functional groups that ligand library loader supports
+
+        :return:
+
+        """
+
+        pattern_payload = {}
+
+        for key, value in R_GROUPS.items():
+            pattern = Chem.MolFromSmarts(value[1])
+            if self.molecule.GetSubstructMatches(pattern,uniquify=False):
+                print ("Found pattern: %s" % len(self.molecule.GetSubstructMatches(pattern,uniquify=False)))
+                pattern_payload[value[1]] = len(self.molecule.GetSubstructMatches(pattern,uniquify=False))
+
     def r_group_enumerator(self):
 
 
         # find one R Group
 
         pattern = Chem.MolFromSmarts('[OX2H]')
-
         print ("number of matches:", len(self.molecule.GetSubstructMatches(pattern,uniquify=False)))
 
         # Enumerate through the R Groups stored in the system.
         for key, value in R_GROUPS.items():
-            modified_molecule = Chem.ReplaceSubstructs(self.molecule, pattern, Chem.MolFromSmiles(value),
+            modified_molecule = Chem.ReplaceSubstructs(self.molecule, pattern, Chem.MolFromSmiles(value[0]),
                                                        replaceAll=True)
 
             # Validate the molecule.
@@ -121,10 +141,7 @@ class RGroupMolObject(object):
 
             print (Chem.MolToSmiles(modified_molecule[0]))
 
-
-
-
-
 if __name__ == "__main__":
         scaffold_molecule = RGroupMolObject(Chem.MolFromSmiles('c1cc(CCCO)ccc1'))
-        chemcials = scaffold_molecule.r_group_enumerator()
+        chem = scaffold_molecule.find_r_groups()
+        # chemcials = scaffold_molecule.r_group_enumerator()
