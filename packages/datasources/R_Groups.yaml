@@ -1,0 +1,26 @@
+R_Groups:
+  # Halogens
+  # --------
+  Bromine: [Br, '[Br]']
+  Chlorine: [Cl, '[Cl]']
+  Fluorine: [F, '[F]']
+
+  # Acyl Halides
+  # ------------
+
+  # Alcohols
+  # --------
+  Primary Alcohol: [O,  '[OX2H]']
+
+  # Ketones
+  # -------
+  #  Ketone: C(=O)OC
+
+  # Acids
+  # -----
+#  Phosphoric Acid: [OP(=O)(O)O, '[$(P(=[OX1])([$([OX2H]),$([OX1-]),$([OX2]P)])([$([OX2H]),$([OX1-]),
+#                                  $([OX2]P)])[$([OX2H]),$([OX1-]),$([OX2]P)]),$([P+]([OX1-])([$([OX2H]),$([OX1-]),
+#                                  $([OX2]P)])([$([OX2H]),$([OX1-]),$([OX2]P)])[$([OX2H]),$([OX1-]),$([OX2]P)])]']
+  Carboxylic Acid: [C(=O)O, '[CX3](=O)[OX1H0-,OX2H1]']
+#  Amine: N
+#  Thiol: S

@@ -1,0 +1,5 @@
+SMILES Name 
+BrCCCc1ccccc1 0
+ClCCCc1ccccc1 1
+FCCCc1ccccc1 2
+O=C(O)CCCc1ccccc1 3
