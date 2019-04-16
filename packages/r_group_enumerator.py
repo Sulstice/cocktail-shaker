@@ -9,7 +9,7 @@
 from rdkit import Chem
 import ruamel.yaml as yaml
 
-from packages.file_handling import FileWriter, FileParser
+from packages.file_handler import FileWriter, FileParser
 
 # Load datasources
 # -------------
@@ -97,9 +97,12 @@ class RGroupMolObject(object):
 
         try:
             vs(smiles)
+            return True
         except RaiseMoleculeError as RME:
             print ("Not a Valid Smiles, Please check the formatting: %s" % self.original_smiles)
             print ("MolVs Stacktrace %s" % RME)
+
+        return False
 
     def validate_molecule(self, molecule):
 
@@ -138,6 +141,7 @@ class RGroupMolObject(object):
         """
 
         pattern_payload = {}
+        load_datasources()
 
         for molecule in self.molecules:
             for key, value in R_GROUPS.items():
