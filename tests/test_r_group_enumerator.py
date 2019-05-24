@@ -7,7 +7,7 @@
 
 # imports
 # -------
-import pytest, yaml
+import yaml
 from rdkit import Chem
 from packages.r_group_enumerator import RGroupMolObject
 
@@ -43,6 +43,8 @@ def test_validation_smiles():
     TODO: Key thing to note molecule validator passes strings that are incoherently incorrect when rendered into a
     molecule object.
 
+    Come up with more a validation test for verification of molecules.
+
     """
     molecule_success = RGroupMolObject(Chem.MolFromSmiles("c1cc(CCCO)ccc1"))
 
@@ -52,47 +54,54 @@ def test_primary_finding_r_groups():
 
     """
 
-    Test finding of the R Group
+    This test is associated with the RGroupMolObject being able to detect R Groups
+    dependent on the datasource.
+
+    If any test fails, it means we cannot support that R Group currently.
+
+    TODO: Handle more sophisticated molecules and run tests on more complex strucutres.
 
     """
 
     # Alcohols
     # --------
-
-    primary_alcohol_molecule = ["c1cc(CCCO)ccc1", '[OX2H]']
-
-    assert len(Chem.MolFromSmiles(primary_alcohol_molecule[0]).GetSubstructMatches(
-        Chem.MolFromSmarts(primary_alcohol_molecule[1]), uniquify=False)) == 1
-
+    # primary_alcohol_molecule = ["c1cc(CCCO)ccc1", '[OX2H]']
     primary_alcohol_molecule = RGroupMolObject(Chem.MolFromSmiles("c1cc(CCCO)ccc1"))
     patterns = primary_alcohol_molecule.find_r_groups()
-    print ("THIS IS PATTERNS" + str(patterns))
-    
+    assert patterns['Primary Alcohol'][0] == 'O'
+    assert patterns['Primary Alcohol'][1] == '[OX2H]'
+
     # Carboxylic Acids
     # ----------------
 
     # included is the acid and the conjugate base
-    primary_carboxylic_acid = ['C1C(CCCC1)CCC(=O)O', '[CX3](=O)[OX1H0-,OX2H1]']
-    assert len(Chem.MolFromSmiles(primary_carboxylic_acid[0]).GetSubstructMatches(
-        Chem.MolFromSmarts(primary_carboxylic_acid[1]), uniquify=False)) == 1
+    # primary_carboxylic_acid = ['C1C(CCCC1)CCC(=O)O', '[CX3](=O)[OX1H0-,OX2H1]']
+    primary_carboxylic_acid = RGroupMolObject(Chem.MolFromSmiles("C1C(CCCC1)CCC(=O)O"))
+    patterns = primary_carboxylic_acid.find_r_groups()
+    assert patterns['Carboxylic Acid'][0] == 'C(=O)O'
+    assert patterns['Carboxylic Acid'][1] == '[CX3](=O)[OX1H0-,OX2H1]'
 
-    # Halogens
-    # --------
-
-    primary_bromine_molecule = ["c1cc(CCCBr)ccc1", '[Br]']
-    primary_chlorine_molecule = ["c1cc(CCCCl)ccc1", '[Cl]']
-    primary_fluorine_molecule = ["c1cc(CCCF)ccc1", '[F]']
+    # # Halogens
+    # # --------
+    # primary_bromine_molecule = ["c1cc(CCCBr)ccc1", '[Br]']
+    # primary_chlorine_molecule = ["c1cc(CCCCl)ccc1", '[Cl]']
+    # primary_fluorine_molecule = ["c1cc(CCCF)ccc1", '[F]']
 
     # Bromine Compounds
-    assert len(Chem.MolFromSmiles(primary_bromine_molecule[0]).GetSubstructMatches(
-        Chem.MolFromSmarts(primary_bromine_molecule[1]), uniquify=False)) == 1
+    primary_bromine_molecule = RGroupMolObject(Chem.MolFromSmiles("c1cc(CCCBr)ccc1"))
+    patterns = primary_bromine_molecule.find_r_groups()
+    assert patterns['Bromine'][0] == 'Br'
+    assert patterns['Bromine'][1] == '[Br]'
 
     # Chlorine Compounds
-    assert len(Chem.MolFromSmiles(primary_chlorine_molecule[0]).GetSubstructMatches(
-        Chem.MolFromSmarts(primary_chlorine_molecule[1]), uniquify=False)) == 1
+    primary_chlorine_molecule = RGroupMolObject(Chem.MolFromSmiles("c1cc(CCCCl)ccc1"))
+    patterns = primary_chlorine_molecule.find_r_groups()
+    assert patterns['Chlorine'][0] == 'Cl'
+    assert patterns['Chlorine'][1] == '[Cl]'
 
     # Fluorine
-    assert len(Chem.MolFromSmiles(primary_fluorine_molecule[0]).GetSubstructMatches(
-        Chem.MolFromSmarts(primary_fluorine_molecule[1]), uniquify=False)) == 1
-
+    primary_fluorine_molecule = RGroupMolObject(Chem.MolFromSmiles("c1cc(CCCF)ccc1"))
+    patterns = primary_fluorine_molecule.find_r_groups()
+    assert patterns['Fluorine'][0] == 'F'
+    assert patterns['Fluorine'][1] == '[F]'
 

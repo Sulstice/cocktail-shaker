@@ -9,7 +9,7 @@
 from rdkit import Chem
 import ruamel.yaml as yaml
 
-from packages.file_handler import FileWriter, FileParser
+from file_handler import FileWriter, FileParser
 
 # Load datasources
 # -------------
@@ -179,28 +179,29 @@ class RGroupMolObject(object):
 
 if __name__ == "__main__":
 
-        import optparse
+        from argparse import ArgumentParser
         load_datasources()
 
         # Have the option to parse in a file if needed.
-        parser = optparse.OptionParser()
-        parser.add_option('-f', '--file',
-                  action="store", dest="file",
-                  help="the file path",  nargs='?')
+        parser = ArgumentParser(description='Parse the information for Patient Info')
 
-        # Have the option to enumerate later.
-        parser.add_option('-e', '--enumerate',
-                          action="store", dest="enumerate",
-                          help="enumerate all representations of file pass in options: True | False",
-                          nargs='?')
-        options, args = parser.parse_args()
+        parser.add_argument('-f', '--file',
+                            action="store", dest="file",
+                            help="the file path",  nargs='?')
+        parser.add_argument('-e', '--enumerate',
+                            action="store", dest="enumerate",
+                            help="enumerate all representations of file pass in options: True | False",
+                            nargs='?')
 
-        if options.file:
-            file = FileParser(options.file)
+        args = parser.parse_args()
 
-        scaffold_molecule = RGroupMolObject([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
-        patterns_found = scaffold_molecule.find_r_groups()
-        modified_molecules = scaffold_molecule.r_group_enumerator(patterns_found=patterns_found)
-        FileWriter("test", modified_molecules, "sdf")
+
+        if args.file:
+            file = FileParser(args.file)
+
+        # scaffold_molecule = RGroupMolObject([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
+        # patterns_found = scaffold_molecule.find_r_groups()
+        # modified_molecules = scaffold_molecule.r_group_enumerator(patterns_found=patterns_found)
+        # FileWriter("test", modified_molecules, "sdf")
         # FileWriter("test", modified_molecules, "txt")
 

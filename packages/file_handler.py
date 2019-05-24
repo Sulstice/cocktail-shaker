@@ -6,6 +6,7 @@
 
 # imports
 # -------
+from rdkit import Chem
 from pathlib import Path
 
 class FileNotSupportedError(Exception):
@@ -108,7 +109,7 @@ class FileParser(object):
     __version_parser__ = 1.0
     __allow_update__ = False
 
-    FILE_EXTENSIONS = ['.sdf','.txt', '.text']
+    FILE_EXTENSIONS = ['.sdf','.txt', '.text', '.mol']
 
     """
 
@@ -187,8 +188,29 @@ class FileParser(object):
 
         Parse an SDF file
 
+        Returns:
+            molecule (RDKit Object): The SDF file converted into a Mol Object.
+
         """
-        pass
+
+        molecule = Chem.SDMolSupplier(self.file)
+
+        return molecule
+
+    def parse_mol(self):
+
+        """
+
+        Parse a Mol File
+
+        Returns:
+             molecule (RDKit Object): The mol file converted into a Mol Object
+
+        """
+
+        molecule = Chem.MolFromMolFile(self.file)
+
+        return molecule
 
     def parse_txt(self):
 
@@ -199,10 +221,13 @@ class FileParser(object):
         """
         pass
 
-    def parse_string(selfs):
+    def parse_string(self):
 
         """
 
-        Parse a string file.
+        Parse a strings as a potential option.
+
         """
+
+        pass
 

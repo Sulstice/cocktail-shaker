@@ -26,7 +26,7 @@ TEST_REQUIREMENTS = [
     'pytest-runner'
 ]
 
-LIGAND_LIBRARY_LOADER = "Ligand Library Loader"
+LIGAND_LIBRARY_LOADER = "Ligand Loader"
 
 # files
 # -----
@@ -39,7 +39,7 @@ with open('README.md') as fi:
 setup(
     name="Ligand Library Enumerator",
     version="0.0.1",
-    description="Expand your ligand library with this amazing package!r",
+    description="Expand your ligand library with this amazing package!",
     long_description=README,
     author="Suliman Sharif",
     author_email="sharifsuliman1@gmail.com",
