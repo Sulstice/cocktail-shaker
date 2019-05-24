@@ -24,4 +24,4 @@ urllib3==1.24.2
 webencodings==0.5.1
 xhtml2pdf==0.2.3
 molvs>=0.1.0
-yaml>=0.1.0
+pyyaml>=0.1.0
