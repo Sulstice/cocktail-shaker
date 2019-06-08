@@ -9,7 +9,7 @@
 from rdkit import Chem
 import ruamel.yaml as yaml
 
-from packages.file_handler import FileWriter, FileParser
+from file_handler import FileWriter, FileParser
 
 # Load datasources
 # -------------
@@ -199,9 +199,9 @@ if __name__ == "__main__":
         if args.file:
             file = FileParser(args.file)
 
-        # scaffold_molecule = RGroupMolObject([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
-        # patterns_found = scaffold_molecule.find_r_groups()
-        # modified_molecules = scaffold_molecule.r_group_enumerator(patterns_found=patterns_found)
-        # FileWriter("test", modified_molecules, "sdf")
-        # FileWriter("test", modified_molecules, "txt")
+        scaffold_molecule = RGroupMolObject([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
+        patterns_found = scaffold_molecule.find_r_groups()
+        modified_molecules = scaffold_molecule.r_group_enumerator(patterns_found=patterns_found)
+        FileWriter("test", modified_molecules, "sdf")
+        FileWriter("test", modified_molecules, "txt")
 

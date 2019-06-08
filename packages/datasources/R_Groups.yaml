@@ -18,9 +18,11 @@ R_Groups:
 
   # Acids
   # -----
-#  Phosphoric Acid: [OP(=O)(O)O, '[$(P(=[OX1])([$([OX2H]),$([OX1-]),$([OX2]P)])([$([OX2H]),$([OX1-]),
-#                                  $([OX2]P)])[$([OX2H]),$([OX1-]),$([OX2]P)]),$([P+]([OX1-])([$([OX2H]),$([OX1-]),
-#                                  $([OX2]P)])([$([OX2H]),$([OX1-]),$([OX2]P)])[$([OX2H]),$([OX1-]),$([OX2]P)])]']
+  #  Phosphoric Acid: [OP(=O)(O)O, '[$(P(=[OX1])([$([OX2H]),$([OX1-]),$([OX2]P)])([$([OX2H]),$([OX1-]),
+  #                                  $([OX2]P)])[$([OX2H]),$([OX1-]),$([OX2]P)]),$([P+]([OX1-])([$([OX2H]),$([OX1-]),
+  #                                  $([OX2]P)])([$([OX2H]),$([OX1-]),$([OX2]P)])[$([OX2H]),$([OX1-]),$([OX2]P)])]']
   Carboxylic Acid: [C(=O)O, '[CX3](=O)[OX1H0-,OX2H1]']
-#  Amine: N
-#  Thiol: S
+
+  # Aldehydes
+  # ---------
+#  Aldehyde:

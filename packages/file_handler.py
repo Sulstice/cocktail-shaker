@@ -29,7 +29,7 @@ class FileWriter(object):
 
     This object is used to manage file outputs dependent on the user of the file.
 
-    TODO: Support SDF, Mol2, Mol, Smiles (TXT) File, FASTA
+    TODO: Support SDF, Mol2, Smiles (TXT) File, FASTA
 
     """
 
@@ -212,6 +212,19 @@ class FileParser(object):
 
         return molecule
 
+    def parse_mol2(self):
+
+        """
+
+        parse a mol2 SYBYL File (commonly known as TRIPOS Files)
+
+        Returns:
+            molecule (RDkit Object): The mo2 file converted into a Mol Object
+
+        """
+
+        return Mol2Parser(self.file)
+
     def parse_txt(self):
 
         """
@@ -230,4 +243,54 @@ class FileParser(object):
         """
 
         pass
+
+class Mol2Parser(object):
+
+    __version_parser__ = 1.0
+    __allow_update__ = False
+
+    """
+    
+    TRIPOS Mol2 files are more complex files to handle that RDKit doesn't support. We need to handle 
+    parsing of the mol2 files. 
+    
+    """
+
+    def __init__(self, file):
+        self.file = file
+
+
+    def _parse_file(self):
+
+        """
+
+        Arguments:
+            self (Object): the mol2 file path.
+
+        Returns:
+            mol2_file (Object): Yields a generator object as a list for every mol2 file encompassed within the file.
+
+        """
+
+        with open(self.file, 'r') as mol2_file:
+            # First item in the list will container the ID, Second item in the list will contain the row by row TRIPOS
+            # molecule data
+            mol2 = ['', []]
+            while True:
+                try:
+                    row = next(mol2_file)
+                    if row.startswith('@<TRIPOS>MOLECULE'):
+                        if mol2[0]:
+                            yield(mol2)
+                        mol2 = ['', []]
+                        mol2[0] = next(mol2_file).rstrip()
+                        mol2[1].append(row)
+                        mol2[1].append(mol2[0])
+                    else:
+                        mol2[1].append(row)
+                except StopIteration:
+                    print (mol2)
+                    yield (mol2)
+                    return
+
 
