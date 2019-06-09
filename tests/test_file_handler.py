@@ -11,6 +11,7 @@ from rdkit import Chem
 from packages.r_group_enumerator import RGroupMolObject
 from packages.file_handler import FileParser, FileWriter
 
+
 def test_encoding_checker():
 
     """
@@ -37,8 +38,6 @@ def test_file_production():
 
     """
 
-    file_object = FileWriter
-
     scaffold_molecule = RGroupMolObject([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
     patterns_found = scaffold_molecule.find_r_groups()
     modified_molecules = scaffold_molecule.r_group_enumerator(patterns_found=patterns_found)
@@ -53,9 +52,17 @@ def test_file_production():
 
 
 def test_file_parser():
+
     """
 
     This tests the file parsing of sdf files, txts, strings for the FileWriter object.
 
     """
-    pass
+
+    cwd = os.getcwd()
+
+    if not FileParser(os.path.join(cwd, "tests/resources", "test.sdf")):
+        return False
+
+    if not FileParser(os.path.join(cwd, "tests/resources", "test.mol2")):
+        return False

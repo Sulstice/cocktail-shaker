@@ -8,6 +8,7 @@
 # -------
 from rdkit import Chem
 from pathlib import Path
+import pandas as pd
 
 class FileNotSupportedError(Exception):
 
@@ -109,7 +110,7 @@ class FileParser(object):
     __version_parser__ = 1.0
     __allow_update__ = False
 
-    FILE_EXTENSIONS = ['.sdf','.txt', '.text', '.mol']
+    FILE_EXTENSIONS = ['.sdf','.txt', '.text', '.mol', '.mol2']
 
     """
 
@@ -223,7 +224,7 @@ class FileParser(object):
 
         """
 
-        return Mol2Parser(self.file)
+        Mol2Parser(self.file)
 
     def parse_txt(self):
 
@@ -249,6 +250,9 @@ class Mol2Parser(object):
     __version_parser__ = 1.0
     __allow_update__ = False
 
+    __COLUMN_NAMES__ = ('atom_id', 'atom_name', 'x', 'y', 'z', 'atom_type', 'subst_id','subst_name', 'charge')
+    __COLUMN_TYPES__ = (int, str, float, float, float, str, int, str, float)
+
     """
     
     TRIPOS Mol2 files are more complex files to handle that RDKit doesn't support. We need to handle 
@@ -258,11 +262,15 @@ class Mol2Parser(object):
 
     def __init__(self, file):
         self.file = file
-
+        self.generator = self._parse_file()
+        self.dataframe = self._parse_mol2()
+        self.molecule = self._convert_df_to_smiles()
 
     def _parse_file(self):
 
         """
+
+        Used to the initial parsing of mol2 files and account for one or more molecules insid the file
 
         Arguments:
             self (Object): the mol2 file path.
@@ -289,8 +297,76 @@ class Mol2Parser(object):
                     else:
                         mol2[1].append(row)
                 except StopIteration:
-                    print (mol2)
                     yield (mol2)
                     return
 
+    def _parse_mol2(self):
 
+        """
+
+        Load the molecule(s) into a dataframe
+
+        Arguments:
+            self (Object): the mol2 file path.
+
+        Returns:
+            df (DataFrame): the dataframe of the mol2 file first molecule.
+
+        TODO: support multimolcule mol2 files
+
+        """
+
+        mol2_code, mol2_lines = next(self.generator)
+        atom_section = self._atom_to_string(mol2_lines)
+
+        df = pd.DataFrame([i.split() for i in atom_section],
+                                 columns=Mol2Parser.__COLUMN_NAMES__)
+
+        # Shape the column names
+        for i in range(df.shape[1]):
+            df[Mol2Parser.__COLUMN_NAMES__[i]] = df[Mol2Parser.__COLUMN_NAMES__[i]]\
+                .astype(Mol2Parser.__COLUMN_TYPES__[i])
+
+        return df
+
+    @staticmethod
+    def _atom_to_string(mol2_list):
+
+        """
+
+        Arguments:
+            mol_list (object): list of mol2
+
+        Returns:
+            atom_section (List): a list of of mol2 strings where each row is an item in the list.
+
+        """
+
+        check_started = False
+        first_index = 0
+        last_index = 0
+
+        for key, value  in enumerate(mol2_list):
+            if value.startswith('@<TRIPOS>ATOM'):
+                first_index = key + 1
+                check_started = True
+            elif check_started and value.startswith('@<TRIPOS>'):
+                last_index = key
+                break
+
+        atom_section = mol2_list[first_index:last_index]
+
+        return atom_section
+
+    def _convert_df_to_smiles(self):
+        """
+
+        Convert the dataframe into a smiles string
+
+        Arguments:
+            self (Object): the mol2 file path.
+
+        """
+
+        from rdkit.Chem import PandasTools as PT
+        SDF = PT.SaveSMILESFromFrame(self.dataframe, "test", molCol='ROMol', isomericSmiles=False)
