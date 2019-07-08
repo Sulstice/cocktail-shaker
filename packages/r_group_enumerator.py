@@ -169,11 +169,13 @@ class RGroupMolObject(object):
                         # Skip redundacies if the r group is already matched.
                         if r_data[1] == value[1]:
                             continue
-
-                        modified_molecule = Chem.ReplaceSubstructs(molecule, smarts_mol,
-                                                                  Chem.MolFromSmiles(r_data[0]), replaceAll=True)
-
-                        modified_molecules.append(modified_molecule[0])
+                        try:
+                            modified_molecule = Chem.ReplaceSubstructs(molecule, smarts_mol,
+                                                                      Chem.MolFromSmiles(r_data[0]), replaceAll=True)
+                            modified_molecules.append(modified_molecule[0])
+                        except RaiseMoleculeError:
+                            print ("Molecule Formed is not possible")
+                            # continue
 
         return modified_molecules
 
@@ -199,9 +201,9 @@ if __name__ == "__main__":
         if args.file:
             file = FileParser(args.file)
 
-        # scaffold_molecule = RGroupMolObject([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
-        # patterns_found = scaffold_molecule.find_r_groups()
-        # modified_molecules = scaffold_molecule.r_group_enumerator(patterns_found=patterns_found)
-        # FileWriter("test", modified_molecules, "sdf")
-        # FileWriter("test", modified_molecules, "txt")
+        scaffold_molecule = RGroupMolObject([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
+        patterns_found = scaffold_molecule.find_r_groups()
+        modified_molecules = scaffold_molecule.r_group_enumerator(patterns_found=patterns_found)
+        FileWriter("test", modified_molecules, "sdf")
+        FileWriter("test", modified_molecules, "txt")
 

@@ -262,9 +262,59 @@ class Mol2Parser(object):
 
     def __init__(self, file):
         self.file = file
-        self.generator = self._parse_file()
-        self.dataframe = self._parse_mol2()
-        self.molecule = self._convert_df_to_smiles()
+        self.molecules = self._parse_mol2_list()
+        # self.generator = self._parse_file()
+        # self.dataframe = self._parse_mol2()
+
+    def _parse_mol2_list(self, delimiter="@<TRIPOS>MOLECULE"):
+
+        """
+
+        Borrowed Script from Derek Jones - Filed under MIT License for Open Source Software -> Acknowledgement.
+        Link: https://github.com/williamdjones/deep_protein_binding/tree/10b00835024702b6d0e73092c777fed267215ca7
+
+        Handling the read of mol2 files into molecule objects using the RDKit function MolFromMol2Block
+
+        Arguments:
+            self (Object): the mol2 file path.
+
+        """
+
+        def _mol2_block_fetcher(file):
+            """
+
+            Helper function to parse mol2 files into a generator object
+
+            Arguments:
+                self (Object): the mol2 file path.
+
+            Returns:
+                mol_name (Generator Object): mol2 blocks with a key mapping of mol name and mol2 block.
+
+            """
+
+            molname = None
+            prevline = ""
+            mol2 = []
+            for line in file: # line will contain the molecule name followed by a newline character
+                if line.startswith(delimiter) and mol2:
+                    yield (molname.replace("\n", "".join(mol2)), "")
+                    molname = ""
+                    mol2 = []
+                elif prevline.startswith(delimiter):
+                    molname = line
+                mol2.append(line)
+                prevline = line
+            if mol2:
+                yield (molname, "".join(mol2))
+                molname = ""
+
+        generator = _mol2_block_fetcher(self.file)
+        molecules = []
+        for key, value in generator:
+            print (key)
+            molecules.append(Chem.MolFromMol2Block(value, sanitize=False))
+
 
     def _parse_file(self):
 
@@ -368,5 +418,4 @@ class Mol2Parser(object):
 
         """
 
-        from rdkit.Chem import PandasTools as PT
-        SDF = PT.SaveSMILESFromFrame(self.dataframe, "test", molCol='ROMol', isomericSmiles=False)
+        print (self.dataframe)
