@@ -8,7 +8,7 @@
 # -------
 import os
 from rdkit import Chem
-from packages.r_group_enumerator import RGroupMolObject
+from packages.functional_group_enumerator import Cocktail
 from packages.file_handler import FileParser, FileWriter
 
 
@@ -38,9 +38,9 @@ def test_file_production():
 
     """
 
-    scaffold_molecule = RGroupMolObject([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
-    patterns_found = scaffold_molecule.find_r_groups()
-    modified_molecules = scaffold_molecule.r_group_enumerator(patterns_found=patterns_found)
+    scaffold_molecule = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
+    patterns_found = scaffold_molecule.detect_functional_groups()
+    modified_molecules = scaffold_molecule.shake(patterns_found=patterns_found)
     FileWriter("tests/test", modified_molecules, "sdf")
     FileWriter("tests/test", modified_molecules, "txt")
 

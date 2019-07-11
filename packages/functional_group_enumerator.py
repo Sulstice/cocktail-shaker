@@ -9,7 +9,7 @@
 from rdkit import Chem
 import ruamel.yaml as yaml
 
-from file_handler import FileWriter, FileParser
+from .file_handler import FileWriter, FileParser
 
 # Load datasources
 # -------------
@@ -49,7 +49,7 @@ class RaiseMoleculeError(Exception):
         super().__init__(message)
         self.errors = errors
 
-class RGroupMolObject(object):
+class Cocktail(object):
     """
 
     This class is used to take in a molecule and replace any R groups with a one of the groups from the R-Group.
@@ -81,7 +81,7 @@ class RGroupMolObject(object):
         This method takes the smiles string and runs through the validation check of a smiles string.
 
         Arguments:
-            self (Object): Class RGroupMolObject
+            self (Object): Class Cocktail
             smiles (string): Smiles string that needs to be evaluated
         Returns:
             N / A
@@ -111,7 +111,7 @@ class RGroupMolObject(object):
         This function will be used to validate molecule objects
 
         Arguments:
-            self (Object): Class RGroupMolObject
+            self (Object): Class Cocktail
             molecule (RDKit Object): Molecule object we need to sanitize.
         Returns:
             molecule (RDKit Object): The RDkit Molecule molecule object
@@ -130,7 +130,7 @@ class RGroupMolObject(object):
             finally:
                 return molecule
 
-    def find_r_groups(self):
+    def detect_functional_groups(self):
 
         """
 
@@ -154,7 +154,7 @@ class RGroupMolObject(object):
 
         return pattern_payload
 
-    def r_group_enumerator(self, patterns_found):
+    def shake(self, patterns_found):
 
         """
 
@@ -201,9 +201,9 @@ if __name__ == "__main__":
         if args.file:
             file = FileParser(args.file)
 
-        scaffold_molecule = RGroupMolObject([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
-        patterns_found = scaffold_molecule.find_r_groups()
-        modified_molecules = scaffold_molecule.r_group_enumerator(patterns_found=patterns_found)
+        scaffold_molecule = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
+        patterns_found = scaffold_molecule.detect_functional_groups()
+        modified_molecules = scaffold_molecule.shake(patterns_found=patterns_found)
         FileWriter("test", modified_molecules, "sdf")
         FileWriter("test", modified_molecules, "txt")
 
