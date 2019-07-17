@@ -9,7 +9,7 @@
 from rdkit import Chem
 import ruamel.yaml as yaml
 
-from .file_handler import FileWriter, FileParser
+from file_handler import FileWriter, FileParser
 
 # Load datasources
 # -------------
@@ -64,6 +64,9 @@ class Cocktail(object):
 
         # I will allow the user to pass a string but for easier sake down the road
         # I will reimplement it as a list.
+
+        load_datasources()
+
         if type(molecules) is not list:
             self.molecules = [molecules]
         else:
@@ -154,12 +157,35 @@ class Cocktail(object):
 
         return pattern_payload
 
-    def shake(self, patterns_found):
+    def shake(self, enumerate=False, complexity=None):
 
         """
+
+        Used to swap out molecules based on the patterns found from the detection.
+
+        Arguments:
+            self (Object): Cocktail object of the list of molecules
+            enumerate (bool): if the user chooses to enumerate their results.
+
+        Return:
+            modified_molecules (List): List of the RDKit molecule objects that have had their structures replaced.
 
         TODO: Do this faster than O(n)^3 as this algorithm is not the most efficient.
         """
+
+        # Run detection first to see and validate what functional groups have been found.
+
+
+        if complexity.lower() == 'low':
+            complexity = 10
+        elif complexity.lower() == 'medium':
+            complexity = 100
+        elif complexity.lower() == 'high':
+            complexity = 1000
+        else:
+            complexity = 10
+
+        patterns_found = self.detect_functional_groups()
 
         modified_molecules = []
         for molecule in self.molecules:
@@ -177,33 +203,25 @@ class Cocktail(object):
                             print ("Molecule Formed is not possible")
                             # continue
 
+        # Enumeration comes from the user iwatobipen
+        # https://iwatobipen.wordpress.com/2018/11/15/generate-possible-list-of-smlies-with-rdkit-rdkit/
+
+        if enumerate:
+            modified_molecules_enumerated = []
+            for modified_molecule in modified_molecules:
+                for i in range(complexity):
+                    smiles_enumerated = Chem.MolToSmiles(modified_molecule, doRandom=True)
+                    if not smiles_enumerated in modified_molecules_enumerated:
+                        modified_molecules_enumerated.append(Chem.MolFromSmiles(smiles_enumerated))
+                        co
+            return modified_molecules_enumerated
+
         return modified_molecules
 
 if __name__ == "__main__":
 
-        from argparse import ArgumentParser
-        load_datasources()
-
-        # Have the option to parse in a file if needed.
-        parser = ArgumentParser(description='Parse the information for Patient Info')
-
-        parser.add_argument('-f', '--file',
-                            action="store", dest="file",
-                            help="the file path",  nargs='?')
-        parser.add_argument('-e', '--enumerate',
-                            action="store", dest="enumerate",
-                            help="enumerate all representations of file pass in options: True | False",
-                            nargs='?')
-
-        args = parser.parse_args()
-
-
-        if args.file:
-            file = FileParser(args.file)
-
         scaffold_molecule = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
-        patterns_found = scaffold_molecule.detect_functional_groups()
-        modified_molecules = scaffold_molecule.shake(patterns_found=patterns_found)
+        modified_molecules = scaffold_molecule.shake(enumerate=True, complexity='High')
         FileWriter("test", modified_molecules, "sdf")
         FileWriter("test", modified_molecules, "txt")
 
