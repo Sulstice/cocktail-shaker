@@ -32,6 +32,7 @@ def load_datasources():
             global R_GROUPS
             R_GROUPS = R_GROUP_DATASOURCE['R_Groups']
         except yaml.YAMLError as exc:
+            print ("Datasources not loading correctly, Please contact lead developer")
             print(exc)
 
 
@@ -48,6 +49,77 @@ class RaiseMoleculeError(Exception):
     def __init__(self, message, errors):
         super().__init__(message)
         self.errors = errors
+
+class RequestError(Exception):
+
+    __version_error_parser__ = 1.0
+    __allow_update__ = False
+
+    """
+
+    Raise a Request Handler Error if the response code is not 200. 
+
+    """
+    def __init__(self, message, errors):
+        super().__init__(message)
+        self.errors = errors
+
+
+class RequestHandler(object):
+
+
+    __version__ = 1.0
+    __allow_update__ = False
+
+    """
+    
+    Handler API requests to external libraries
+    
+    
+    """
+
+    def __init__(self, url):
+
+        self.url = url
+
+    def get(self):
+        """
+
+        Issues the request of the URL
+
+        TODO: Handle requests that need a payload (assuming this will be the case for MolPort down the road)
+
+        """
+
+        # imports
+        # -------
+        from urllib.request import urlopen
+        from lxml import etree
+
+        try:
+            request = urlopen(self.url)
+        except RequestError:
+            print ("Error handling request, please try again or contact Suliman Sharif")
+
+        if request.getcode() != 200:
+            raise RequestError(message="Error handling request, please try again or contact Suliman Sharif", errors='Request Error')
+
+        response = etree.parse(request).getroot()
+        for child in response.iter('item'):
+            response = child.text
+
+        return response
+
+class CactusResolver(object):
+
+    __version__ = 1.0
+    __allow_update__ = False
+
+    """
+    
+    Handle responses coming back from cactus. 
+    
+    """
 
 class Cocktail(object):
     """
@@ -157,7 +229,7 @@ class Cocktail(object):
 
         return pattern_payload
 
-    def shake(self, enumerate=False, complexity=None):
+    def shake(self, shape=None):
 
         """
 
@@ -165,7 +237,6 @@ class Cocktail(object):
 
         Arguments:
             self (Object): Cocktail object of the list of molecules
-            enumerate (bool): if the user chooses to enumerate their results.
 
         Return:
             modified_molecules (List): List of the RDKit molecule objects that have had their structures replaced.
@@ -174,16 +245,6 @@ class Cocktail(object):
         """
 
         # Run detection first to see and validate what functional groups have been found.
-
-
-        if complexity.lower() == 'low':
-            complexity = 10
-        elif complexity.lower() == 'medium':
-            complexity = 100
-        elif complexity.lower() == 'high':
-            complexity = 1000
-        else:
-            complexity = 10
 
         patterns_found = self.detect_functional_groups()
 
@@ -203,25 +264,129 @@ class Cocktail(object):
                             print ("Molecule Formed is not possible")
                             # continue
 
-        # Enumeration comes from the user iwatobipen
-        # https://iwatobipen.wordpress.com/2018/11/15/generate-possible-list-of-smlies-with-rdkit-rdkit/
-
-        if enumerate:
-            modified_molecules_enumerated = []
-            for modified_molecule in modified_molecules:
-                for i in range(complexity):
-                    smiles_enumerated = Chem.MolToSmiles(modified_molecule, doRandom=True)
-                    if not smiles_enumerated in modified_molecules_enumerated:
-                        modified_molecules_enumerated.append(Chem.MolFromSmiles(smiles_enumerated))
-                        co
-            return modified_molecules_enumerated
 
         return modified_molecules
 
+    def _retrieve_3D_rendering(self):
+
+        """
+
+        TODO: Incorporate TwirlyMol into a python version
+
+        Arguments:
+             molecules (List): List of molecules we need to retrieve the 3D rendering.
+
+        Returns:
+            three_d_molecules_text (List): A list of the 3D molecules representation in text.
+
+        Exceptions:
+            RequestError: Raises when the response code from cactus is not 200 (something wrong on their server side).
+
+        """
+
+        _API_BASE = 'https://cactus.nci.nih.gov/chemical/structure'
+        _FILE_FORMATS = ['mol2']
+
+        def _construct_api_url(molecule, get3d=True, **kwargs):
+            """
+
+            Return the URL for the desired API endpoint.
+
+            Arguments:
+                molecule (String): Smiles representation of the molecule we are interested in.
+                get3d (Boolean): Parameter Cactus needs to handle to return the mol2 data.
+
+            Returns:
+                url (string): The full url used to request from cactus.
+
+            """
+
+            # imports
+            # -------
+            from urllib.parse import quote, urlencode
+
+            kwargs['format'] = 'mol2'
+            representation = 'file'
+            tautomers = 'tautomers:%s' % molecule
+            url = '{}/{}/{}/{}'.format(_API_BASE, quote(tautomers), representation, 'xml/')
+            if get3d:
+                kwargs['get3d'] = True
+
+            url += '?%s' % urlencode(kwargs)
+
+            return url
+
+        three_d_molecules_text = []
+
+        bulk = False
+
+        if len(self.molecules) > 1:
+            bulk = True
+        for molecule in self.molecules:
+            # Our request will use smiles.
+            molecule = Chem.MolToSmiles(molecule)
+            url = _construct_api_url(molecule)
+
+            # Parse out to the request handler
+            request = RequestHandler(url)
+            response = request.get()
+
+            three_d_molecules_text.append(response)
+
+        return three_d_molecules_text
+
+    @staticmethod
+    def enumerate(molecules, enumeration_complexity=None, dimensionality=None):
+
+        """
+
+        Enumerate the drug library based on dimension.
+
+        Arguments:
+            molecules (List): a list of molecules that the user would like enumerated.
+            enumeration_complexity (String): Declares how many times we will want to discover another molecule
+                                             configuration
+            dimensionality (String): Enumerate based on dimensionality (1D, 2D, 3D)
+
+        Returns:
+            enumerated_molecules (List): Dependent on the dimensionality of the user it can be -> a list of smiles, or
+                                         a list of RDKit Molecule Objects.
+
+        """
+
+        # Enumeration comes from the user iwatobipen
+        # https://iwatobipen.wordpress.com/2018/11/15/generate-possible-list-of-smlies-with-rdkit-rdkit/
+
+        if enumeration_complexity.lower() == 'low':
+            complexity = 10
+        elif enumeration_complexity.lower() == 'medium':
+            complexity = 100
+        elif enumeration_complexity.lower() == 'high':
+            complexity = 1000
+        else:
+            complexity = 10
+
+        enumerated_molecules = []
+        for molecule in molecules:
+            for i in range(complexity):
+                smiles_enumerated = Chem.MolToSmiles(molecule, doRandom=True)
+                if dimensionality == '1D' and smiles_enumerated not in enumerated_molecules:
+                    enumerated_molecules.append(smiles_enumerated)
+                elif dimensionality == '2D':
+                    if not smiles_enumerated in enumerated_molecules:
+                        enumerated_molecules.append(Chem.MolFromSmiles(smiles_enumerated))
+                elif dimensionality == '3D':
+                    print ('Not supported yet')
+                    return enumerated_molecules
+
+        return enumerated_molecules
+
 if __name__ == "__main__":
 
-        scaffold_molecule = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
-        modified_molecules = scaffold_molecule.shake(enumerate=True, complexity='High')
-        FileWriter("test", modified_molecules, "sdf")
-        FileWriter("test", modified_molecules, "txt")
+        starting_compound = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
+        starting_compound._retrieve_3D_rendering()
+        modified_molecules = starting_compound.shake()
+        # smiles = Cocktail.enumerate(modified_molecules, enumeration_complexity='Low', dimensionality='2D')
 
+        # FileWriter("test", modified_molecules, "sdf")
+        # FileWriter("test", modified_molecules, "txt")
