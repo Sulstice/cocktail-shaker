@@ -9,6 +9,8 @@
 from rdkit import Chem
 from pathlib import Path
 import pandas as pd
+from request_handler import CactusRequestHandler, RequestError, Resolver
+
 
 class FileNotSupportedError(Exception):
 
@@ -44,6 +46,7 @@ class FileWriter(object):
         self.option = option
         self.fragmentation = fragementation # Determines if they would like the SDF split into fragments.
 
+        print ("Writing Files...")
         # Avoids the continuous "if" and "else" statements.
         option_decision = self.option + "_writer"
         method_to_call = getattr(FileWriter, option_decision)
@@ -104,6 +107,102 @@ class FileWriter(object):
                 writer.write(i)
 
             writer.close()
+
+    def mol2_writer(self):
+
+        """
+
+        Arguments:
+            self (Object): Parameters to write the mol2 file.
+
+        """
+
+        """
+
+        TODO: Incorporate TwirlyMol into a python version
+
+        Arguments:
+             molecules (List): List of molecules we need to retrieve the 3D rendering.
+
+        Returns:
+            three_d_molecules_text (List): A list of the 3D molecules representation in text.
+
+        Exceptions:
+            RequestError: Raises when the response code from cactus is not 200 (something wrong on their server side).
+
+        """
+
+        _API_BASE = 'https://cactus.nci.nih.gov/chemical/structure'
+        _FILE_FORMATS = ['mol2']
+
+        def _construct_api_url(molecule, get3d=True, **kwargs):
+            """
+
+            Return the URL for the desired API endpoint.
+
+            Arguments:
+                molecule (String): Smiles representation of the molecule we are interested in.
+                get3d (Boolean): Parameter Cactus needs to handle to return the mol2 data.
+
+            Returns:
+                url (string): The full url used to request from cactus.
+
+            """
+
+            # imports
+            # -------
+            from urllib.parse import quote, urlencode
+
+            kwargs['format'] = 'mol2'
+            representation = 'file'
+            tautomers = 'tautomers:%s' % molecule
+            url = '{}/{}/{}/{}'.format(_API_BASE, quote(tautomers), representation, 'xml/')
+            if get3d:
+                kwargs['get3d'] = True
+
+            url += '?%s' % urlencode(kwargs)
+
+            return url
+
+        three_d_molecules_text = []
+
+        bulk = False
+
+        if len(self.molecules) > 1:
+            bulk = True
+        for molecule in self.molecules:
+            # Our request will use smiles.
+            molecule = Chem.MolToSmiles(molecule)
+            url = _construct_api_url(molecule)
+
+            # Parse out to the request handler
+            request = CactusRequestHandler(url)
+            response = request.get()
+
+            # Parse out to the resolver
+            resolver = Resolver(response)
+            mol2_text = resolver.cactus_mol2_resolver()
+            three_d_molecules_text.append(mol2_text)
+
+        if not self.fragmentation:
+            writer = open(self.name + ".mol2", "w")
+            for i in three_d_molecules_text:
+                writer.write(i)
+            writer.close()
+        else:
+            file_count = 1
+            writer = open(self.name + str(file_count) + ".mol2", "w")
+            for i in range(0, len(three_d_molecules_text)):
+                if i == self.fragmentation:
+                    writer.close()
+                    file_count += 1
+                    writer = open(self.name + str(file_count) + ".mol2", "w")
+                writer.write(three_d_molecules_text[i])
+                writer.write("\n")
+
+        writer.close()
+
+        return three_d_molecules_text
 
 class FileParser(object):
 
