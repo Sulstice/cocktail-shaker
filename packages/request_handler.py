@@ -40,9 +40,7 @@ class CactusRequestHandler(object):
     def get(self):
         """
 
-        Issues the request of the URL
-
-        TODO: Handle requests that need a payload (assuming this will be the case for MolPort down the road)
+        Issues Requests specifically for the Cactus website.
 
         """
 
@@ -50,6 +48,43 @@ class CactusRequestHandler(object):
         # -------
         from urllib.request import urlopen
         from lxml import etree
+
+        try:
+            request = urlopen(self.url)
+        except RequestError:
+            print ("Error handling request, please try again or contact Suliman Sharif")
+
+        if request.getcode() != 200:
+            raise RequestError(message="Error handling request, please try again or contact Suliman Sharif", errors='Request Error')
+
+        return request
+
+class MolPortRequestHandler(object):
+
+    __version__ = 1.0
+    __allow_update__ = False
+
+    """
+    
+    Handles MolPort Requests
+    
+    """
+
+    def __init__(self, request):
+
+        self.request = request
+
+
+    def get(self):
+        """
+
+        Issues Requests specifically for the Cactus website.
+
+        """
+
+        # imports
+        # -------
+        from urllib.request import urlopen
 
         try:
             request = urlopen(self.url)
@@ -85,5 +120,7 @@ class Resolver(object):
             response = child.text
 
         return response
+
+
 
 

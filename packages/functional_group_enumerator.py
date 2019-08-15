@@ -125,7 +125,7 @@ class Cocktail(object):
         Exceptions:
             RaiseMoleculeError (Exception): Raise the Raise Molcule Error if the molecule is not valid.
 
-        TODO: Verify Sanitize molcule that the validation works
+        TODO: Verify Sanitize molecule that the validation works
         """
 
         if not molecule:
@@ -258,7 +258,7 @@ if __name__ == "__main__":
 
         # FileWriter("test", modified_molecules, "sdf")
         # FileWriter("test", modified_molecules, "txt")
-        FileWriter("test", compounds_result, "mol2")
+        FileWriter("test", compounds_result, "sdf3000")
 
 
 
