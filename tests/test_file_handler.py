@@ -52,7 +52,6 @@ def test_file_production():
     FileWriter("tests/test", modified_molecules, "gromacs")
     FileWriter("tests/test", modified_molecules, "hyperchem")
     FileWriter("tests/test", modified_molecules, "jme")
-    FileWriter("tests/test", modified_molecules, "maestro")
     FileWriter("tests/test", modified_molecules, "mol")
     FileWriter("tests/test", modified_molecules, "mol2")
     FileWriter("tests/test", modified_molecules, "pdb")
@@ -76,7 +75,6 @@ def test_file_production():
     assert Path(dir_path + "/test.gromacs").is_file() == True
     assert Path(dir_path + "/test.hyperchem").is_file() == True
     assert Path(dir_path + "/test.jme").is_file() == True
-    assert Path(dir_path + "/test.maestro").is_file() == True
     assert Path(dir_path + "/test.mol").is_file() == True
     assert Path(dir_path + "/test.mol2").is_file() == True
     assert Path(dir_path + "/test.pdb").is_file() == True
