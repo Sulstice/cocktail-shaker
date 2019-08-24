@@ -1,6 +1,6 @@
 
 ## Ligand Library Design
-![Build status](https://travis-ci.com/Sulstice/Ligand-Library-Creation.svg?branch=master)
+![Build status](https://travis-ci.org/Sulstice/Cocktail-Shaker.svg?branch=master)
 ![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)
 
 
