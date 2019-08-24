@@ -4,8 +4,6 @@
 #
 # ----------------------------------------------------------
 
-
-
 class RequestError(Exception):
 
     __version_error_parser__ = 1.0

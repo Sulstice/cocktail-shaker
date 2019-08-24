@@ -26,7 +26,7 @@ TEST_REQUIREMENTS = [
     'pytest-runner'
 ]
 
-LIGAND_LIBRARY_LOADER = "Ligand Loader"
+LIGAND_LIBRARY_LOADER = "Cocktail Shaker"
 
 # files
 # -----
@@ -37,19 +37,19 @@ with open('README.md') as fi:
 # exec
 # ----
 setup(
-    name="Ligand Library Enumerator",
+    name="Cocktail Shaker",
     version="0.0.1",
     description="Expand your ligand library with this amazing package!",
     long_description=README,
     author="Suliman Sharif",
     author_email="sharifsuliman1@gmail.com",
-    url="www.github",
+    url="www.github.com/Sulstice/Cocktail-Shaker",
     install_requires=REQUIREMENTS,
     zip_safe=False,
     keywords=['ligand-loader', 'chemistry', 'ligand-design'],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
+        'Intended Audience :: Developers :: Cheminformaticians',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
