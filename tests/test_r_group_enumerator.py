@@ -9,7 +9,7 @@
 # -------
 import yaml
 from rdkit import Chem
-from packages.functional_group_enumerator import Cocktail
+from functional_group_enumerator import Cocktail
 
 # Load datasources
 # -------------

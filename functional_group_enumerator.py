@@ -252,6 +252,7 @@ class Cocktail(object):
 
 # Implemented Strictly for Testing
 # --------------------------------
+# if __name__ == '__main__':
 #
 #         cocktail = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
 #         compounds_result = cocktail.shake()
