@@ -9,7 +9,7 @@
 from rdkit import Chem
 import ruamel.yaml as yaml
 
-from file_handler import FileWriter, FileParser
+from .file_handler import FileWriter, FileParser
 
 # Load datasources
 # -------------
@@ -250,15 +250,14 @@ class Cocktail(object):
 
         return enumerated_molecules
 
-if __name__ == "__main__":
-
-        cocktail = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
-        compounds_result = cocktail.shake()
-        compounds_result_enumerated = cocktail.enumerate(enumeration_complexity='Low', dimensionality='2D')
-
-        # FileWriter("test", modified_molecules, "sdf")
-        # FileWriter("test", modified_molecules, "txt")
-        FileWriter("test", compounds_result, "sdf3000")
+# Implemented Strictly for Testing
+# --------------------------------
+#
+#         cocktail = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
+#         compounds_result = cocktail.shake()
+#         compounds_result_enumerated = cocktail.enumerate(enumeration_complexity='Low', dimensionality='2D')
+#
+#         FileWriter("test", compounds_result, "sdf3000")
 
 
 
