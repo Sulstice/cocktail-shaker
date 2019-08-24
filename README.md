@@ -1,6 +1,5 @@
 
-## Ligand Library Design
-
+## Cocktail Shaker 
 
 ![Build status](https://travis-ci.org/Sulstice/Cocktail-Shaker.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/Sulstice/Cocktail-Shaker/badge.svg?branch=master)](https://coveralls.io/github/Sulstice/Cocktail-Shaker?branch=master)
