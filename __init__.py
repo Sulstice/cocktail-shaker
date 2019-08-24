@@ -1,1 +1,1 @@
-name = 'Cocktail Shaker'
+name = 'CocktailShaker'

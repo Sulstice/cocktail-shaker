@@ -42,5 +42,7 @@ before_script:
 - echo $RDBASE
 
 script:
-- python -m pytest
+- python -m pytest --cov=CocktailShaker/
 
+after_success:
+- coveralls
