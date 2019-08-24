@@ -156,8 +156,37 @@ def test_primary_finding_r_groups():
     assert patterns['Nitro'][0] == '[N+](=O)[O-]'
     assert patterns['Nitro'][1] == '[$([NX3](=O)=O),$([NX3+](=O)[O-])][!#8]'
 
+    # Ether Compounds
+    ether_molecule = Cocktail(Chem.MolFromSmiles('c1cc(CCCCOC)ccc1'))
+    patterns = ether_molecule.detect_functional_groups()
+    assert patterns['Ether'][0] == 'COC'
+    assert patterns['Ether'][1] == '[OD2]([#6])[#6]'
+
     # Sulfoxide
     # sulfoxide_molecule = Cocktail(Chem.MolFromSmiles('c1cc(CCCS(=O)(=O)C)ccc1'))
     # patterns = sulfoxide_molecule.detect_functional_groups()
     # assert patterns['Sulfoxide'][0] == 'S(=O)(=O)C'
     # assert patterns['Sulfoxide'][1] == '[$([#16X3]=[OX1]),$([#16X3+][OX1-])]'
+
+    # Azides
+    azide_molecule = Cocktail(Chem.MolFromSmiles('c1cc(CCC([N-][N+]#N))ccc1'))
+    patterns = azide_molecule.detect_functional_groups()
+    assert patterns['Azide'][0] == '([N-][N+]#N)'
+    assert patterns['Azide'][1] == '[$(*-[NX2-]-[NX2+]#[NX1]),$(*-[NX2]=[NX2+]=[NX1-])]'
+
+    # Amines
+    primary_amine_molecule = Cocktail(Chem.MolFromSmiles('c1cc(CCCN)ccc1'))
+    patterns = primary_amine_molecule.detect_functional_groups()
+    assert patterns['Primary Amine'][0] == 'N'
+    assert patterns['Primary Amine'][1] == '[NX3;H2;!$(NC=[!#6]);!$(NC#[!#6])][#6]'
+
+    secondary_amine_molecule = Cocktail(Chem.MolFromSmiles('c1cc(CCCNC)ccc1'))
+    patterns = secondary_amine_molecule.detect_functional_groups()
+    assert patterns['Secondary Amine'][0] == 'NC'
+    assert patterns['Secondary Amine'][1] == '[NX3;H2,H1;!$(NC=O)]'
+
+    enamine_amine_molecule = Cocktail(Chem.MolFromSmiles('CC(=CC(=O)OC)N'))
+    patterns = enamine_amine_molecule.detect_functional_groups()
+    assert patterns['Enamine'][0] == 'N'
+    assert patterns['Enamine'][1] == '[NX3][CX3]=[CX3]'
+
