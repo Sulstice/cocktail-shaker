@@ -1,6 +1,11 @@
 
 ## Ligand Library Design
-![Build status](https://travis-ci.com/Sulstice/Ligand-Library-Creation.svg?branch=master)
+
+
+![Build status](https://travis-ci.org/Sulstice/Cocktail-Shaker.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Sulstice/Cocktail-Shaker/badge.svg?branch=master)](https://coveralls.io/github/Sulstice/Cocktail-Shaker?branch=master)
+[![License](https://img.shields.io/badge/license-new%20BSD-blue.svg)](https://github.com/Sulstice/CocktailShaker/blob/master/LICENSE)
+[![Join the chat at https://gitter.im/Cocktail-Shaker/community](https://badges.gitter.im/Cocktail-Shaker/community.svg)](https://gitter.im/Cocktail-Shaker/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)
 
 
