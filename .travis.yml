@@ -42,7 +42,7 @@ before_script:
 - echo $RDBASE
 
 script:
-- python -m pytest --cov='tests/'
+- python -m pytest --cov=tests/
 
 after_success:
 - coveralls
