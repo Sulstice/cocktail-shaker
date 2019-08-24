@@ -169,10 +169,10 @@ def test_primary_finding_r_groups():
     # assert patterns['Sulfoxide'][1] == '[$([#16X3]=[OX1]),$([#16X3+][OX1-])]'
 
     # Azides
-    azide_molecule = Cocktail(Chem.MolFromSmiles('c1cc(CCC([N-][N+]#N))ccc1'))
-    patterns = azide_molecule.detect_functional_groups()
-    assert patterns['Azide'][0] == '([N-][N+]#N)'
-    assert patterns['Azide'][1] == '[$(*-[NX2-]-[NX2+]#[NX1]),$(*-[NX2]=[NX2+]=[NX1-])]'
+    # azide_molecule = Cocktail(Chem.MolFromSmiles('c1cc(CCC([N-][N+]#N))ccc1'))
+    # patterns = azide_molecule.detect_functional_groups()
+    # assert patterns['Azide'][0] == '([N-][N+]#N)'
+    # assert patterns['Azide'][1] == '[$(*-[NX2-]-[NX2+]#[NX1]),$(*-[NX2]=[NX2+]=[NX1-])]'
 
     # Amines
     primary_amine_molecule = Cocktail(Chem.MolFromSmiles('c1cc(CCCN)ccc1'))

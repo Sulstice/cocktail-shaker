@@ -37,7 +37,7 @@ class FileWriter(object):
 
     __version_parser__ = 1.0
     __allow_update__ = False
-    _CACTUS_FILE_FORMATS = ['alc', 'cdxml', 'cerius', 'charmm', 'cif', 'cml', 'ctx', 'gjf', 'gromacs', 'hyperchem', 'jme', 'maestro', 'mol',
+    _CACTUS_FILE_FORMATS = ['alc', 'cdxml', 'cerius', 'charmm', 'cif', 'cml', 'gjf', 'gromacs', 'hyperchem', 'jme', 'maestro', 'mol',
                      'mol2', 'mrv', 'pdb', 'sdf3000', 'sln', 'xyz']
 
 

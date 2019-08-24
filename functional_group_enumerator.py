@@ -252,13 +252,13 @@ class Cocktail(object):
 
 # Implemented Strictly for Testing
 # --------------------------------
-# if __name__ == '__main__':
-#
-#         cocktail = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
-#         compounds_result = cocktail.shake()
-#         compounds_result_enumerated = cocktail.enumerate(enumeration_complexity='Low', dimensionality='2D')
-#
-#         FileWriter("test", compounds_result, "sdf3000")
+if __name__ == '__main__':
+
+        cocktail = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
+        compounds_result = cocktail.shake()
+        compounds_result_enumerated = cocktail.enumerate(enumeration_complexity='Low', dimensionality='2D')
+
+        FileWriter("test", compounds_result, "gjf")
 
 
 

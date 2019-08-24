@@ -48,7 +48,6 @@ def test_file_production():
     FileWriter("tests/test", modified_molecules, "charmm")
     FileWriter("tests/test", modified_molecules, "cif")
     FileWriter("tests/test", modified_molecules, "cml")
-    FileWriter("tests/test", modified_molecules, "ctx")
     FileWriter("tests/test", modified_molecules, "gjf")
     FileWriter("tests/test", modified_molecules, "gromacs")
     FileWriter("tests/test", modified_molecules, "hyperchem")
@@ -73,7 +72,6 @@ def test_file_production():
     assert Path(dir_path + "/test.charmm").is_file() == True
     assert Path(dir_path + "/test.cif").is_file() == True
     assert Path(dir_path + "/test.cml").is_file() == True
-    assert Path(dir_path + "/test.ctx").is_file() == True
     assert Path(dir_path + "/test.gjf").is_file() == True
     assert Path(dir_path + "/test.gromacs").is_file() == True
     assert Path(dir_path + "/test.hyperchem").is_file() == True
