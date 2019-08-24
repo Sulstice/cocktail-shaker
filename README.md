@@ -1,5 +1,8 @@
 
 ## Ligand Library Design
+
+[![Join the chat at https://gitter.im/Cocktail-Shaker/community](https://badges.gitter.im/Cocktail-Shaker/community.svg)](https://gitter.im/Cocktail-Shaker/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ![Build status](https://travis-ci.org/Sulstice/Cocktail-Shaker.svg?branch=master)
 ![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)
 
