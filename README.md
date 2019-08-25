@@ -7,6 +7,8 @@
 [![Join the chat at https://gitter.im/Cocktail-Shaker/community](https://badges.gitter.im/Cocktail-Shaker/community.svg)](https://gitter.im/Cocktail-Shaker/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)
  <a href="https://github.com/badges/shields/pulse" alt="Activity"><img src="https://img.shields.io/github/commit-activity/m/badges/shields" /></a>
+ [![DOI](https://zenodo.org/badge/170644606.svg)](https://zenodo.org/badge/latestdoi/170644606)
+
 
 **Background:** ML algorithms are capable of searching extensive chemical spaces
 for the best starting points for a drug development program. This leaves us with the question of
