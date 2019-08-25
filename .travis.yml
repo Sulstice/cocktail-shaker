@@ -36,6 +36,7 @@ install:
 
 - python setup.py install
 - pip install python-coveralls
+- pip install coveralls
 - pip install coverage       # Add me to install coverage.py
 - pip install nose           # Add me to install nose
 
@@ -48,7 +49,7 @@ script:
 - python -m nose --verbose --with-coverage
 
 after_success:
-- coveralls
+- python -m coveralls
 
 notifications:
   email:
