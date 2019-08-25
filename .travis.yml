@@ -35,6 +35,9 @@ install:
 - conda install -q -c rdkit rdkit
 
 - python setup.py install
+- pip install python-coveralls
+- pip install coverage       # Add me to install coverage.py
+- pip install nose           # Add me to install nose
 
 before_script:
 # RDKit
@@ -42,7 +45,14 @@ before_script:
 - echo $RDBASE
 
 script:
-- python -m pytest --cov=tests/
+- python -m nose --verbose --with-coverage
 
 after_success:
 - coveralls
+
+notifications:
+  email:
+    recipients:
+    - sharifsuliman1@gmail.com
+    on_success: always
+    on_failure: always
