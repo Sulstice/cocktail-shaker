@@ -1,7 +1,7 @@
 biopandas==0.2.3
 biopython==1.72
 future==0.16.0
-jupyter-core==4.4.0
+jupyter-core==4.5.0
 matplotlib==3.0.2
 more-itertools==4.3.0
 numpy==1.16.0
