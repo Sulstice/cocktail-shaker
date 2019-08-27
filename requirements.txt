@@ -25,5 +25,5 @@ webencodings==0.5.1
 xhtml2pdf==0.2.3
 molvs>=0.1.0
 pyyaml>=0.1.0
-lxml==4.3.0
+lxml==4.4.1
 coveralls
