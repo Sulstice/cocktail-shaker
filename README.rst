@@ -2,7 +2,7 @@
 Cocktail Shaker: Drug Expansion and Enumeration!
 ------------------------------------------------
 
-|Build| |License| |Coverage| |Python| |Gitter| |Zenodo|
+|Build| |License| |Coverage| |Python| |Gitter| |Zenodo| |Docs|
 
 ----
 
@@ -122,3 +122,6 @@ External links
 .. |Gitter| image:: https://badges.gitter.im/Cocktail-Shaker/community.svg
    :target: https://gitter.im/Cocktail-Shaker/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 .. |Python| image:: https://img.shields.io/badge/python-3.6-blue.svg
+.. |Docs| image:: https://readthedocs.org/projects/cocktail-shaker/badge/?version=latest
+   :target: https://cocktail-shaker.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status

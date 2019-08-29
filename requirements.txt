@@ -5,7 +5,7 @@ jupyter-core==4.4.0
 matplotlib==3.0.2
 more-itertools==4.3.0
 numpy==1.16.0
-pandas==0.23.4
+pandas==0.24.2
 plotly==3.4.2
 prettyprint==0.1.5
 progress==1.4

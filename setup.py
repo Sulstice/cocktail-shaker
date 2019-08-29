@@ -7,7 +7,7 @@
 
 # imports
 # -------
-
+import os
 
 # config
 # ------
@@ -26,13 +26,10 @@ TEST_REQUIREMENTS = [
     'pytest-runner'
 ]
 
-LIGAND_LIBRARY_LOADER = "Cocktail Shaker"
-
-# # files
-# # -----
-# with open('README.md') as fi:
-#     README = fi.read()
-
+if os.path.exists('README.rst'):
+    long_description = open('README.rst').read()
+else:
+    long_description = '''Cocktail Shaker is drug enumeration and expansion library'''
 
 # exec
 # ----
@@ -45,8 +42,9 @@ setup(
     author_email="sharifsuliman1@gmail.com",
     url="https://www.github.com/Sulstice/Cocktail-Shaker",
     install_requires=REQUIREMENTS,
+    long_description=long_description,
     zip_safe=False,
-    keywords=['cocktail', 'chemistry', 'ligand-design', 'shaker'],
+    keywords='cocktail chemistry ligand-design shaker',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Natural Language :: English',
