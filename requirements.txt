@@ -26,4 +26,3 @@ xhtml2pdf==0.2.3
 molvs>=0.1.0
 pyyaml>=0.1.0
 lxml==4.3.0
-coveralls
