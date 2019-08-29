@@ -1,5 +1,6 @@
 
-## Cocktail Shaker 
+Cocktail Shaker: An open source drug expansion and enumeration library!
+-----------------------------------------------------------------------
 
 ![Build status](https://travis-ci.org/Sulstice/Cocktail-Shaker.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/Sulstice/Cocktail-Shaker/badge.svg?branch=master)](https://coveralls.io/github/Sulstice/Cocktail-Shaker?branch=master)
@@ -10,28 +11,109 @@
  [![DOI](https://zenodo.org/badge/170644606.svg)](https://zenodo.org/badge/latestdoi/170644606)
 
 
-**Background:** ML algorithms are capable of searching extensive chemical spaces
-for the best starting points for a drug development program. This leaves us with the question of
-how do we design and construct the virtual library which will be searched during this process.
+----
 
-**Goal:** Construct a library of 10,000 distinct compounds, which are all synthesizable. The library
-should be optimized for chemical diversity, to span as much of the chemical space as possible.
+Cocktail Shaker is a **high-performance drug enumeration and expansion library**. Cocktail Shaker leverages the computational power of  **RDKit** to create and enumerate large volumes of drug compounds. 
 
-This problem target the main apex pain point hindering chemical modeling today. Given the rise of the genomic and protenoimics have discovered therapeutic targets with no small molecule modulators. The demand asks for more increased virtual high throughput screening but with a lack of adequate screening libraries. 
-
-Questions arise:
-    - How do we construct these chemical libraries?
-    
-    - How do we construct these chemical libraries expanding the most chemical diversity possible?
-    
-    - How do we construct chemical libraries exploring as many combinations of representation of data as possible? 
-    
-    - Added on to this what style of chemical libaries are we constructing? (Natural/Non-Natural Amino Acids versus small molecule inhibitors) 
-    
-    - How do we create these chemical libraries so it adheres to easy synthesis or, to make the chemists happy, can be constructed through click chemistry methods.
-    
-    - How do construct datasets that are not in violation with existing patents for pharma companies today? 
-
-#### Ligand Selection
+-  File parsing of TXT, SDF, and Chemical Smiles. 
+-  File writing in a variety of formats some of which include: cif, sdf, pdb, mol, mol2 and many others
+-  Ability to recognize and expand libraries of compounds some of which include halogens, acyl halides, aldehydes. 
+-  Ability to enumerate in 1D, and 2D structures and produce those compounds. 
 
 
+Announcements
+-------------
+
+- **Release!** Version 1.0.0-beta, August 26, 2019
+- **RDkit UGM 2019**: talk at September 25th at the University of Hamburg, Germany.
+
+
+Using Cocktail Shaker
+---------------------
+
+Cocktail Shaker is a young library under heavy development at this time. It
+targets two categories of users:
+
+1. **Users knowing RDKit**, or willing to learn RDKit, who want to
+   create fast sets of data for high throughput screening or machine learning.
+2. **Open Science Scientists without any knowledge of RDKit**, who are seeking a
+   a high-level wrapper to create chemical files for their software.
+
+If you're in the first category, you can already start using RDKit.
+Cocktail Shaker offers a Pythonic, easy-to-use library and you can start channeling molecules in the expansion library.
+Instead of validating the sanity of the data, Cocktail Shaker takes care of that for you.
+With each molecule being generated it will head into a 1D, and or 2D validation check (3D not supported yet). 
+
+If you're in the second category, we're starting to build experimental
+high-level python code to take care a lot of the underpinnings of RDKit.
+
+Installation (TBD)
+------------------
+
+Cocktail Shaker runs on Python 3.3+ and depends on RDKit. 
+
+
+Cocktail Shaker can be installed either via `pip`:
+
+```
+pip install
+```
+
+or within the `Anaconda <https://www.anaconda.com/download/>`_ Python
+distribution. Anaconda provides a convenient package management system.
+Installing VisPy can then easily be achieved by adding `conda-forge` to the
+channels with:
+
+```
+conda config --add channels conda-forge
+```
+
+Once the `conda-forge` channel has been enabled, `vispy` can be installed with:
+
+```
+conda install 
+```
+
+Development Installation
+------------------------
+
+As Cocktail Shaker is under heavy development at this time, we highly recommend
+developers to use the development version on Github (master branch). You need
+to clone the repository and install VisPy with
+``python setup.py install``.
+
+As a one-liner, assuming `git` is installed::
+
+    git clone https://github.com/Sulstice/Cocktail-Shaker.git
+
+This will automatically install the latest version of Cocktail Shaker.
+
+Structure of Cocktail Shaker
+----------------------------
+
+Currently, the main subpackages are:
+
+-  **root**: Contains a lot of the high level functionality; Request Handling, File Parsing/Writing, Enumeration and Expansion
+-  **docs**: An access point for the readthedocs implementation. 
+-  **datasources**: This is where the system stores it's data on predfined functional groups and/or shapes (coming soon). 
+-  **tests**: Tests that are for the file handling, requests, and testing molecule pattern recognition
+
+The API of all public interfaces are subject to change in the future,
+although **datasources** are *relatively* stable at this point.
+
+
+Genesis
+-------
+
+Cocktail Shaker began when one developer/scientist wanted an open source drug library. 
+`Suliman sharif <http://sulstice.github.io/>`
+
+Now Cocktail Shaker looks to build on the expertise of these developers/scientists and the
+broader open-science community to build an effective drug library. 
+
+----
+
+External links
+--------------
+
+-  `Documentation <http://cocktail-shaker.readthedocs.org>`__
