@@ -113,7 +113,7 @@ External links
 
 .. |Build| image:: https://travis-ci.org/Sulstice/Cocktail-Shaker.svg?branch=master
    :target: https://travis-ci.org/Sulstice/Cocktail-Shaker
-.. |LICENSE| image:: https://github.com/Sulstice/Cocktail-Shaker/blob/master/LICENSE
+.. |LICENSE| image:: https://img.shields.io/badge/license-new%20BSD-blue.svg
    :target: https://github.com/Sulstice/Cocktail-Shaker/blob/master/LICENSE
 .. |Coverage| image:: https://coveralls.io/repos/github/Sulstice/Cocktail-Shaker/badge.svg?branch=master
    :target: https://coveralls.io/github/Sulstice/Cocktail-Shaker?branch=master
