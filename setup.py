@@ -43,6 +43,7 @@ setup(
     url="https://www.github.com/Sulstice/Cocktail-Shaker",
     install_requires=REQUIREMENTS,
     long_description=long_description,
+    long_description_content_type='text/rst',
     zip_safe=False,
     keywords='cocktail chemistry ligand-design shaker',
     classifiers=[
