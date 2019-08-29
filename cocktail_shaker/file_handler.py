@@ -9,7 +9,7 @@
 from rdkit import Chem
 from pathlib import Path
 import pandas as pd
-from request_handler import CactusRequestHandler, RequestError, Resolver
+from cocktail_shaker.request_handler import CactusRequestHandler, Resolver
 
 class FileNotSupportedError(Exception):
 

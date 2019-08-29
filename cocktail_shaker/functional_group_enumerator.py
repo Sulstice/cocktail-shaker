@@ -9,7 +9,6 @@
 from rdkit import Chem
 import ruamel.yaml as yaml
 
-from file_handler import FileWriter, FileParser
 
 # Load datasources
 # -------------

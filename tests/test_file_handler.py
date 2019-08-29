@@ -8,8 +8,8 @@
 # -------
 import os
 from rdkit import Chem
-from functional_group_enumerator import Cocktail
-from file_handler import FileParser, FileWriter
+from cocktail_shaker.functional_group_enumerator import Cocktail
+from cocktail_shaker.file_handler import FileParser, FileWriter
 
 
 def test_encoding_checker():
