@@ -1,4 +1,4 @@
-biopandas==0.2.3
+biopandas==0.2.5
 biopython==1.72
 future==0.16.0
 jupyter-core==4.4.0
@@ -26,4 +26,6 @@ xhtml2pdf==0.2.3
 molvs>=0.1.0
 pyyaml>=0.1.0
 lxml==4.3.0
+pyup-pin-coveralls-1.8.2
 coveralls==1.8.2
+
