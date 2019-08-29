@@ -38,7 +38,7 @@ def test_file_production():
 
     """
 
-    scaffold_molecule = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
+    scaffold_molecule = Cocktail(['c1cc(CCCO)ccc1','c1cc(CCCBr)ccc1'])
     modified_molecules = scaffold_molecule.shake()
     FileWriter("tests/test", modified_molecules, "sdf")
     FileWriter("tests/test", modified_molecules, "txt")

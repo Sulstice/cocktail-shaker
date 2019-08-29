@@ -68,11 +68,11 @@ class Cocktail(object):
         load_datasources()
         self.dimensionality = '1D'
         self.modified_molecules = []
+        rdkit_rendered_molecules = []
+        for molecule in molecules:
+            rdkit_rendered_molecules.append(Chem.MolFromSmiles(molecule))
 
-        if type(molecules) is not list:
-            self.molecules = [molecules]
-        else:
-            self.molecules = molecules
+        self.molecules = rdkit_rendered_molecules
 
         for molecule in self.molecules:
             self.original_smiles = Chem.MolToSmiles(molecule)
@@ -200,6 +200,8 @@ class Cocktail(object):
 
         self.modified_molecules = modified_molecules
 
+        print ("Molecules Generated: {}".format(len(modified_molecules)))
+
         return modified_molecules
 
     def enumerate(self, enumeration_complexity=None, dimensionality=None):
@@ -249,15 +251,5 @@ class Cocktail(object):
 
         return enumerated_molecules
 
-# Implemented Strictly for Testing
-# --------------------------------
-# if __name__ == '__main__':
-#
-#         cocktail = Cocktail([Chem.MolFromSmiles('c1cc(CCCO)ccc1'), Chem.MolFromSmiles('c1cc(CCCBr)ccc1')])
-#         compounds_result = cocktail.shake()
-#         compounds_result_enumerated = cocktail.enumerate(enumeration_complexity='Low', dimensionality='2D')
-#
-#         FileWriter("test", compounds_result, "maestro")
-#
 
 
