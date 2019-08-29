@@ -10,13 +10,6 @@ Welcome to Cocktail Shaker's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
 .. Cocktail Shaker documentation master file, created by sphinx-quickstart on Tue Mar 24 16:12:38 2015.
 
 Cocktail Shaker
