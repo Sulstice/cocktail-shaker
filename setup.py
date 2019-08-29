@@ -28,29 +28,30 @@ TEST_REQUIREMENTS = [
 
 LIGAND_LIBRARY_LOADER = "Cocktail Shaker"
 
-# files
-# -----
-with open('README.md') as fi:
-    README = fi.read()
+# # files
+# # -----
+# with open('README.md') as fi:
+#     README = fi.read()
 
 
 # exec
 # ----
 setup(
-    name="Cocktail Shaker",
-    version="0.0.1",
-    description="Expand your ligand library with this amazing package!",
-    long_description=README,
+    name="cocktail_shaker",
+    version="1.0.0-beta",
+    packages = ['cocktail_shaker'],
+    license='MIT',
     author="Suliman Sharif",
     author_email="sharifsuliman1@gmail.com",
-    url="www.github.com/Sulstice/Cocktail-Shaker",
+    url="https://www.github.com/Sulstice/Cocktail-Shaker",
     install_requires=REQUIREMENTS,
     zip_safe=False,
-    keywords=['ligand-loader', 'chemistry', 'ligand-design'],
+    keywords=['cocktail', 'chemistry', 'ligand-design', 'shaker'],
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers :: Cheminformaticians',
+        'Development Status :: 4 - Beta',
         'Natural Language :: English',
+        'License :: OSI Approved :: MIT License',
+        'Intended Audience :: Developers',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
