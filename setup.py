@@ -29,7 +29,7 @@ TEST_REQUIREMENTS = [
 if os.path.exists('README.md'):
     long_description = open('README.md').read()
 else:
-    long_description = '''Cocktail Shaker is drug enumeration and expansion library'''
+    long_description = 'Cocktail Shaker is drug enumeration and expansion library'
 
 # exec
 # ----
@@ -43,7 +43,7 @@ setup(
     url="https://www.github.com/Sulstice/Cocktail-Shaker",
     install_requires=REQUIREMENTS,
     long_description=long_description,
-    long_description_content_type='text/rst',
+    long_description_content_type='text/markdown',
     zip_safe=False,
     keywords='cocktail chemistry ligand-design shaker',
     classifiers=[

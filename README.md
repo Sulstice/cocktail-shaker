@@ -53,11 +53,11 @@ high-level python code to take care a lot of the underpinnings of RDKit.
 Installation (TBD)
 ==================
 
-Cocktail Shaker runs on Python 3.3+ and depends on RDKit.
+Cocktail Shaker runs on Python 3.3+ and depends on RDKit version (Make sure you have this installed!).
 
 Cocktail Shaker can be installed either via \`pip\`:
 
-`` ` pip install ``\`
+`` ` pip install cocktail_shaker``\`
 
 or within the [Anaconda](https://www.anaconda.com/download/) Python
 distribution. Anaconda provides a convenient package management system.
@@ -90,7 +90,7 @@ Structure of Cocktail Shaker
 
 Currently, the main subpackages are:
 
--   **root**: Contains a lot of the high level functionality; Request
+-   **cocktail_shaker**: Contains a lot of the high level functionality; Request
     Handling, File Parsing/Writing, Enumeration and Expansion
 -   **docs**: An access point for the readthedocs implementation.
 -   **datasources**: This is where the system stores it's data on
