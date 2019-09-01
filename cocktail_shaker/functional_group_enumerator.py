@@ -151,14 +151,15 @@ class Cocktail(object):
         print ("Detecting Functional Groups...")
 
         for molecule in self.molecules:
-            for functonal_group, pattern in R_GROUPS.items():
-                for key, value in pattern[0].items():
-                    smart_pattern = Chem.MolFromSmarts(value[1])
-                    if molecule.GetSubstructMatches(smart_pattern,uniquify=False):
-                        print ("Found Functional Group: %s | Pattern Count: %s" % (key,
-                                                                                   len(molecule.GetSubstructMatches(
-                                                                                       smart_pattern,uniquify=False))))
-                    pattern_payload[key] = [value[0], value[1]]
+            for functional_group, pattern in R_GROUPS.items():
+                for i in range(0, len(pattern)):
+                    for key, value in pattern[i].items():
+                        smart_pattern = Chem.MolFromSmarts(value[1])
+                        if molecule.GetSubstructMatches(smart_pattern,uniquify=False):
+                            print ("Found Functional Group: %s | Pattern Count: %s" % (key,
+                                                                                       len(molecule.GetSubstructMatches(
+                                                                                           smart_pattern,uniquify=False))))
+                        pattern_payload[key] = [value[0], value[1]]
 
         return pattern_payload
 
@@ -188,18 +189,19 @@ class Cocktail(object):
             for molecule in self.molecules:
                 for key, value in patterns_found.items():
                         smarts_mol = Chem.MolFromSmarts(value[1])
-                        for functonal_group, pattern in R_GROUPS.items():
-                            for r_functional_group, r_data in pattern[0].items():
-                                # Skip redundacies if the r group is already matched.
-                                if r_data[1] == value[1]:
-                                    continue
-                                try:
-                                    modified_molecule = Chem.ReplaceSubstructs(molecule, smarts_mol,
-                                                                              Chem.MolFromSmiles(r_data[0]), replaceAll=True)
-                                    modified_molecules.append(modified_molecule[0])
-                                except RaiseMoleculeError:
-                                    print ("Molecule Formed is not possible")
-                                    # continue
+                        for functional_group, pattern in R_GROUPS.items():
+                            for i in range(0, len(pattern)):
+                                for r_functional_group, r_data in pattern[0].items():
+                                    # Skip redundacies if the r group is already matched.
+                                    if r_data[1] == value[1]:
+                                        continue
+                                    try:
+                                        modified_molecule = Chem.ReplaceSubstructs(molecule, smarts_mol,
+                                                                                  Chem.MolFromSmiles(r_data[0]), replaceAll=True)
+                                        modified_molecules.append(modified_molecule[0])
+                                    except RaiseMoleculeError:
+                                        print ("Molecule Formed is not possible")
+                                        # continue
         else:
             modified_molecules = []
             for molecule in self.molecules:
