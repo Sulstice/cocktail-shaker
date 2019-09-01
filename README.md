@@ -61,7 +61,7 @@ To install RDKit, set up an environment through this:
 
 Cocktail Shaker can be installed either via \`pip\`:
 
-`` ` pip install cocktail_shaker``\`
+`` ` pip install cocktail-shaker``\`
 
 or within the [Anaconda](https://www.anaconda.com/download/) Python
 distribution. Anaconda provides a convenient package management system.
@@ -70,7 +70,7 @@ the channels with:
 
 `` ` conda config --add channels conda-forge ``\`
 
-Once the conda-forge channel has been enabled, vispy can be installed
+Once the conda-forge channel has been enabled, cocktail_shaker can be installed
 with:
 
 `` ` conda install ``\`
@@ -80,7 +80,8 @@ Development Installation
 
 As Cocktail Shaker is under heavy development at this time, we highly
 recommend developers to use the development version on Github (master
-branch). You need to clone the repository and install VisPy with
+branch). You need to clone the repository and install cocktail_shaker with
+
 `python setup.py install`.
 
 As a one-liner, assuming git is installed:

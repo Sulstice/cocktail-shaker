@@ -30,6 +30,8 @@ def test_encoding_checker():
     fail_file_object = FileParser(path + "/resources/test_fail_encoding.sdf")
     assert fail_file_object.check_utf8() == False
 
+    print ("Encoding Check Passes")
+
 def test_file_production():
 
     """
@@ -38,8 +40,8 @@ def test_file_production():
 
     """
 
-    scaffold_molecule = Cocktail(['c1cc(CCCO)ccc1','c1cc(CCCBr)ccc1'])
-    modified_molecules = scaffold_molecule.shake()
+    scaffold_molecule = Cocktail(['c1cc(CCCO)ccc1'])
+    modified_molecules = scaffold_molecule.shake(functional_groups=['Azides'])
     FileWriter("tests/test", modified_molecules, "sdf")
     FileWriter("tests/test", modified_molecules, "txt")
     FileWriter("tests/test", modified_molecules, "alc")
@@ -60,6 +62,7 @@ def test_file_production():
     FileWriter("tests/test", modified_molecules, "sln")
     FileWriter("tests/test", modified_molecules, "xyz")
 
+    print ("File Writing Passes")
     from pathlib import Path
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -83,6 +86,8 @@ def test_file_production():
     assert Path(dir_path + "/test.sln").is_file() == True
     assert Path(dir_path + "/test.xyz").is_file() == True
 
+    print ("File writing passes")
+
 def test_file_parser():
 
     """
@@ -98,3 +103,5 @@ def test_file_parser():
 
     if not FileParser(os.path.join(cwd, "tests/resources", "test.mol2")):
         return False
+
+    print ("File Parser passes")
