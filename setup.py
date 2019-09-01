@@ -26,8 +26,8 @@ TEST_REQUIREMENTS = [
     'pytest-runner'
 ]
 
-if os.path.exists('README.rst'):
-    long_description = open('README.rst').read()
+if os.path.exists('README.md'):
+    long_description = open('README.md').read()
 else:
     long_description = '''Cocktail Shaker is drug enumeration and expansion library'''
 
