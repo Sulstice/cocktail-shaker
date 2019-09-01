@@ -50,10 +50,14 @@ validation check (3D not supported yet).
 If you're in the second category, we're starting to build experimental
 high-level python code to take care a lot of the underpinnings of RDKit.
 
-Installation (TBD)
+Installation 
 ==================
 
 Cocktail Shaker runs on Python 3.3+ and depends on RDKit version (Make sure you have this installed!).
+
+To install RDKit, set up an environment through this:
+
+``` $ conda install -q -c rdkit rdkit ```
 
 Cocktail Shaker can be installed either via \`pip\`:
 
