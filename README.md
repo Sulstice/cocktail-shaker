@@ -9,7 +9,9 @@ Cocktail Shaker: Drug Expansion and Enumeration!
 [![Zenodo](https://zenodo.org/badge/170644606.svg)](https://zenodo.org/badge/latestdoi/170644606)
 [![Documentation Status](https://readthedocs.org/projects/cocktail-shaker/badge/?version=latest)](https://cocktail-shaker.readthedocs.io/en/latest/?badge=latest)
 
-* * * * *
+<p align="center">
+  <img width="600" height="500" src="images/logoshaker.png">
+</p>
 
 Cocktail Shaker is a **high-performance drug enumeration and expansion
 library**. Cocktail Shaker leverages the computational power of
@@ -110,7 +112,10 @@ Genesis
 =======
 
 Cocktail Shaker began when one developer/scientist wanted an open source
-drug library. Suliman sharif \<http://sulstice.github.io/\>
+drug library.
+
+- Lead Developer [Suliman sharif](http://sulstice.github.io/)
+- Artwork [Elena Chow](http://www.chowelena.com/)
 
 Now Cocktail Shaker looks to build on the expertise of these
 developers/scientists and the broader open-science community to build an
