@@ -48,8 +48,6 @@ A step-by-step guide to getting started with Cocktail Shaker.
 
     guide/installation
     guide/quickstart
-    guide/functional_groups
-    guide/contributing
 
 API documentation
 -----------------
@@ -58,6 +56,18 @@ Comprehensive API documentation with information on every function, class and me
 
 .. toctree::
     :maxdepth: 2
-    guide/cocktail_shaker.rst
+
+    guide/file_formats
+    guide/file_handling
+    guide/functional_groups
+    guide/cocktail
+    guide/contributing
+
+Cocktail Shaker's license
+-------------------------
+
+Cocktail Shaker is released under the MIT License. This is a short, permissive software license that allows commercial use,
+modifications, distribution, sublicensing and private use. Basically, you can do whatever you want with Cocktail Shaker as long as
+you include the original copyright and license in any copies or derivative projects.
 
 .. _`MIT license`: https://github.com/Sulstice/Cocktail-Shaker/blob/master/LICENSE

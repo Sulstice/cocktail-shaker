@@ -1,0 +1,129 @@
+.. _cocktail:
+
+Cocktail API Documentation
+==========================
+
+This page gives a introduction on what functionality the cocktail object and some deeper look into what it can
+accomplish down the road.
+
+The Cocktail Class
+------------------
+
+The cocktail object is the meat of the package and allows the user to parse in a smile string and expand their drug
+library with different functional groups and enumerate representations of the molecule in 1D and 2D.
+
+    .. attribute:: molecules
+
+      The list of smiles you would like to be passed into the cocktail
+
+    You instantiate a ``Cocktail`` object by parsing in a list of smiles
+    Cocktail Shaker will already handle the smiles to RDKit mol object for you without having to subject to create them
+    yourself.
+    If the smiles fails to load and *is not* supported, then ``MoleculeError`` will be raised instead.
+
+    >>> from cocktail_shaker import Cocktail
+    >>> cocktail = Cocktail(['c1cc(CCCO)ccc1'])
+    >>> cocktail = Cocktail(['c1cc(CCCO)ccc1', 'c1cc(CCCBr)ccc1'])
+    >>> print (cocktail)
+    >>> CocktailObject
+
+    Cocktail, under the hood, uses two validation schemes to determine whether the molecule is a legitimate molecule.
+    One comes from MolVS validator
+
+    And the other is internal. Using RDKit's rendering capabilities from smiles to RDKit Mol Object, we can determine
+    if the molecule generated is legitimate. Using both internal validations we can ensure validation of the smiles.
+
+
+The "Shake" Module
+------------------
+
+    The shake function detects functional groups present on the molecule, breaks their bond and then adds a functional
+    group (not itself) from the datasource library in replacement.
+
+    Essentially the shake compound is utilizing a chemical method known as "click" chemistry in the snapping and formation
+    of new bonds linking them together.
+
+
+    You instantiate a ``Cocktail`` object by parsing in a list of smiles and then "shake" the compounds.
+    Cocktail Shaker shows what functional groups can be detected and then swaps accordingly.
+    If the shake fails to work then ``MoleculeError`` will be raised instead and please contact the Lead Developer.
+
+    >>> from cocktail_shaker import Cocktail
+    >>> cocktail = Cocktail(['c1cc(CCCO)ccc1'])
+    >>> new_compounds = cocktail.shake()
+    >>> print (cocktail)
+    [RDKit Mol Object, RDKit Mol Object, RDKit Mol Object]
+
+    As mentioned before, validation happens internally, so with whatever molecules are being generated they are validated
+    before appended the list.
+
+    As you may have noticed there are some restrictions in the first release of this package.
+
+    1. Not being able to pick which bond you would like to break (This is up and coming for version 2.0 and on the roadmap)
+    2. The limit of functional groups cocktail shaker can detect.
+
+    Since cocktail shaker uses SMART pattern recognition to detect functional groups, it is limited to how fast we can
+    support new groups and thoroughly test them. The library is looking to expand into more classes and a variety of
+    groups.
+
+    Cocktail Shaker does also allow you pass in a functional_groups parameter where you can selectively pick a functional
+    group. Please go to :ref:`functional groups <functionalgroups>` to see what we support.
+
+    >>> from cocktail_shaker import Cocktail
+    >>> cocktail = Cocktail(['c1cc(CCCO)ccc1'])
+    >>> new_compounds = cocktail.shake(functional_groups=['Azides'])
+    >>> print (cocktail)
+    [RDKit Mol Object (Azide)]
+
+   .. attribute:: functional_groups
+
+      The list of functional groups that you would like to exchange specifically with.
+
+The "Enumerate" Module
+----------------------
+
+    The enumerate module takes your RDKit molecule objects and generates random representations of the compounds in either
+    1D, 2D, and coming soon (3D).
+
+    Enumeration does not take into account tautomers, salts, and other configurations just yet but it's on its way!
+
+    You instantiate a ``Cocktail`` object by parsing in a list of smiles and then "enumerate" the compounds.
+    If the enumerate fails to work then ``MoleculeError`` will be raised instead and please contact the Lead Developer.
+
+    >>> from cocktail_shaker import Cocktail
+    >>> cocktail = Cocktail(['c1cc(CCCO)ccc1'])
+    >>> new_compounds = cocktail.enumerate(enumeration_complexity='low', dimensionality='2D'))
+    >>> print (cocktail)
+    [RDKit Mol Object (2D Representation), RDKit Mol Object (2D Representation), RDKit Mol Object (2D Representation)]
+
+    Alternatively, if you have just shook the compounds Cocktail Shaker is smart enough to grab the previously generated
+    new compounds and apply the shake.
+
+    >>> from cocktail_shaker import Cocktail
+    >>> cocktail = Cocktail(['c1cc(CCCO)ccc1'])
+    >>> cocktail.shake()
+    >>> new_compounds = cocktail.enumerate(enumeration_complexity='low', dimensionality='2D'))
+    >>> print (cocktail)
+    [RDKit Mol Object (2D Representation), RDKit Mol Object (2D Representation), RDKit Mol Object (2D Representation)]
+
+    How the enumeration works is that it follows the algorithm of generating random SMILES generated by RDKit. This allows
+    for different representation in 1D format. Coincidentally, this algorithm works for 2D. 3D files are a little more
+    complex in terms of enumeration but also on track for version 2.0 release.
+
+    The enumeration complexity refers to how many times cocktail shaker will try to generate a unique random SMILES
+    representation. This goes with order of magnitude of 10.
+
+   .. attribute:: enumeration_complexity
+
+        How many representations would you like to generate.
+        'low'    = 10 Representations
+        'medium' = 100 Representations
+        'high    = 1000 Representations
+
+   .. attribute:: dimensionality
+
+        What dimensionality you would like i.e '1D', '2D', '3D (Not Supported)'
+
+
+
+

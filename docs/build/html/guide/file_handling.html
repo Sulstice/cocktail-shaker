@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>File API Documentation &mdash; Cocktail Shaker 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Functional Groups" href="functional_groups.html" />
+    <link rel="prev" title="File Formats" href="file_formats.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cocktail Shaker
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="file_formats.html">File Formats</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">File API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-fileparser-module">The FileParser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-filewriter-module">The FileWriter module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functional_groups.html">Functional Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cocktail.html">Cocktail API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cocktail Shaker</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>File API Documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/guide/file_handling.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-api-documentation">
+<span id="filehandling"></span><h1>File API Documentation<a class="headerlink" href="#file-api-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This page gives a introduction on how cocktail-shaker operates reading and writing files. Let’s get started! To see
+what files we support please head to <a class="reference internal" href="file_formats.html#fileformats"><span class="std std-ref">file formats</span></a></p>
+<div class="section" id="the-fileparser-module">
+<h2>The FileParser module<a class="headerlink" href="#the-fileparser-module" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>You instantiate a <code class="docutils literal notranslate"><span class="pre">FileParser</span></code>
+by providing exactly the path to a file with the extension included.
+Cocktail Shaker is smart enough to detect the file extension and allocate it’s specific parsing.
+If the file being parsed <em>is not</em> supported, then <code class="docutils literal notranslate"><span class="pre">FileNotSupportedError</span></code> will be raised instead.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cocktail_shaker</span> <span class="k">import</span> <span class="n">FileParser</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">molecules</span> <span class="o">=</span> <span class="n">FileParser</span><span class="p">(</span><span class="s1">&#39;compounds.sdf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="p">(</span><span class="n">molecules</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="s1">&#39;c1cc(CCCO)ccc1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>FileParser will then return a list of SMILES.</p>
+<dl class="attribute">
+<dt id="file_path">
+<code class="descname">file_path</code><a class="headerlink" href="#file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to a file</p>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="the-filewriter-module">
+<h2>The FileWriter module<a class="headerlink" href="#the-filewriter-module" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>You instantiate a <code class="docutils literal notranslate"><span class="pre">FileWriter</span></code>
+by providing the path to the file, compounds to be written, and the extension you would like the files in.
+If the file being written <em>is not</em> supported, then <code class="docutils literal notranslate"><span class="pre">FileNotSupportedError</span></code> will be raised instead.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cocktail_shaker</span> <span class="k">import</span> <span class="n">Cocktail</span><span class="p">,</span> <span class="n">FileWriter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cocktail</span> <span class="o">=</span> <span class="n">Cocktail</span><span class="p">([</span><span class="s1">&#39;c1cc(CCCO)ccc1&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">molecules</span> <span class="o">=</span> <span class="n">cocktail</span><span class="o">.</span><span class="n">shake</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="p">(</span><span class="n">molecules</span><span class="p">)</span>
+<span class="go">[RDKit_Mol_Object, RDKit_Mol_Object, RDKit_Mol_Object...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FileWriter</span><span class="p">(</span><span class="s1">&#39;new_compounds&#39;</span><span class="p">,</span> <span class="n">molecules</span><span class="p">,</span> <span class="s1">&#39;.sdf&#39;</span><span class="p">)</span>
+<span class="go">Generates an SDF File....</span>
+</pre></div>
+</div>
+<p>If however you would like to generate the files into separate files you can pass in the fragmentation parameter</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cocktail_shaker</span> <span class="k">import</span> <span class="n">Cocktail</span><span class="p">,</span> <span class="n">FileWriter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cocktail</span> <span class="o">=</span> <span class="n">Cocktail</span><span class="p">([</span><span class="s1">&#39;c1cc(CCCO)ccc1&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">molecules</span> <span class="o">=</span> <span class="n">cocktail</span><span class="o">.</span><span class="n">shake</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="p">(</span><span class="n">molecules</span><span class="p">)</span>
+<span class="go">[RDKit_Mol_Object, RDKit_Mol_Object, RDKit_Mol_Object...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FileWriter</span><span class="p">(</span><span class="s1">&#39;new_compounds&#39;</span><span class="p">,</span> <span class="n">molecules</span><span class="p">,</span> <span class="s1">&#39;.sdf&#39;</span><span class="p">,</span> <span class="n">fragmentation</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">Generates 2 SDF Files....</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="name">
+<code class="descname">name</code><a class="headerlink" href="#name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to a file</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="molecules">
+<code class="descname">molecules</code><a class="headerlink" href="#molecules" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of RDKit molecules you would like to write.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="option">
+<code class="descname">option</code><a class="headerlink" href="#option" title="Permalink to this definition">¶</a></dt>
+<dd><p>The extension of the file you would like to write</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fragmentation">
+<code class="descname">fragmentation</code><span class="sig-paren">(</span><em>optional</em><span class="sig-paren">)</span><a class="headerlink" href="#fragmentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>How many files you would like to produce.</p>
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="functional_groups.html" class="btn btn-neutral float-right" title="Functional Groups" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="file_formats.html" class="btn btn-neutral" title="File Formats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Suliman Sharif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

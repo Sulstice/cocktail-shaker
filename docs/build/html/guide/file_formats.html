@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>File Formats &mdash; Cocktail Shaker 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="File API Documentation" href="file_handling.html" />
+    <link rel="prev" title="Getting started" href="quickstart.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cocktail Shaker
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">File Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file_handling.html">File API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functional_groups.html">Functional Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cocktail.html">Cocktail API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cocktail Shaker</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>File Formats</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/guide/file_formats.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-formats">
+<span id="fileformats"></span><h1>File Formats<a class="headerlink" href="#file-formats" title="Permalink to this headline">¶</a></h1>
+<p>Input can additionally be parsed in a variety of file formats that are autodetected:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">FileParser</span><span class="p">(</span><span class="s1">&#39;compound.sdf&#39;</span><span class="p">)</span>
+
+<span class="go">[&#39;RDKit MolObject&#39;]</span>
+</pre></div>
+</div>
+<p>The full list of file formats that we support parsing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">txt</span>       <span class="c1"># Smiles Txt Format</span>
+<span class="n">sdf</span>       <span class="c1"># 2D Structure file format</span>
+<span class="n">mol2</span>      <span class="c1"># (Coming soon)</span>
+</pre></div>
+</div>
+<p>Output can additionally be returned in a variety of file formats that are specified your enumerated compounds and your
+desired file extension:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">FileWriter</span><span class="p">(</span><span class="s1">&#39;test&#39;&#39;, compounds, &#39;</span><span class="o">.</span><span class="n">mol2</span><span class="s1">&#39;)</span>
+
+<span class="go">Writes all the compounds to 1 mol2 file.</span>
+</pre></div>
+</div>
+<p>The full list of file formats:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alc</span>         <span class="c1"># Alchemy format</span>
+<span class="n">cdxml</span>       <span class="c1"># CambridgeSoft ChemDraw XML format</span>
+<span class="n">cerius</span>      <span class="c1"># MSI Cerius II format</span>
+<span class="n">charmm</span>      <span class="c1"># Chemistry at Harvard Macromolecular Mechanics file format</span>
+<span class="n">cif</span>         <span class="c1"># Crystallographic Information File</span>
+<span class="n">cml</span>         <span class="c1"># Chemical Markup Language</span>
+<span class="n">gjf</span>         <span class="c1"># Gaussian input data file</span>
+<span class="n">gromacs</span>     <span class="c1"># GROMACS file format</span>
+<span class="n">hyperchem</span>   <span class="c1"># HyperChem file format</span>
+<span class="n">jme</span>         <span class="c1"># Java Molecule Editor format</span>
+<span class="n">maestro</span>     <span class="c1"># Schroedinger MacroModel structure file format</span>
+<span class="n">mol</span>         <span class="c1"># Symyx molecule file</span>
+<span class="n">mol2</span>        <span class="c1"># Tripos Sybyl MOL2 format</span>
+<span class="n">pdb</span>         <span class="c1"># Protein Data Bank</span>
+<span class="n">sdf</span>         <span class="c1"># 2D formatted structure data files</span>
+<span class="n">sdf3000</span>     <span class="c1"># Symyx Structure Data Format 3000</span>
+<span class="n">sln</span>         <span class="c1"># SYBYL Line Notation</span>
+<span class="n">xyz</span>         <span class="c1"># xyz file format</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file_handling.html" class="btn btn-neutral float-right" title="File API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quickstart.html" class="btn btn-neutral" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Suliman Sharif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

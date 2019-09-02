@@ -41,11 +41,12 @@ class FileWriter(object):
                      'mol2', 'mrv', 'pdb', 'sdf3000', 'sln', 'xyz']
 
 
-    def __init__(self, name, molecules, option, fragementation=None):
+    def __init__(self, name, molecules, option, fragmentation=None, smiles=False):
         self.molecules = molecules
         self.name = name
         self.option = option
-        self.fragmentation = fragementation # Determines if they would like the SDF split into fragments.
+        self.smiles = False
+        self.fragmentation = fragmentation # Determines if they would like the SDF split into fragments.
 
         if self.option not in self._CACTUS_FILE_FORMATS and self.option != 'sdf' and self.option != 'txt':
             raise FileNotSupportedError
@@ -97,6 +98,7 @@ class FileWriter(object):
 
         """
 
+
         if not self.fragmentation:
             writer = Chem.SmilesWriter(self.name + ".txt")
             for i in self.molecules:
@@ -107,6 +109,8 @@ class FileWriter(object):
             file_count = 1
             writer = Chem.SmilesWriter(self.name + str(file_count) + ".txt")
             for i in self.molecules:
+                if self.smiles:
+                    i = Chem.MolFromSmiles(i)
                 if writer.NumMols() == self.fragmentation:
                     writer.close()
                     file_count += 1
@@ -302,6 +306,7 @@ class FileParser(object):
         """
 
         molecule = Chem.SDMolSupplier(self.file)
+        molecule = Chem.MolToSmiles(molecule)
 
         return molecule
 
@@ -317,6 +322,7 @@ class FileParser(object):
         """
 
         molecule = Chem.MolFromMolFile(self.file)
+        molecule = Chem.MolToSmiles(molecule)
 
         return molecule
 
