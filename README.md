@@ -10,7 +10,7 @@ Cocktail Shaker: Drug Expansion and Enumeration!
 [![Documentation Status](https://readthedocs.org/projects/cocktail-shaker/badge/?version=latest)](https://cocktail-shaker.readthedocs.io/en/latest/?badge=latest)
 
 <p align="center">
-  <img width="600" height="500" src="images/logoshaker.png">
+  <img width="200" height="300" src="images/logoshaker.png">
 </p>
 
 Cocktail Shaker is a **high-performance drug enumeration and expansion
