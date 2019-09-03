@@ -6,7 +6,7 @@ matplotlib==3.0.2
 more-itertools==4.3.0
 numpy==1.16.2
 pandas==0.24.2
-plotly==3.4.2
+plotly==4.1.1
 prettyprint==0.1.5
 progress==1.4
 py==1.7.0
