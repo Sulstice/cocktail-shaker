@@ -306,7 +306,6 @@ class FileParser(object):
         """
 
         molecule = Chem.SDMolSupplier(self.file)
-        molecule = Chem.MolToSmiles(molecule)
 
         return molecule
 
@@ -322,7 +321,6 @@ class FileParser(object):
         """
 
         molecule = Chem.MolFromMolFile(self.file)
-        molecule = Chem.MolToSmiles(molecule)
 
         return molecule
 
