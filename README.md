@@ -15,12 +15,11 @@ Cocktail Shaker: Drug Expansion and Enumeration!
 
 Cocktail Shaker is a **high-performance drug enumeration and expansion
 library**. Cocktail Shaker leverages the computational power of
-**RDKit** to create and enumerate large volumes of drug compounds. -
-File parsing of TXT, SDF, and Chemical Smiles. - File writing in a
-variety of formats some of which include: cif, sdf, pdb, mol, mol2 and
-many others - Ability to recognize and expand libraries of compounds
-some of which include halogens, acyl halides, aldehydes. - Ability to
-enumerate in 1D, and 2D structures and produce those compounds.
+**RDKit** to create and enumerate large volumes of drug compounds. 
+-File parsing of TXT, SDF, and Chemical Smiles.
+- File writing in a variety of formats some of which include: cif, sdf, pdb, mol, mol2 and many others.
+- Ability to recognize and expand libraries of compounds some of which include halogens, acyl halides, aldehydes. 
+- Ability to enumerate in 1D, and 2D structures and produce those compounds.
 
 Announcements
 =============
