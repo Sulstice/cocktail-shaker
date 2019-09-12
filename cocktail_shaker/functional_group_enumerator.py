@@ -70,6 +70,10 @@ class Cocktail(object):
         self.modified_molecules = []
         rdkit_rendered_molecules = []
         for molecule in molecules:
+            if 'R1' in molecule:
+                molecule = molecule.replace('R1', '[*:1]', 1)
+            elif 'R' in molecule:
+                molecule = molecule.replace('R', '[*:1]', 1)
             rdkit_rendered_molecules.append(Chem.MolFromSmiles(molecule))
 
         self.molecules = rdkit_rendered_molecules
