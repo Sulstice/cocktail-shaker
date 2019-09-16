@@ -115,6 +115,7 @@ drug library.
 
 - Lead Developer [Suliman sharif](http://sulstice.github.io/)
 - Artwork [Elena Chow](http://www.chowelena.com/)
+- Technical Documentation [Rose Gierth](https://www.linkedin.com/in/rose-gierth-69a4a083/)
 
 Now Cocktail Shaker looks to build on the expertise of these
 developers/scientists and the broader open-science community to build an
