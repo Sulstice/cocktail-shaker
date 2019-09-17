@@ -12,7 +12,7 @@ The FileParser Module
     You instantiate a ``FileParser``
     by providing the exact path to a file with the extension included.
     cocktail-shaker is smart enough to detect the file extension and allocate its specific parsing.
-    If the file being parsed *is not* supported, then ``FileNotSupportedError`` will be raised instead.
+    If the file being parsed is *not* supported, then ``FileNotSupportedError`` will be raised instead.
 
     >>> from cocktail_shaker import FileParser
     >>> molecules = FileParser('compounds.sdf')
@@ -31,7 +31,7 @@ The FileWriter Module
 
     You instantiate a ``FileWriter``
     by providing the path to the file, compounds to be written, and the extension you would like the files in.
-    If the file being written *is not* supported, then ``FileNotSupportedError`` will be raised instead.
+    If the file being written is *not* supported, then ``FileNotSupportedError`` will be raised instead.
 
     >>> from cocktail_shaker import Cocktail, FileWriter
     >>> cocktail = Cocktail(['c1cc(CCCO)ccc1'])
@@ -41,7 +41,7 @@ The FileWriter Module
     >>> FileWriter('new_compounds', molecules, '.sdf')
     Generates an SDF File....
 
-    However, if you would like to generate the files into separate files, then you can pass in the fragmentation parameter
+    However, if you would like to generate the files into separate files, then you can pass in the fragmentation parameter.
 
     >>> from cocktail_shaker import Cocktail, FileWriter
     >>> cocktail = Cocktail(['c1cc(CCCO)ccc1'])
