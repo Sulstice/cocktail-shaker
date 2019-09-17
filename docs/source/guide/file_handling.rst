@@ -3,15 +3,15 @@
 File API Documentation
 ======================
 
-This page gives a introduction on how cocktail-shaker operates reading and writing files. Let's get started! To see
-what files we support please head to :ref:`file formats <fileformats>`
+This page provides an overview of how cocktail-shaker operates reading and writing files. To see
+the files that cocktail-shaker supports, refer to :ref:`file formats <fileformats>`.
 
-The FileParser module
+The FileParser Module
 ---------------------
 
     You instantiate a ``FileParser``
-    by providing exactly the path to a file with the extension included.
-    Cocktail Shaker is smart enough to detect the file extension and allocate it's specific parsing.
+    by providing the exact path to a file with the extension included.
+    cocktail-shaker is smart enough to detect the file extension and allocate its specific parsing.
     If the file being parsed *is not* supported, then ``FileNotSupportedError`` will be raised instead.
 
     >>> from cocktail_shaker import FileParser
@@ -26,7 +26,7 @@ The FileParser module
        The path to a file
 
 
-The FileWriter module
+The FileWriter Module
 ---------------------
 
     You instantiate a ``FileWriter``
@@ -41,7 +41,7 @@ The FileWriter module
     >>> FileWriter('new_compounds', molecules, '.sdf')
     Generates an SDF File....
 
-    If however you would like to generate the files into separate files you can pass in the fragmentation parameter
+    However, if you would like to generate the files into separate files, then you can pass in the fragmentation parameter
 
     >>> from cocktail_shaker import Cocktail, FileWriter
     >>> cocktail = Cocktail(['c1cc(CCCO)ccc1'])
