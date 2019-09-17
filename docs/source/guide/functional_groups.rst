@@ -51,4 +51,4 @@ If you would like to add to this list, the functional group information is store
 R_Groups.yml.
 
 Each smart pattern recognition is tested thoroughly before moving into the cocktail-shaker package, so please PR your
-test as well. You can follow the schema outlined in the function **test_primary_finding_r_groups**
+test as well. You can follow the schema outlined in the function **test_primary_finding_r_groups**.
