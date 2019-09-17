@@ -3,9 +3,7 @@
 Functional Groups
 =================
 
-This page lists the functional groups that cocktail-shaker currently supports.
-
-Functional Groups:
+Below is a list of the functional groups that cocktail-shaker currently supports.
 
 +------------------+--------------+---------------+--------------------------------------------------------------+
 | Functional Group | Class        | Smiles        | Smarts                                                       |
