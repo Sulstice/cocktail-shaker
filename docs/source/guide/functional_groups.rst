@@ -3,7 +3,7 @@
 Functional Groups
 =================
 
-This page gives a introduction on what functional groups the cocktail shaker currently supports
+This page lists the functional groups that cocktail-shaker currently supports.
 
 Functional Groups:
 
@@ -49,8 +49,8 @@ Functional Groups:
 | Azide            | Azides       | C([N-][N+]#N) | [$(*-[NX2-]-[NX2+]#[NX1]),$(*-[NX2]=[NX2+]=[NX1-])]          |
 +------------------+--------------+---------------+--------------------------------------------------------------+
 
-If you would like to add more to the list, functional group information is stored in the **datasource** directory under
+If you would like to add more, this functional group information is stored in the **datasource** directory under
 R_Groups.yml.
 
 Each smart pattern recognition is tested thoroughly before moving into the cocktail-shaker package, so please PR your
-test as well. You can follow the schema out lined in the function **test_primary_finding_r_groups**
+test as well. You can follow the schema outlined in the function **test_primary_finding_r_groups**
