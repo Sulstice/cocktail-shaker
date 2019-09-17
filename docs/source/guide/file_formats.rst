@@ -3,20 +3,20 @@
 File Formats
 ============
 
-Input can additionally be parsed in a variety of file formats that are autodetected::
+Input can be parsed in a variety of file formats that are autodetected::
 
     >>> FileParser('compound.sdf')
 
     ['RDKit MolObject']
 
-The full list of file formats that we support parsing::
+The full list of file formats that cocktail-shaker supports parsing::
 
     txt       # Smiles Txt Format
     sdf       # 2D Structure file format
     mol2      # (Coming soon)
 
 
-Output can additionally be returned in a variety of file formats that are specified your enumerated compounds and your
+Output can be returned in a variety of file formats that are specified your enumerated compounds and your
 desired file extension::
 
     >>> FileWriter('test'', compounds, '.mol2')
