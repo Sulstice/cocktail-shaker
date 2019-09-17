@@ -3,40 +3,41 @@
 Installation
 ============
 
-cocktail_shaker supports Python versions 3.3+. There required dependencies, most notably RDKit must be installed.
+cocktail-shaker supports Python versions 3.3+. Pyhton's required dependencies, most notably RDKit, must be installed.
 
-Option 1: Use pip (recommended)
+Option 1 (Recommended): Use Pip 
 -------------------------------
 
-The easiest and recommended way to install is using pip::
+The easiest way to install cocktail-shaker is using pip::
 
     pip install cocktail_shaker
 
-This will download the latest version of cocktail_shaker, and place it in your `site-packages` folder so it is automatically
-available to all your python scripts.
+This will download the latest version of cocktail-shaker and place it in your `site-packages` folder so it is automatically
+available to all your Python scripts.
 
-If you don't already have pip installed, you can `install it using get-pip.py`_::
+If you do not have pip installed yet, you can `install it using get-pip.py`_::
 
        curl -O https://raw.github.com/pypa/pip/master/contrib/get-pip.py
        python get-pip.py
 
-Option 2: Download the latest release
+Option 2: Download the Latest Release
 -------------------------------------
 
-Alternatively, `download the latest release`_ manually and install yourself::
+Alternatively, you can get cocktail-shaker by manually `download the latest release`_ and installing it yourself::
 
     tar -xzvf cocktail_shaker-1.0.0tar.gz
     cd cocktail_shaker-1.0.0
     python setup.py install
 
-The setup.py command will install cocktail_shaker in your `site-packages` folder so it is automatically available to all your
-python scripts.
+The setup.py command will install cocktail-shaker in your `site-packages` folder so it is automatically available to all your
+Python scripts.
 
-Option 3: Clone the repository
+Option 3: Clone the Repository
 ------------------------------
 
-The latest development version of cocktail_shaker is always `available on GitHub`_. This version is not guaranteed to be
-stable, but may include new features that have not yet been released. Simply clone the repository and install as usual::
+Additionally, the latest development version of cocktail-shaker is always `available on GitHub`_. The version on GitHub is not guaranteed to be stable, but may include new features that have not yet been released. 
+
+Simply clone the repository and install as usual::
 
     git clone https://github.com/Sulstice/Cocktail-Shaker.git
     cd Cocktail-Shaker
