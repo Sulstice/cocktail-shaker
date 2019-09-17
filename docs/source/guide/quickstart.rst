@@ -3,7 +3,7 @@
 Getting Started
 ===============
 
-This page instructs you on how to get started with Cocktail Shaker. To begin, make sure you have
+This page instructs you on how to get started with Cocktail Shaker. To begin, make sure you have performed
 :ref:`installing cocktail_shaker <install>`.
 
 Basic Usage
@@ -15,8 +15,8 @@ The simplest way to use Cocktail Shaker is to create a cocktail object with the 
     >>> new_compounds = cocktail.shake()
     [RDKit_Mol_Object, RDKit_Mol_Object, RDKit_Mol_Object...]
 
-Write the new compounds to an SDF file:
+Write the new compounds into an SDF file:
 
     >>> FileWriter('new_compounds', new_compounds, 'sdf')
 
-In this example, we have taken one smiles string and expanded the compounds into a variety of variations in one SDF file.
+In this example, we have taken one smiles string and expanded the compounds into a variety of variations into one SDF file.
