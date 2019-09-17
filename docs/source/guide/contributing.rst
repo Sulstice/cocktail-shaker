@@ -5,18 +5,18 @@ Contributing
 
 .. sectionauthor:: Suliman Sharif <sharifsuliman1@gmail.com>
 
-Contributions of any kind are greatly appreciated!
-
 Contributing
 ------------
 
-If you are able to contribute changes yourself, just fork the `source code`_ on GitHub, make changes and file a pull
-request. All contributions are welcome, no matter how big or small.
+Contributions of any kind to cocktail-shaker are greatly appreciated! All contributions are welcome, no matter how big or small.
 
-Quick guide to contributing
+If you are able to contribute changes yourself, just fork the `source code`_ on GitHub, make changes, and file a pull
+request.
+
+Quick Guide to Contributing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. `Fork the Cocktail-Shaker repository on GitHub`_, then clone your fork to your local machine::
+1. `Fork the Cocktail-Shaker repository on GitHub`_, then clone the fork to your local machine::
 
     git clone https://github.com/<username>/Cocktail-Shaker.git
 
@@ -29,7 +29,7 @@ Quick guide to contributing
 
     git checkout -b <name-for-changes>
 
-4. Make your changes or additions. Ideally add some tests and ensure they pass.
+4. Make your changes or additions. Ideally create some tests and ensure they pass.
 
 5. Commit your changes and push to your fork on GitHub::
 
