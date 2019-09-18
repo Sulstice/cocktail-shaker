@@ -112,7 +112,6 @@ class Resolver(object):
     def cactus_mol2_resolver(self):
 
         from lxml import etree
-
         response = etree.parse(self.request).getroot()
         for child in response.iter('item'):
             response = child.text

@@ -194,25 +194,28 @@ class Cocktail(object):
                 for key, value in patterns_found.items():
                         smarts_mol = Chem.MolFromSmarts(value[1])
                         for functional_group, pattern in R_GROUPS.items():
-                            for i in range(0, len(pattern)):
-                                for r_functional_group, r_data in pattern[0].items():
-                                    # Skip redundacies if the r group is already matched.
-                                    if r_data[1] == value[1]:
-                                        continue
-                                    try:
-                                        modified_molecule = Chem.ReplaceSubstructs(molecule, smarts_mol,
-                                                                                  Chem.MolFromSmiles(r_data[0]), replaceAll=True)
-                                        modified_molecules.append(modified_molecule[0])
-                                    except RaiseMoleculeError:
-                                        print ("Molecule Formed is not possible")
-                                        # continue
+                            if functional_group == 'R-Groups':
+                                continue
+                            else:
+                                for i in range(0, len(pattern)):
+                                    for r_functional_group, r_data in pattern[0].items():
+                                        if r_data[1] == value[1]:
+                                            continue
+                                        try:
+                                            modified_molecule = Chem.ReplaceSubstructs(molecule, smarts_mol,
+                                                                                      Chem.MolFromSmiles(r_data[0]), replaceAll=True)
+                                            modified_molecules.append(modified_molecule[0])
+                                        except RaiseMoleculeError:
+                                            print ("Molecule Formed is not possible")
         else:
             modified_molecules = []
             for molecule in self.molecules:
                 for key, value in patterns_found.items():
                     smarts_mol = Chem.MolFromSmarts(value[1])
                     for functional_group, pattern in R_GROUPS.items():
-                        if functional_group not in functional_groups:
+                        if functional_group == 'R-Groups':
+                            continue
+                        elif functional_group not in functional_groups:
                             continue
                         else:
                             for r_functional_group, r_data in pattern[0].items():
@@ -274,7 +277,7 @@ class Cocktail(object):
                     if not smiles_enumerated in enumerated_molecules:
                         enumerated_molecules.append(Chem.MolFromSmiles(smiles_enumerated))
                 elif dimensionality == '3D':
-                    print ('Not supported yet')
+                    print ('3D Functionality is not supported yet!')
                     return enumerated_molecules
 
         return enumerated_molecules
