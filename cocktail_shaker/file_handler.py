@@ -73,8 +73,10 @@ class FileWriter(object):
         if not self.fragmentation:
             writer = Chem.SDWriter(self.name + ".sdf")
             for i in self.molecules:
-                writer.write(i)
-
+                try:
+                    writer.write(i)
+                except:
+                    continue
             writer.close()
         else:
             file_count = 1

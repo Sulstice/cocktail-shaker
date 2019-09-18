@@ -231,10 +231,10 @@ class Cocktail(object):
                                 try:
                                     if self.markush_structure:
                                         modified_molecule = Chem.ReplaceSubstructs(molecule, Chem.MolFromSmiles('[*:1]'),
-                                                                                   Chem.MolFromSmiles(r_data[0]), replaceAll=True)
+                                                                                   Chem.MolFromSmiles(r_data[0]))
                                     else:
                                         modified_molecule = Chem.ReplaceSubstructs(molecule, smarts_mol,
-                                                                                   Chem.MolFromSmiles(r_data[0]), replaceAll=True)
+                                                                                   Chem.MolFromSmiles(r_data[0]))
                                     modified_molecules.append(modified_molecule[0])
                                 except RaiseMoleculeError:
                                     print ("Molecule Formed is not possible")
