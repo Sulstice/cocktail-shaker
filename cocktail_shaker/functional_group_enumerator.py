@@ -69,12 +69,16 @@ class Cocktail(object):
         self.dimensionality = '1D'
         self.modified_molecules = []
         rdkit_rendered_molecules = []
+        self.markush_structure = False
         for molecule in molecules:
             if 'R1' in molecule:
                 molecule = molecule.replace('R1', '[*:1]', 1)
+                self.markush_structure = True
             elif 'R' in molecule:
                 molecule = molecule.replace('R', '[*:1]', 1)
-            rdkit_rendered_molecules.append(Chem.MolFromSmiles(molecule))
+                self.markush_structure = True
+
+        rdkit_rendered_molecules.append(Chem.MolFromSmiles(molecule))
 
         self.molecules = rdkit_rendered_molecules
 
@@ -187,9 +191,8 @@ class Cocktail(object):
 
         patterns_found = self.detect_functional_groups()
         print ("Shaking Compound....")
-
+        modified_molecules = []
         if functional_groups[0] == 'all':
-            modified_molecules = []
             for molecule in self.molecules:
                 for key, value in patterns_found.items():
                         smarts_mol = Chem.MolFromSmarts(value[1])
@@ -202,13 +205,16 @@ class Cocktail(object):
                                         if r_data[1] == value[1]:
                                             continue
                                         try:
-                                            modified_molecule = Chem.ReplaceSubstructs(molecule, smarts_mol,
-                                                                                      Chem.MolFromSmiles(r_data[0]), replaceAll=True)
+                                            if self.markush_structure:
+                                                modified_molecule = Chem.ReplaceSubstructs(molecule, Chem.MolFromSmiles('[*:1]'),
+                                                                                           Chem.MolFromSmiles(r_data[0]), replaceAll=True)
+                                            else:
+                                                modified_molecule = Chem.ReplaceSubstructs(molecule, smarts_mol,
+                                                                                          Chem.MolFromSmiles(r_data[0]), replaceAll=True)
                                             modified_molecules.append(modified_molecule[0])
                                         except RaiseMoleculeError:
                                             print ("Molecule Formed is not possible")
         else:
-            modified_molecules = []
             for molecule in self.molecules:
                 for key, value in patterns_found.items():
                     smarts_mol = Chem.MolFromSmarts(value[1])
@@ -223,12 +229,15 @@ class Cocktail(object):
                                 if r_data[1] == value[1]:
                                     continue
                                 try:
-                                    modified_molecule = Chem.ReplaceSubstructs(molecule, smarts_mol,
-                                                                               Chem.MolFromSmiles(r_data[0]), replaceAll=True)
+                                    if self.markush_structure:
+                                        modified_molecule = Chem.ReplaceSubstructs(molecule, Chem.MolFromSmiles('[*:1]'),
+                                                                                   Chem.MolFromSmiles(r_data[0]), replaceAll=True)
+                                    else:
+                                        modified_molecule = Chem.ReplaceSubstructs(molecule, smarts_mol,
+                                                                                   Chem.MolFromSmiles(r_data[0]), replaceAll=True)
                                     modified_molecules.append(modified_molecule[0])
                                 except RaiseMoleculeError:
                                     print ("Molecule Formed is not possible")
-                                    # continue
         self.modified_molecules = modified_molecules
 
         print ("Molecules Generated: {}".format(len(modified_molecules)))
