@@ -35,7 +35,7 @@ Python scripts.
 Option 3: Clone the Repository
 ------------------------------
 
-Additionally, the latest development version of cocktail-shaker is always `available on GitHub`_. The version on GitHub is not guaranteed to be stable, but may include new features that have not yet been released. 
+Lastly, the latest development version of cocktail-shaker is always `available on GitHub`_. The version on GitHub is not guaranteed to be stable, but may include new features that have not yet been released. 
 
 Simply clone the repository and install as usual::
 
