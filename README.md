@@ -13,13 +13,13 @@ Cocktail Shaker: Drug Expansion and Enumeration!
   <img width="200" height="300" src="images/logoshaker.png">
 </p>
 
-Cocktail Shaker is a **high-performance drug enumeration and expansion
-library**. Cocktail Shaker leverages the computational power of
+cocktail-shaker is a **high-performance drug enumeration and expansion
+library**. cocktail-shaker leverages the computational power of
 **RDKit** to create and enumerate large volumes of drug compounds. 
--File parsing of TXT, SDF, and Chemical Smiles.
-- File writing in a variety of formats some of which include: cif, sdf, pdb, mol, mol2 and many others.
-- Ability to recognize and expand libraries of compounds some of which include halogens, acyl halides, aldehydes. 
-- Ability to enumerate in 1D, and 2D structures and produce those compounds.
+-File parsing of TXT, SDF, and Chemical SMILES.
+- File writing in a variety of formats some of which include: cif, sdf, pdb, mol, mol2, and more.
+- Ability to recognize and expand libraries of compounds some of which include: halogens, acyl halides, aldehydes. 
+- Ability to enumerate in 1D and 2D structures and produce those compounds.
 
 Announcements
 =============
@@ -31,21 +31,21 @@ Announcements
 Using Cocktail Shaker
 =====================
 
-Cocktail Shaker is a young library under heavy development at this time.
+cocktail-shaker is a young library under heavy development at this time.
 It targets two categories of users:
 
-1.  **Users knowing RDKit**, or willing to learn RDKit, who want to
+1.  **Users familiar with RDKit**, or those willing to learn RDKit, who want to
     create fast sets of data for high throughput screening or machine
     learning.
-2.  **Open Science Scientists without any knowledge of RDKit**, who are
+2.  **Open-Science Scientists without any knowledge of RDKit** who are
     seeking a a high-level wrapper to create chemical files for their
     software.
 
-If you're in the first category, you can already start using RDKit.
-Cocktail Shaker offers a Pythonic, easy-to-use library and you can start
+If you're in the first category, then you can already start using RDKit.
+cocktail-shaker offers a Pythonic, easy-to-use library and you can start
 channeling molecules in the expansion library. Instead of validating the
-sanity of the data, Cocktail Shaker takes care of that for you. With
-each molecule being generated it will head into a 1D, and or 2D
+sanity of the data, cocktail-shaker takes care of that for you. With
+each molecule being generated it will head into a 1D and/or 2D
 validation check (3D not supported yet).
 
 If you're in the second category, we're starting to build experimental
@@ -54,13 +54,13 @@ high-level python code to take care a lot of the underpinnings of RDKit.
 Installation 
 ==================
 
-Cocktail Shaker runs on Python 3.3+ and depends on RDKit version (Make sure you have this installed!).
+cocktail-shaker runs on Python 3.3+ and depends on RDKit version (make sure you have this installed!).
 
 To install RDKit, set up an environment through this:
 
 ``` $ conda install -q -c rdkit rdkit ```
 
-Cocktail Shaker can be installed either via \`pip\`:
+cocktail-shaker can be installed either via \`pip\`:
 
 `` ` pip install cocktail-shaker``\`
 
@@ -71,7 +71,7 @@ the channels with:
 
 `` ` conda config --add channels conda-forge ``\`
 
-Once the conda-forge channel has been enabled, cocktail_shaker can be installed
+Once the conda-forge channel has been enabled, cocktail-shaker can be installed
 with:
 
 `` ` conda install ``\`
@@ -79,9 +79,9 @@ with:
 Development Installation
 ========================
 
-As Cocktail Shaker is under heavy development at this time, we highly
+As cocktail-shaker is under heavy development at this time, we highly
 recommend developers to use the development version on Github (master
-branch). You need to clone the repository and install cocktail_shaker with
+branch). You need to clone the repository and install cocktail-shaker with
 
 `python setup.py install`.
 
@@ -89,20 +89,20 @@ As a one-liner, assuming git is installed:
 
     git clone https://github.com/Sulstice/Cocktail-Shaker.git
 
-This will automatically install the latest version of Cocktail Shaker.
+This will automatically install the latest version of cocktail-shaker.
 
-Structure of Cocktail Shaker
+Structure of cocktail-shaker
 ============================
 
 Currently, the main subpackages are:
 
--   **cocktail_shaker**: Contains a lot of the high level functionality; Request
-    Handling, File Parsing/Writing, Enumeration and Expansion
+-   **cocktail_shaker**: Contains a lot of the high level functionality; request
+    handling, file parsing/writing, enumeration, and expansion.
 -   **docs**: An access point for the readthedocs implementation.
--   **datasources**: This is where the system stores it's data on
+-   **datasources**: This is where the system stores its data on
     predfined functional groups and/or shapes (coming soon).
 -   **tests**: Tests that are for the file handling, requests, and
-    testing molecule pattern recognition
+    testing molecule pattern recognition.
 
 The API of all public interfaces are subject to change in the future,
 although **datasources** are *relatively* stable at this point.
@@ -110,14 +110,14 @@ although **datasources** are *relatively* stable at this point.
 Genesis
 =======
 
-Cocktail Shaker began when one developer/scientist wanted an open source
+cocktail-shaker began when one developer/scientist wanted an open source
 drug library.
 
 - Lead Developer [Suliman sharif](http://sulstice.github.io/)
 - Artwork [Elena Chow](http://www.chowelena.com/)
 - Technical Documentation [Rose Gierth](https://www.linkedin.com/in/rose-gierth-69a4a083/)
 
-Now Cocktail Shaker looks to build on the expertise of these
+Now cocktail-shaker looks to build on the expertise of these
 developers/scientists and the broader open-science community to build an
 effective drug library.
 
