@@ -19,4 +19,4 @@ Write the new compounds into an SDF file:
 
     >>> FileWriter('new_compounds', new_compounds, 'sdf')
 
-In this example, we have taken one smiles string and expanded the compounds into a variety of variations into one SDF file.
+In this example, we have taken one SMILES string and expanded the compounds into a variety of variations into one SDF file.
