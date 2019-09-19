@@ -6,7 +6,7 @@ Functional Groups
 Below is a list of the functional groups that cocktail-shaker currently supports.
 
 +------------------+--------------+---------------+--------------------------------------------------------------+
-| Functional Group | Class        | Smiles        | Smarts                                                       |
+| Functional Group | Class        | SMILES        | Smarts                                                       |
 +------------------+--------------+---------------+--------------------------------------------------------------+
 | Bromine          | Halogens     | Br            | [Br]                                                         |
 +------------------+--------------+---------------+--------------------------------------------------------------+
