@@ -116,7 +116,7 @@ drug library.
 - Lead Developer [Suliman sharif](http://sulstice.github.io/)
 - Artwork [Elena Chow](http://www.chowelena.com/)
 - Technical Documentation [Rose Gierth](https://www.linkedin.com/in/rose-gierth-69a4a083/)
-- QA Tester [Marvin Corro] (https://www.linkedin.com/in/marvincorro/)
+- QA Tester [Marvin Corro](https://www.linkedin.com/in/marvincorro/)
 
 Now cocktail-shaker looks to build on the expertise of these
 developers/scientists and the broader open-science community to build an
