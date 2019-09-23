@@ -35,7 +35,7 @@ else:
 # ----
 setup(
     name="cocktail_shaker",
-    version="1.0.0",
+    version="1.0.1",
     packages = ['cocktail_shaker'],
     license='MIT',
     author="Suliman Sharif",
