@@ -54,7 +54,23 @@ high-level python code to take care a lot of the underpinnings of RDKit.
 Installation 
 ==================
 
-cocktail-shaker runs on Python 3.3+ and depends on RDKit version (make sure you have this installed!).
+cocktail-shaker runs on Python 3.5+ and depends on RDKit version (make sure you have this installed!).
+
+To setup and install a conda env on the MacOS/Linux, first download Conda:
+
+Linux: 
+``` $ wget/curl http://repo.continuum.io/miniconda/Miniconda3-4.1.11-Linux-x86_64.sh -O miniconda.sh ```
+
+MacOSx:
+``` $ curl http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh ```
+
+Run the Installation:
+
+``` $ sh Miniconda3-latest-MacOSX-x86_64.sh ```
+
+Create a conda environment: 
+
+``` $ /anaconda3/bin/conda create -n your_env_name python=3.5 anaconda ```
 
 To install RDKit, set up an environment through this:
 
@@ -62,19 +78,7 @@ To install RDKit, set up an environment through this:
 
 cocktail-shaker can be installed either via \`pip\`:
 
-`` ` pip install cocktail-shaker``\`
-
-or within the [Anaconda](https://www.anaconda.com/download/) Python
-distribution. Anaconda provides a convenient package management system.
-Installing VisPy can then easily be achieved by adding conda-forge to
-the channels with:
-
-`` ` conda config --add channels conda-forge ``\`
-
-Once the conda-forge channel has been enabled, cocktail-shaker can be installed
-with:
-
-`` ` conda install ``\`
+``` $ your_env_name/bin/python -m pip install cocktail-shaker```
 
 Development Installation
 ========================
@@ -99,7 +103,7 @@ Currently, the main subpackages are:
 -   **cocktail_shaker**: Contains a lot of the high level functionality; request
     handling, file parsing/writing, enumeration, and expansion.
 -   **docs**: An access point for the readthedocs implementation.
--   **datasources**: This is where the system stores its data on
+-   **cocktail_shaker/datasources**: This is where the system stores its data on
     predfined functional groups and/or shapes (coming soon).
 -   **tests**: Tests that are for the file handling, requests, and
     testing molecule pattern recognition.
