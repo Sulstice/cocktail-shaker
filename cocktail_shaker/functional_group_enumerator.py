@@ -4,14 +4,17 @@
 #
 # ----------------------------------------------------------
 
-# imports
+# Imports
 # ---------
 from rdkit import Chem
 import ruamel.yaml as yaml
 
+# Relative Imports
+# ----------------
+from validation import RaiseMoleculeError
 
 # Load datasources
-# -------------
+# ----------------
 def load_datasources():
 
     """
@@ -35,19 +38,32 @@ def load_datasources():
             print(exc)
 
 
-class RaiseMoleculeError(Exception):
-
-    __version_error_parser__ = 1.0
-    __allow_update__ = False
+class LoadCustomLibrary(object):
 
     """
 
-    Raise Molecule Error if for some reason we can't evaluate a SMILES, 2D, or 3D molecule.
+    Load a custom datasource per the user.
+
+    Convert their SMILES to SMARTS
 
     """
-    def __init__(self, message, errors):
-        super().__init__(message)
-        self.errors = errors
+
+    __version__ = "1.0.2"
+
+
+    def __init__(self, molecules):
+
+        # imports
+        # -------
+
+        from molvs import Validator
+        from validation import MoleculeValidator
+
+        self.molecules = molecules
+        self.custom_datasources = False
+
+        validator = MoleculeValidator(self.molecules, smiles=True)
+
 
 class Cocktail(object):
     """
@@ -71,12 +87,9 @@ class Cocktail(object):
         rdkit_rendered_molecules = []
         self.markush_structure = False
         for molecule in molecules:
-            if 'R1' in molecule:
-                molecule = molecule.replace('R1', '[*:1]', 1)
+            if '[*:1]' in molecule:
                 self.markush_structure = True
-            elif 'R' in molecule:
-                molecule = molecule.replace('R', '[*:1]', 1)
-                self.markush_structure = True
+                self.r_group_count = molecule.count('[*:1]')
 
         rdkit_rendered_molecules.append(Chem.MolFromSmiles(molecule))
 
