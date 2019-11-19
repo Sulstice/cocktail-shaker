@@ -5,7 +5,7 @@
 # ----------------------------------------------------------
 
 
-class PeptideBackboneMolecule(object):
+class PeptideMolecule(object):
 
     """
 
@@ -20,9 +20,11 @@ class PeptideBackboneMolecule(object):
 
     def __init__(self, length_of_peptide = 1):
         self.length_of_peptide = int(length_of_peptide)
-        self.peptide_base = 'NCC(NCC(O)=O)=O'
-        self.build_peptide_backbone()
+        self.peptide_base = self.build_peptide_backbone()
+        self.peptide_replaced = self.build_peptide_molecule_temp_replacements()
 
+    def __repr__(self):
+        return self.peptide_replaced
 
     def build_peptide_backbone(self):
 
@@ -32,12 +34,13 @@ class PeptideBackboneMolecule(object):
 
         Returns:
             peptide (String): Peptide molecule string of a certain length
+            peptide_base (String): The base peptide of 1 length amino acid.
 
         """
 
         # Return the base of the peptide for one length.
         if self.length_of_peptide == 1:
-            return self.peptide_base
+            return 'NCC(NCC(O)=O)=O'
 
         peptide_n_terminus = 'NCC('
         peptide_c_terminus = 'O)=O)'
@@ -46,9 +49,24 @@ class PeptideBackboneMolecule(object):
             peptide_n_terminus += 'NCC('
             peptide_c_terminus += '=O)'
 
-
         peptide_backbone = peptide_n_terminus + peptide_c_terminus[:-1]
-        print (peptide_backbone)
+        self.peptide_base = peptide_backbone
+
+        return peptide_backbone
+
+    def build_peptide_molecule_temp_replacements(self):
+
+        """
+
+        Build a temporary functional peptide molecule string to be used for the combinations downstream.
+
+        """
+        replaced_peptides = self.peptide_base
+        for i in range(1, self.length_of_peptide + 1):
+            start_index_pattern = replaced_peptides.find('NCC')
+            replaced_peptides = replaced_peptides[0:start_index_pattern + 1] + 'C([*:' + str(i) + '])' + replaced_peptides[start_index_pattern + 2:]
+
+        return replaced_peptides
 
     def build_c_terminus(self):
 

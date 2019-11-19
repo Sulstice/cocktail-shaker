@@ -75,116 +75,59 @@ class Cocktail(object):
     __version_parser__ = 1.0
     __allow_update__ = False
 
-    def __init__(self, molecules):
+    def __init__(self, peptide_backbone, ligand_library = [], dimensionality = '1D', enumeration_complexity='Low'):
+
+        # imports
+        # -------
+        import re
+        from rdkit import Chem
         from molvs import Validator
 
         # I will allow the user to pass a string but for easier sake down the road
         # I will reimplement it as a list.
 
         load_datasources()
-        self.dimensionality = '1D'
-        self.modified_molecules = []
-        rdkit_rendered_molecules = []
-        self.markush_structure = False
-        for molecule in molecules:
-            if '[*:1]' in molecule:
-                self.markush_structure = True
-                self.r_group_count = molecule.count('[*:1]')
+        self.peptide_backbone = peptide_backbone
+        self.ligand_library = ligand_library
 
-        rdkit_rendered_molecules.append(Chem.MolFromSmiles(molecule))
+        # Guardrail for combinations
+        # max_number_side_chains = [character for character in re.split("[^0-9]", self.peptide_backbone) if character != '']
+        # if int(max(map(int, max_number_side_chains))) != len(self.ligand_library):
+        #     print ("Ligand Library must match the amount of Side Chains")
+        #     raise IndexError
 
-        self.molecules = rdkit_rendered_molecules
+        self.dimensionality = dimensionality
+        self.enumeration_complexity = enumeration_complexity
 
-        for molecule in self.molecules:
-            self.original_smiles = Chem.MolToSmiles(molecule)
-            # Validation
-            validator_format = '%(asctime)s - %(levelname)s - %(validation)s - %(message)s'
-            self.validate = Validator(log_format=validator_format)
-
-    def validate_smiles(self, smiles):
-        """
-
-        This method takes the smiles string and runs through the validation check of a smiles string.
-
-        Arguments:
-            self (Object): Class Cocktail
-            smiles (string): Smiles string that needs to be evaluated
-        Returns:
-            N / A
-
-        Exceptions:
-            RaiseMoleculeError (Exception): MolVs Stacktrace and the smiles string that failed.
+    def shake(self):
 
         """
 
-        # Use MolVS to validate the smiles to make sure enumeration and r group connections are correct
-        # at least in the 1D Format.
-        from molvs import validate_smiles as vs
-
-        try:
-            vs(smiles)
-            return True
-        except RaiseMoleculeError as RME:
-            print ("Not a Valid Smiles, Please check the formatting: %s" % self.original_smiles)
-            print ("MolVs Stacktrace %s" % RME)
-
-        return False
-
-    def validate_molecule(self, molecule):
+        Generate all combinations of a molecule
 
         """
 
-        This function will be used to validate molecule objects
+        results = []
+        peptide = self.peptide_backbone
+        import itertools
+        combinations = (list(itertools.permutations(self.ligand_library)))
+        print (combinations)
 
-        Arguments:
-            self (Object): Class Cocktail
-            molecule (RDKit Object): Molecule object we need to sanitize.
-        Returns:
-            molecule (RDKit Object): The RDkit Molecule molecule object
+        for combination in combinations:
+            combination = list(combination)
+            peptide_molecule = ''
+            for j in range(0, len(self.ligand_library)):
+                if j == 0:
+                    peptide_molecule = str(peptide).replace('[*:' + str(j + 1) +']', combination[j])
+                else:
+                    peptide_molecule = str(peptide_molecule).replace('[*:' + str(j + 1) +']', combination[j])
+            results.append(peptide_molecule)
 
-        Exceptions:
-            RaiseMoleculeError (Exception): Raise the Raise Molcule Error if the molecule is not valid.
+        print (results)
+        return results
 
-        TODO: Verify Sanitize molecule that the validation works
-        """
 
-        if not molecule:
-            try:
-                Chem.rdmolops.SanitizeMol(molecule)
-            except RaiseMoleculeError as RME:
-                print ("Not a valid molecule: %s" % RME)
-            finally:
-                return molecule
-
-    def detect_functional_groups(self):
-
-        """
-
-        Find functional groups that ligand library loader supports
-
-        :return:
-
-        """
-
-        pattern_payload = {}
-        load_datasources()
-
-        print ("Detecting Functional Groups...")
-
-        for molecule in self.molecules:
-            for functional_group, pattern in R_GROUPS.items():
-                for i in range(0, len(pattern)):
-                    for key, value in pattern[i].items():
-                        smart_pattern = Chem.MolFromSmarts(value[1])
-                        if molecule.GetSubstructMatches(smart_pattern,uniquify=False):
-                            print ("Found Functional Group: %s | Pattern Count: %s" % (key,
-                                                                                       len(molecule.GetSubstructMatches(
-                                                                                           smart_pattern,uniquify=False))))
-                        pattern_payload[key] = [value[0], value[1]]
-
-        return pattern_payload
-
-    def shake(self, functional_groups=["all"], shape=None):
+    def _shake(self, functional_groups=["all"], shape=None):
 
         """
 
