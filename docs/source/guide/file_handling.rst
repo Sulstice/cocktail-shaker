@@ -44,11 +44,11 @@ The FileWriter Module
     However, if you would like to generate the files into separate files, then you can pass in the fragmentation parameter.
 
     >>> from cocktail_shaker import Cocktail, FileWriter
-    >>> cocktail = Cocktail(['c1cc(CCCO)ccc1'])
-    >>> molecules = cocktail.shake()
-    >>> print (molecules)
-    [RDKit_Mol_Object, RDKit_Mol_Object, RDKit_Mol_Object...]
-    >>> FileWriter('new_compounds', molecules, '.sdf', fragmentation=2)
+    >>> from cocktail_shaker import PeptideMolecule
+    >>> peptide_backbone = PeptideMolecule(2)
+    >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
+    >>> combinations = cocktail.shake()
+    >>> FileWriter('new_compounds', combinations, '.sdf', fragmentation=2)
     Generates 2 SDF Files....
 
     .. attribute:: name

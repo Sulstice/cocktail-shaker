@@ -11,9 +11,13 @@ Basic Usage
 
 The simplest way to use cocktail-shaker is to create a cocktail object with the ``shake`` function and create new compounds:
 
-    >>> cocktail = Cocktail(['c1cc(CCCO)ccc1'])
-    >>> new_compounds = cocktail.shake()
-    [RDKit_Mol_Object, RDKit_Mol_Object, RDKit_Mol_Object...]
+    >>> from cocktail_shaker import Cocktail
+    >>> from cocktail_shaker import PeptideMolecule
+    >>> peptide_backbone = PeptideMolecule(2)
+    >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
+    >>> combinations = cocktail.shake()
+    >>> print (combinations)
+    >>> ['NC(Br)C(=O)NC(I)C(=O)NCC(=O)O', 'NC(I)C(=O)NC(Br)C(=O)NCC(=O)O']
 
 Write the new compounds into an SDF file:
 

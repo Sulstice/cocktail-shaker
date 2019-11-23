@@ -11,7 +11,6 @@ Input can be parsed in a variety of file formats that are autodetected::
 
 The full list of file formats that cocktail-shaker supports parsing::
 
-    txt       # Smiles Txt Format
     sdf       # 2D Structure file format
     mol2      # (Coming soon)
 
