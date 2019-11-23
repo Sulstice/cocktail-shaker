@@ -13,7 +13,7 @@ import progressbar
 
 # Cocktail Shaker Imports
 # -----------------------
-from validation import MoleculeValidator
+from .validation import MoleculeValidator
 
 def load_datasources():
 
