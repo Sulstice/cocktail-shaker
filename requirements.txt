@@ -25,3 +25,5 @@ pyyaml>=0.1.0
 lxml>=4.3.0
 coveralls>=1.8.2
 sphinx_bootstrap_theme>=0.7.1
+molvs>=0.1.0
+ruamel.yaml>=0.1.0
