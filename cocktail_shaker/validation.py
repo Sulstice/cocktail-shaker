@@ -66,9 +66,7 @@ class MoleculeValidator(object):
         # at least in the 1D Format.
         from molvs import validate_smiles as vs
 
-        print ('Validating Smiles...')
-
-        for i in progressbar.progressbar(range(len(self.molecules))):
+        for i in range(len(self.molecules)):
             try:
                 vs(self.molecules[i])
             except RaiseMoleculeError as RME:
@@ -94,9 +92,7 @@ class MoleculeValidator(object):
 
         """
 
-        print ('Validating Molecules...')
-
-        for i in progressbar.progressbar(range(len(self.molecules))):
+        for i in range(len(self.molecules)):
             try:
                 Chem.rdmolops.SanitizeMol(self.molecules[i])
             except RaiseMoleculeError as RME:

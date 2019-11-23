@@ -47,7 +47,7 @@ class Cocktail(object):
     __version_parser__ = 1.0
     __allow_update__ = False
 
-    def __init__(self, peptide_backbone, ligand_library = [], enumeration = False, dimensionality = '1D', enumeration_complexity='Low'):
+    def __init__(self, peptide_backbone, ligand_library = []):
 
         # imports
         # -------
@@ -60,13 +60,11 @@ class Cocktail(object):
         self.peptide_backbone = str(peptide_backbone)
         self.ligand_library = ligand_library
         self.peptide_backbone_length = int(max(re.findall("\d", self.peptide_backbone)))
+        self.combinations = []
 
-        if self.peptide_backbone_length > len(self.ligand_library):
+        if self.peptide_backbone_length > len(self.ligand_library) or not ligand_library:
             print ("Cocktail Shaker Error: Peptide Backbone Length needs to be less than or equal to for your library")
             raise IndexError
-
-        if enumeration:
-            self.enumerate(dimensionality, enumeration_complexity)
 
     def shake(self):
 
@@ -101,9 +99,12 @@ class Cocktail(object):
         # Validate Smiles
         MoleculeValidator(results, smiles=True)
 
+        # Store in combinations if enumeration
+        self.combinations = results
+
         return results
 
-    def enumerate(self, enumeration_complexity=None, dimensionality=None):
+    def enumerate(self, dimensionality = '1D', enumeration_complexity='Low'):
 
         """
 
@@ -136,8 +137,9 @@ class Cocktail(object):
             complexity = 10
 
         enumerated_molecules = []
-        for molecule in self.modified_molecules:
-            for i in range(complexity):
+        for i in progressbar.progressbar(range(len(self.combinations))):
+            for _ in range(complexity):
+                molecule = Chem.MolFromSmiles(self.combinations[i])
                 smiles_enumerated = Chem.MolToSmiles(molecule, doRandom=True)
                 if dimensionality == '1D' and smiles_enumerated not in enumerated_molecules:
                     enumerated_molecules.append(smiles_enumerated)
@@ -147,6 +149,9 @@ class Cocktail(object):
                 elif dimensionality == '3D':
                     print ('3D Functionality is not supported yet!')
                     return enumerated_molecules
+
+        # Validate Smiles
+        MoleculeValidator(enumerated_molecules, smiles=True)
 
         return enumerated_molecules
 
