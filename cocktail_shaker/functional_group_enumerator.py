@@ -59,7 +59,8 @@ class Cocktail(object):
         load_datasources()
         self.peptide_backbone = str(peptide_backbone)
         self.ligand_library = ligand_library
-        self.peptide_backbone_length = int(max(re.findall("\d", self.peptide_backbone)))
+        self.peptide_backbone_length = int(max(map(int, re.findall(r"\d+",self.peptide_backbone))))
+
         self.combinations = []
 
         if self.peptide_backbone_length > len(self.ligand_library) or not ligand_library:
@@ -128,11 +129,11 @@ class Cocktail(object):
         print ("Enumerating Compunds....")
 
         if enumeration_complexity.lower() == 'low':
-            complexity = 10
-        elif enumeration_complexity.lower() == 'medium':
             complexity = 100
-        elif enumeration_complexity.lower() == 'high':
+        elif enumeration_complexity.lower() == 'medium':
             complexity = 1000
+        elif enumeration_complexity.lower() == 'high':
+            complexity = 10000
         else:
             complexity = 10
 

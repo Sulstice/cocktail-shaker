@@ -35,13 +35,11 @@ def load_datasources():
         except yaml.YAMLError as exc:
             print(exc)
 
-def test_validation_smiles():
+def test_cocktail_shake():
 
     """
 
-    Validate that the validator package is working correctly,
-
-    Come up with more a validation test for verification of molecules.
+    Verify Cocktail Shaker is working extensively and also include the stress testing.
 
     """
     peptide_backbone = PeptideMolecule(1)
@@ -49,4 +47,53 @@ def test_validation_smiles():
         peptide_backbone,
         ligand_library = ['Br']
     )
-    modified_molecules = cocktail.shake()
+    combinations = cocktail.shake()
+
+    assert len(combinations) == 1
+    assert combinations[0] == 'NC(Br)C(=O)NCC(=O)O'
+
+    peptide_backbone = PeptideMolecule(2)
+    cocktail = Cocktail(
+        peptide_backbone,
+        ligand_library = ['Br', 'I']
+    )
+    combinations = cocktail.shake()
+
+    assert len(combinations) == 2
+    assert 'NC(Br)C(=O)NC(I)C(=O)NCC(=O)O' in combinations
+    assert 'NC(I)C(=O)NC(Br)C(=O)NCC(=O)O' in combinations
+
+    peptide_backbone = PeptideMolecule(2)
+    cocktail = Cocktail(
+        peptide_backbone,
+        ligand_library = ['Br', 'I', 'F', 'N', 'C', 'Cl']
+    )
+    combinations = cocktail.shake()
+    assert len(combinations) == 30
+
+    peptide_backbone = PeptideMolecule(6)
+    cocktail = Cocktail(peptide_backbone,
+                        ligand_library = ['Br', 'I', 'F', 'N', 'C', 'Cl']
+                        )
+    combinations = cocktail.shake()
+    assert len(combinations) == 720
+
+def test_cocktail_enumerate():
+
+    """
+
+    Test the enumerate function within Cocktail Class Object
+
+    """
+
+    peptide_backbone = PeptideMolecule(1)
+    cocktail = Cocktail(
+        peptide_backbone,
+        ligand_library = ['Br']
+    )
+    cocktail.shake()
+    combinations = cocktail.enumerate()
+
+    assert len(combinations) == 68
+    assert 'C(NCC(=O)O)(C(N)Br)=O' in combinations
+    assert 'OC(CNC(C(Br)N)=O)=O' in combinations

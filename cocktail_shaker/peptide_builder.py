@@ -23,7 +23,7 @@ class PeptideMolecule(object):
         self.peptide_replaced = self.build_peptide_molecule_temp_replacements()
 
     def __repr__(self):
-        return self.peptide_replaced
+        return str(self.peptide_replaced)
 
     def build_peptide_backbone(self):
 
