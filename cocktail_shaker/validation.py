@@ -8,6 +8,7 @@
 # imports
 # -------
 from rdkit import Chem
+import progressbar
 
 class RaiseMoleculeError(Exception):
 
@@ -38,8 +39,12 @@ class MoleculeValidator(object):
 
         if smiles:
             self.validate_smiles(self.molecules)
+            self.molecules = [Chem.MolFromSmiles(molecule) for molecule in self.molecules]
+            self.validate_molecule(self.molecules)
         else:
             self.validate_molecule(self.molecules)
+            self.molecules = [Chem.MolToSmiles(molecule) for molecule in self.molecules]
+            self.validate_smiles(self.molecules)
 
     def validate_smiles(self, smiles):
         """
@@ -48,7 +53,7 @@ class MoleculeValidator(object):
 
         Arguments:
             self (Object): Class Cocktail
-            smiles (string): Smiles string that needs to be evaluated
+            smiles (List): List of smiles strings that need to be evaluated.
         Returns:
             N / A
 
@@ -61,14 +66,16 @@ class MoleculeValidator(object):
         # at least in the 1D Format.
         from molvs import validate_smiles as vs
 
-        try:
-            vs(smiles)
-            return True
-        except RaiseMoleculeError as RME:
-            print ("Not a Valid Smiles, Please check the formatting: %s" % self.original_smiles)
-            print ("MolVs Stacktrace %s" % RME)
+        print ('Validating Smiles...')
 
-        return False
+        for i in progressbar.progressbar(range(len(self.molecules))):
+            try:
+                vs(self.molecules[i])
+            except RaiseMoleculeError as RME:
+                print ("Not a Valid Smiles, Please check the formatting: %s" % self.original_smiles)
+                print ("MolVs Stacktrace %s" % RME)
+
+        return
 
     def validate_molecule(self, molecule):
 
@@ -85,16 +92,17 @@ class MoleculeValidator(object):
         Exceptions:
             RaiseMoleculeError (Exception): Raise the Raise Molcule Error if the molecule is not valid.
 
-        TODO: Verify Sanitize molecule that the validation works
         """
 
-        if not molecule:
+        print ('Validating Molecules...')
+
+        for i in progressbar.progressbar(range(len(self.molecules))):
             try:
-                Chem.rdmolops.SanitizeMol(molecule)
+                Chem.rdmolops.SanitizeMol(self.molecules[i])
             except RaiseMoleculeError as RME:
                 print ("Not a valid molecule: %s" % RME)
-            finally:
-                return molecule
+
+        return molecule
 
 class FileValidator(object):
 

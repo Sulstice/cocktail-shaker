@@ -53,44 +53,8 @@ class CactusRequestHandler(object):
             print ("Error handling request, please try again or contact Suliman Sharif")
 
         if request.getcode() != 200:
-            raise RequestError(message="Error handling request, please try again or contact Suliman Sharif", errors='Request Error')
-
-        return request
-
-class MolPortRequestHandler(object):
-
-    __version__ = 1.0
-    __allow_update__ = False
-
-    """
-    
-    Handles MolPort Requests
-    
-    """
-
-    def __init__(self, request):
-
-        self.request = request
-
-
-    def get(self):
-        """
-
-        Issues Requests specifically for the Cactus website.
-
-        """
-
-        # imports
-        # -------
-        from urllib.request import urlopen
-
-        try:
-            request = urlopen(self.url)
-        except RequestError:
-            print ("Error handling request, please try again or contact Suliman Sharif")
-
-        if request.getcode() != 200:
-            raise RequestError(message="Error handling request, please try again or contact Suliman Sharif", errors='Request Error')
+            raise RequestError(message="Error handling request, please try again or contact Suliman Sharif",
+                               errors='Request Error')
 
         return request
 

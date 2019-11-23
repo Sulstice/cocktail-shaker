@@ -13,7 +13,7 @@ import progressbar
 
 # Cocktail Shaker Imports
 # -----------------------
-from validation import RaiseMoleculeError
+from validation import MoleculeValidator
 
 def load_datasources():
 
@@ -47,13 +47,11 @@ class Cocktail(object):
     __version_parser__ = 1.0
     __allow_update__ = False
 
-    def __init__(self, peptide_backbone, ligand_library = [], dimensionality = '1D', enumeration_complexity='Low'):
+    def __init__(self, peptide_backbone, ligand_library = [], enumeration = False, dimensionality = '1D', enumeration_complexity='Low'):
 
         # imports
         # -------
         import re
-        from rdkit import Chem
-        from molvs import Validator
 
         # I will allow the user to pass a string but for easier sake down the road
         # I will reimplement it as a list.
@@ -67,8 +65,8 @@ class Cocktail(object):
             print ("Cocktail Shaker Error: Peptide Backbone Length needs to be less than or equal to for your library")
             raise IndexError
 
-        self.dimensionality = dimensionality
-        self.enumeration_complexity = enumeration_complexity
+        if enumeration:
+            self.enumerate(dimensionality, enumeration_complexity)
 
     def shake(self):
 
@@ -99,6 +97,9 @@ class Cocktail(object):
 
         # Remove Duplicates
         results = list(set(results))
+
+        # Validate Smiles
+        MoleculeValidator(results, smiles=True)
 
         return results
 

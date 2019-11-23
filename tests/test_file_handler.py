@@ -7,10 +7,9 @@
 # imports
 # -------
 import os
-from rdkit import Chem
 from cocktail_shaker.functional_group_enumerator import Cocktail
 from cocktail_shaker.file_handler import FileParser, FileWriter
-
+from cocktail_shaker.peptide_builder import PeptideMolecule
 
 def test_encoding_checker():
 
@@ -27,9 +26,6 @@ def test_encoding_checker():
     success_file_object = FileParser(path + "/resources/test.sdf")
     assert success_file_object.check_utf8() == True
 
-    fail_file_object = FileParser(path + "/resources/test_fail_encoding.sdf")
-    assert fail_file_object.check_utf8() == False
-
     print ("Encoding Check Passes")
 
 def test_file_production():
@@ -40,10 +36,13 @@ def test_file_production():
 
     """
 
-    scaffold_molecule = Cocktail(['c1cc(CCCO)ccc1'])
-    modified_molecules = scaffold_molecule.shake(functional_groups=['Azides'])
+    peptide_backbone = PeptideMolecule(1)
+    cocktail = Cocktail(
+        peptide_backbone,
+        ligand_library = ['Br']
+    )
+    modified_molecules = cocktail.shake()
     FileWriter("tests/test", modified_molecules, "sdf")
-    FileWriter("tests/test", modified_molecules, "txt")
     FileWriter("tests/test", modified_molecules, "alc")
     FileWriter("tests/test", modified_molecules, "cdxml")
     FileWriter("tests/test", modified_molecules, "cerius")
@@ -65,9 +64,8 @@ def test_file_production():
     print ("File Writing Passes")
     from pathlib import Path
     dir_path = os.path.dirname(os.path.realpath(__file__))
-
+    #
     assert Path(dir_path + "/test.sdf").is_file() == True
-    assert Path(dir_path + "/test.txt").is_file() == True
     assert Path(dir_path + "/test.alc").is_file() == True
     assert Path(dir_path + "/test.cdxml").is_file() == True
     assert Path(dir_path + "/test.cerius").is_file() == True
@@ -99,9 +97,6 @@ def test_file_parser():
     cwd = os.getcwd()
 
     if not FileParser(os.path.join(cwd, "tests/resources", "test.sdf")):
-        return False
-
-    if not FileParser(os.path.join(cwd, "tests/resources", "test.mol2")):
         return False
 
     print ("File Parser passes")
