@@ -9,7 +9,8 @@
 from rdkit import Chem
 from pathlib import Path
 import pandas as pd
-from cocktail_shaker.request_handler import CactusRequestHandler, Resolver
+import progressbar
+from request_handler import CactusRequestHandler, Resolver
 
 class FileNotSupportedError(Exception):
 
@@ -42,7 +43,7 @@ class FileWriter(object):
 
 
     def __init__(self, name, molecules, option, fragmentation=None, smiles=False):
-        self.molecules = molecules
+        self.molecules = [Chem.MolFromSmiles(molecule) for molecule in molecules]
         self.name = name
         self.option = option
         self.smiles = False
@@ -152,9 +153,9 @@ class FileWriter(object):
 
         if len(self.molecules) > 1:
             bulk = True
-        for molecule in self.molecules:
+        for i in progressbar.progressbar(range(len(self.molecules))):
             # Our request will use smiles.
-            molecule = Chem.MolToSmiles(molecule)
+            molecule = self.molecules[i]
             url = self._construct_api_url(molecule, file_format=self.option)
 
             # Parse out to the request handler
