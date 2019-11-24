@@ -47,7 +47,7 @@ class Cocktail(object):
     __version_parser__ = 1.0
     __allow_update__ = False
 
-    def __init__(self, peptide_backbone, ligand_library = []):
+    def __init__(self, peptide_backbone, ligand_library = [], enable_isomers = False):
 
         # imports
         # -------
@@ -60,6 +60,7 @@ class Cocktail(object):
         self.peptide_backbone = str(peptide_backbone)
         self.ligand_library = ligand_library
         self.peptide_backbone_length = int(max(map(int, re.findall(r"\d+",self.peptide_backbone))))
+        self.enable_isomers = enable_isomers
 
         self.combinations = []
 
@@ -90,9 +91,18 @@ class Cocktail(object):
                                                                Chem.MolFromSmiles('[*:'+ str(j+1)+']'),
                                                                Chem.MolFromSmiles(str(combination[j])))
 
-                peptide_molecule = Chem.MolToSmiles(modified_molecule[0])
+                peptide_molecule = Chem.MolToSmiles(modified_molecule[0], isomericSmiles=True)
 
-            results.append(str(peptide_molecule))
+            # Enable StereoChemistry
+            if self.enable_isomers:
+
+                molecule = Chem.MolFromSmiles(str(peptide_molecule))
+                options = Chem.EnumerateStereoisomers.StereoEnumerationOptions(unique=True, tryEmbedding=True)
+                isomers = tuple(Chem.EnumerateStereoisomers.EnumerateStereoisomers(molecule, options=options))
+                for smile in sorted(Chem.MolToSmiles(isomer, isomericSmiles=True) for isomer in isomers):
+                    results.append(str(smile))
+            else:
+                results.append(str(peptide_molecule))
 
         # Remove Duplicates
         results = list(set(results))
