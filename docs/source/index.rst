@@ -70,7 +70,7 @@ Comprehensive API documentation with information on every function, class and me
 Cocktail Shaker's license
 -------------------------
 
-Cocktail Shaker is released under the MIT License. This is a short, permissive software license that allows commercial use,
+Cocktail Shaker is released under the Mozilla Public License 2.0. This is a short, permissive software license that allows commercial use,
 modifications, distribution, sublicensing and private use. Basically, you can do whatever you want with Cocktail Shaker as long as
 you include the original copyright and license in any copies or derivative projects.
 
