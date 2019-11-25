@@ -38,12 +38,14 @@ of whether to include generation of stereoisomers and/or natural amino acids.
 Cocktail Shaker will generate all combinations of the library and allocate them to a slot within the peptide. This process of 
 string manipulation is presented in ```Figure 1```.
 
-<p align="center">
   <figure>
-    <img src="./images/figure_1.png" alt="Figure 1 String Manipulation Diagram"/>
-    <figcaption><i>Figure 1: Full string manipulation diagram of Cocktail Shaker.</i></figcaption>
+      <p align="center">
+          <img src="./images/figure_1.png" alt="Figure 1 String Manipulation Diagram"/>
+      </p>
+        <p align="center">
+          <i>Figure 1: Full string manipulation diagram of Cocktail Shaker.</i>
+        </p>
   </figure>
-</p>
 
 ```Cocktail Shaker``` also allows for File Writing of the molecules into a wide array of chemical formats (found in the documentation).
 ```Cocktail Shaker ``` uses RDKit to convert from 1D to 2D and the CIR Resolver built from webchem to convert 1D SMILES to 3D. At the request 
@@ -61,16 +63,6 @@ vendor information on any compound generated. It was presented at the RDKit UGM 
 to the cheminformatics community with positive feedback with it's second version 1.0.1. With incorporated feedback it will now be
 released with version 1.1.0. With more contributions ```Cocktail Shaker``` will be an exciting time for drug library creation 
 and drug discovery for scientists and engineers alike. 
-
-
-# Citations
-
-Citations to entries in paper.bib should be in
-
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
 
 # Acknowledgements
 
