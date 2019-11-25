@@ -2,7 +2,7 @@ Cocktail Shaker: Drug Expansion and Enumeration for Peptides!
 =============================================================
 
 [![Build](https://travis-ci.org/Sulstice/Cocktail-Shaker.svg?branch=master)](https://travis-ci.org/Sulstice/Cocktail-Shaker)
-[![LICENSE](https://img.shields.io/badge/license-new%20BSD-blue.svg)](https://github.com/Sulstice/Cocktail-Shaker/blob/master/LICENSE)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 [![Coverage](https://coveralls.io/repos/github/Sulstice/Cocktail-Shaker/badge.svg?branch=master)](https://coveralls.io/github/Sulstice/Cocktail-Shaker?branch=master)
 ![Python](https://img.shields.io/badge/python-3.6-blue.svg)
 [![Gitter](https://badges.gitter.im/Cocktail-Shaker/community.svg)](https://gitter.im/Cocktail-Shaker/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
