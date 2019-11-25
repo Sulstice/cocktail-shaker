@@ -71,7 +71,7 @@ Figures can be included like this: ![Example figure.](figure.png)
 
 # Acknowledgements
 
-We acknowledge contributions from Ryland Forsythe as an academic advisor,Marvin Corro for quality assurance, Rose Gierth
+We acknowledge contributions from Ryland Forsythe as an academic advisor, Marvin Corro for quality assurance, Rose Gierth
 for technical documentation, and Elena Chow for her work on the graphics. 
 
 # References

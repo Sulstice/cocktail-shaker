@@ -47,7 +47,19 @@ class Cocktail(object):
     __version_parser__ = 1.0
     __allow_update__ = False
 
-    def __init__(self, peptide_backbone, ligand_library = [], enable_isomers = False):
+    def __init__(self, peptide_backbone, ligand_library = [], enable_isomers = False, include_amino_acids = False):
+
+        """
+
+        Initialize the Cocktail Object with optional parameters
+
+        Arguments:
+            peptide_backbone (String): Peptide Backbone with the slots allocated.
+            ligand_library (List): The library of ligands the user would like for the combinations
+            enable_isomers (Bool): Whether the user would like to include stereoisomers in the results
+            include_amino_acids (Bool): Whether the user would like to include amino acids in their combinations
+
+        """
 
         # imports
         # -------
@@ -61,6 +73,7 @@ class Cocktail(object):
         self.ligand_library = ligand_library
         self.peptide_backbone_length = int(max(map(int, re.findall(r"\d+",self.peptide_backbone))))
         self.enable_isomers = enable_isomers
+        self.include_amino_acids = include_amino_acids
 
         self.combinations = []
 
@@ -78,6 +91,10 @@ class Cocktail(object):
 
         results = []
         peptide = self.peptide_backbone
+
+        if self.include_amino_acids:
+            self.ligand_library.extend(self._load_amino_acids())
+
         combinations = list(itertools.permutations(self.ligand_library, self.peptide_backbone_length))
 
         print ("Generating Compounds...")
@@ -166,5 +183,50 @@ class Cocktail(object):
 
         return enumerated_molecules
 
+    def _load_amino_acids(self):
 
+        """
+
+        Load the amino acids.
+
+        Returns:
+            natural_amino_acids (List): The natural amino acid list represented in smiles
+
+        Reference:
+            amino_acids = {
+                "Alanine": "C"
+            }
+
+        """
+
+        amino_acids = {
+            "Alanine": "C",
+            "Arginine": "CCCCNC(N)=N",
+            "Asparagine": "CCC(N)=O",
+            "Aspartic Acid": "CC(O)=O",
+            "Cysteine": "CS",
+            "Glutamic Acid": "CCC(O)=O",
+            "Glutamine": "CCC(N)=O",
+            "Glycine": "[H]",
+            "Histidine":"CC1=CNC=N1",
+            "Isoleucine": "C(CC)([H])C",
+            "Leucine": "CC(C)C",
+            "Lysine": "CCCCN",
+            "Methionine": "CCSC",
+            "PhenylAlanine": "CC1=CC=CC=C1",
+            "Proline": "",
+            "Serine": "CO",
+            "Threonine": "C(C)([H])O",
+            "Tryptophan": "CCC1=CNC2=C1C=CC=C2",
+            "Tyrosine": "CC1=CC=C(O)C=C1",
+            "Valine": "C(C)C"
+        }
+
+        natural_amino_acids = ["C", "CCCNC(N)=N", "CCC(N)=O", "CC(O)=O", "CS", "CCC(O)=O", "CCC(O)=O", "CCC(N)=O", "[H]",
+                               "CC1=CNC=N1", "C(CC)([H])C", "CC(C)C", "CCCCN", "CCSC", "CC1=CC=CC=C1", "CO", "C(C)([H])O",
+                               "CCC1=CNC2=C1C=CC=C2", "CC1=CC=C(O)C=C1", "C(C)C"]
+
+        return natural_amino_acids
+
+        
 
