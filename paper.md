@@ -62,19 +62,9 @@ to the cheminformatics community with positive feedback with it's second version
 released with version 1.1.0. With more contributions ```Cocktail Shaker``` will be an exciting time for drug library creation 
 and drug discovery for scientists and engineers alike. 
 
-
-# Citations
-
-Citations to entries in paper.bib should be in
-
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
-
 # Acknowledgements
 
-We acknowledge contributions from Ryland Forsythe as an academic advisor, Marvin Corro for quality assurance, Rose Gierth
+We acknowledge contributions from Ryland Forsythe as an academic consultation, Marvin Corro for quality assurance, Rose Gierth
 for technical documentation, and Elena Chow for her work on the graphics. 
 
 # References
