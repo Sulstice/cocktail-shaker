@@ -130,7 +130,7 @@ def test_amino_acids():
     cocktail = Cocktail(
         peptide_backbone,
         ligand_library = [],
-        enable_isomers = True
+        include_amino_acids = True
     )
     combinations = cocktail.shake()
 
