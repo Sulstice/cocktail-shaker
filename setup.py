@@ -31,12 +31,18 @@ if os.path.exists('README.md'):
 else:
     long_description = 'Cocktail Shaker is drug enumeration and expansion library'
 
+ENTRY_POINTS = {
+    'console_scripts': [
+        'cocktail-shaker = cocktail_shaker.cli:main',
+    ],
+}
+
 # exec
 # ----
 setup(
     name="cocktail_shaker",
     version="1.1.0",
-    packages = ['cocktail_shaker'],
+    packages=['cocktail_shaker'],
     license='MIT',
     author="Suliman Sharif",
     author_email="sharifsuliman1@gmail.com",
@@ -59,5 +65,6 @@ setup(
         'Programming Language :: Python :: 3.7',
     ],
     test_suite='tests',
-    tests_require=TEST_REQUIREMENTS
+    tests_require=TEST_REQUIREMENTS,
+    entry_points=ENTRY_POINTS,
 )
