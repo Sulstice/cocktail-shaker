@@ -65,6 +65,7 @@ Comprehensive API documentation with information on every function, class and me
     guide/functional_groups
     guide/amino_acids
     guide/cocktail
+    guide/examples
     guide/contributing
 
 Cocktail Shaker's license
@@ -74,4 +75,4 @@ Cocktail Shaker is released under the Mozilla Public License 2.0. This is a shor
 modifications, distribution, sublicensing and private use. Basically, you can do whatever you want with Cocktail Shaker as long as
 you include the original copyright and license in any copies or derivative projects.
 
-.. _`MIT license`: https://github.com/Sulstice/Cocktail-Shaker/blob/master/LICENSE
+.. _`MPL license`: https://github.com/Sulstice/Cocktail-Shaker/blob/master/LICENSE

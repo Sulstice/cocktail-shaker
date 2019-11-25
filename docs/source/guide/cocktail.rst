@@ -36,13 +36,14 @@ if a generated molecule is legitimate. By using both validation methods, cocktai
 
   The list of the ligands you would like installed on the peptide. It can be of any order.
 
-.. attribute:: enable_isomers
+.. attribute:: enable_isomers (optional)
 
-  Include stereochemistry and stereoisomers in the the results
+  Include stereochemistry and stereoisomers in the the results. Defaults to False.
 
-.. attribute:: include_amino_acids
+.. attribute:: include_amino_acids (optional)
 
-  Include the natural amino acids except for Proline (TBD), list of smiles found in :ref:`amino acids <aminoacids>`
+  Include the natural amino acids except for Proline (TBD), list of smiles found in :ref:`amino acids <aminoacids>`.
+  Defaults to False.
 
 
 The "Shake" Function

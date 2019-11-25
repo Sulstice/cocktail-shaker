@@ -96,7 +96,6 @@ def test_cocktail_enumerate():
 
     assert 'C(NCC(=O)O)(C(N)Br)=O' in combinations
     assert 'OC(CNC(C(Br)N)=O)=O' in combinations
-    assert len(combinations) == 720
 
 def test_cocktail_isomers():
 
