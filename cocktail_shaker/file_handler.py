@@ -9,7 +9,7 @@
 from rdkit import Chem
 from pathlib import Path
 import progressbar
-from .request_handler import CactusRequestHandler, Resolver
+from request_handler import CactusRequestHandler, Resolver
 
 class FileNotSupportedError(Exception):
 
@@ -49,7 +49,7 @@ class FileWriter(object):
         if self.option not in self._CACTUS_FILE_FORMATS and self.option != 'sdf' and self.option != 'txt':
             raise FileNotSupportedError(message='Cocktail Shaker does not support that file format')
 
-        print ("Writing Files...")
+        print ("Writing Files... %s%s" % (self.name, self.option))
 
         if self.option in self._CACTUS_FILE_FORMATS:
             method_to_call = getattr(FileWriter, 'cactus_writer')

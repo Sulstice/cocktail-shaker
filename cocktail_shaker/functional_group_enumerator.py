@@ -77,7 +77,7 @@ class Cocktail(object):
 
         self.combinations = []
 
-        if self.peptide_backbone_length > len(self.ligand_library) or not ligand_library:
+        if (self.peptide_backbone_length > len(self.ligand_library) or not ligand_library) and self.include_amino_acids == False:
             print ("Cocktail Shaker Error: Peptide Backbone Length needs to be less than or equal to for your library")
             raise IndexError
 
@@ -93,7 +93,10 @@ class Cocktail(object):
         peptide = self.peptide_backbone
 
         if self.include_amino_acids:
-            self.ligand_library.extend(self._load_amino_acids())
+            if not self.ligand_library:
+                self.ligand_library = self._load_amino_acids()
+            else:
+                self.ligand_library.extend(self._load_amino_acids())
 
         combinations = list(itertools.permutations(self.ligand_library, self.peptide_backbone_length))
 
@@ -194,33 +197,29 @@ class Cocktail(object):
 
         Reference:
             amino_acids = {
-                "Alanine": "C"
+                "Alanine": "C",
+                "Arginine": "CCCCNC(N)=N",
+                "Asparagine": "CCC(N)=O",
+                "Aspartic Acid": "CC(O)=O",
+                "Cysteine": "CS",
+                "Glutamic Acid": "CCC(O)=O",
+                "Glutamine": "CCC(N)=O",
+                "Glycine": "[H]",
+                "Histidine":"CC1=CNC=N1",
+                "Isoleucine": "C(CC)([H])C",
+                "Leucine": "CC(C)C",
+                "Lysine": "CCCCN",
+                "Methionine": "CCSC",
+                "PhenylAlanine": "CC1=CC=CC=C1",
+                "Proline": "",
+                "Serine": "CO",
+                "Threonine": "C(C)([H])O",
+                "Tryptophan": "CCC1=CNC2=C1C=CC=C2",
+                "Tyrosine": "CC1=CC=C(O)C=C1",
+                "Valine": "C(C)C"
             }
 
         """
-
-        amino_acids = {
-            "Alanine": "C",
-            "Arginine": "CCCCNC(N)=N",
-            "Asparagine": "CCC(N)=O",
-            "Aspartic Acid": "CC(O)=O",
-            "Cysteine": "CS",
-            "Glutamic Acid": "CCC(O)=O",
-            "Glutamine": "CCC(N)=O",
-            "Glycine": "[H]",
-            "Histidine":"CC1=CNC=N1",
-            "Isoleucine": "C(CC)([H])C",
-            "Leucine": "CC(C)C",
-            "Lysine": "CCCCN",
-            "Methionine": "CCSC",
-            "PhenylAlanine": "CC1=CC=CC=C1",
-            "Proline": "",
-            "Serine": "CO",
-            "Threonine": "C(C)([H])O",
-            "Tryptophan": "CCC1=CNC2=C1C=CC=C2",
-            "Tyrosine": "CC1=CC=C(O)C=C1",
-            "Valine": "C(C)C"
-        }
 
         natural_amino_acids = ["C", "CCCNC(N)=N", "CCC(N)=O", "CC(O)=O", "CS", "CCC(O)=O", "CCC(O)=O", "CCC(N)=O", "[H]",
                                "CC1=CNC=N1", "C(CC)([H])C", "CC(C)C", "CCCCN", "CCSC", "CC1=CC=CC=C1", "CO", "C(C)([H])O",

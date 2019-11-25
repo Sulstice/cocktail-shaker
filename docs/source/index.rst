@@ -63,6 +63,7 @@ Comprehensive API documentation with information on every function, class and me
     guide/file_formats
     guide/file_handling
     guide/functional_groups
+    guide/amino_acids
     guide/cocktail
     guide/contributing
 

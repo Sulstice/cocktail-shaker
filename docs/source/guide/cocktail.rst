@@ -36,6 +36,15 @@ if a generated molecule is legitimate. By using both validation methods, cocktai
 
   The list of the ligands you would like installed on the peptide. It can be of any order.
 
+.. attribute:: enable_isomers
+
+  Include stereochemistry and stereoisomers in the the results
+
+.. attribute:: include_amino_acids
+
+  Include the natural amino acids except for Proline (TBD), list of smiles found in :ref:`amino acids <aminoacids>`
+
+
 The "Shake" Module
 ------------------
 
@@ -70,6 +79,8 @@ support new groups and thoroughly test them. The library is looking to expand in
 groups.
 
 Please refer to :ref:`functional groups <functionalgroups>` to see what cocktail-shaker supports.
+Please refer to :ref:`amino acids <aminoacids>` to see what cocktail-shaker supports.
+
 
 The "Enumerate" Module
 ----------------------
