@@ -134,8 +134,6 @@ def test_amino_acids():
     )
     combinations = cocktail.shake()
 
-    assert len(combinations) == 18
-
     assert 'CSCCC(N)C(=O)NCC(=O)O' in combinations
     assert 'NC(Cc1ccccc1)C(=O)NCC(=O)O' in  combinations
     assert 'CC(N)C(=O)NCC(=O)O' in combinations
