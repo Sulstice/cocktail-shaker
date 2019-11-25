@@ -38,10 +38,12 @@ of whether to include generation of stereoisomers and/or natural amino acids.
 Cocktail Shaker will generate all combinations of the library and allocate them to a slot within the peptide. This process of 
 string manipulation is presented in ```Figure 1```.
 
-<figure>
-  <img src="images/figure_1.png" alt="Figure 1 String Manipulation Diagram"/>
-  <figcaption><i>Figure 1: Full string manipulation diagram of Cocktail Shaker.</i></figcaption>
-</figure>
+<p align="center">
+  <figure>
+    <img src="./images/figure_1.png" alt="Figure 1 String Manipulation Diagram"/>
+    <figcaption><i>Figure 1: Full string manipulation diagram of Cocktail Shaker.</i></figcaption>
+  </figure>
+</p>
 
 ```Cocktail Shaker``` also allows for File Writing of the molecules into a wide array of chemical formats (found in the documentation).
 ```Cocktail Shaker ``` uses RDKit to convert from 1D to 2D and the CIR Resolver built from webchem to convert 1D SMILES to 3D. At the request 
