@@ -126,7 +126,7 @@ def test_amino_acids():
 
     """
 
-    peptide_backbone = PeptideMolecule(2)
+    peptide_backbone = PeptideMolecule(1)
     cocktail = Cocktail(
         peptide_backbone,
         ligand_library = [],
