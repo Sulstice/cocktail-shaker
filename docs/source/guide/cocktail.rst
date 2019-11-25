@@ -1,12 +1,12 @@
 .. _cocktail:
 
-cocktail-shaker API Documentation
-=================================
+API Documentation
+=================
 
 This page introduces the functionality of the cocktail object and provides a deeper look into what it can accomplish in the future.
 
 
-The cocktail Class
+The Cocktail Class
 ------------------
 
 The cocktail object is the heart of the package and allows you to parse in a peptide SMILES string and expand your drug
@@ -45,8 +45,8 @@ if a generated molecule is legitimate. By using both validation methods, cocktai
   Include the natural amino acids except for Proline (TBD), list of smiles found in :ref:`amino acids <aminoacids>`
 
 
-The "Shake" Module
-------------------
+The "Shake" Function
+--------------------
 
 The shake module detects functional groups present on a molecule, breaks their bond, and then adds a functional
 group (not itself) from the datasource library as replacement.
@@ -82,8 +82,8 @@ Please refer to :ref:`functional groups <functionalgroups>` to see what cocktail
 Please refer to :ref:`amino acids <aminoacids>` to see what cocktail-shaker supports.
 
 
-The "Enumerate" Module
-----------------------
+The "Enumerate" Function
+------------------------
 
 The enumerate module takes your RDKit molecule objects and generates random representations of the compounds in either
 1D, 2D, and coming soon 3D.
