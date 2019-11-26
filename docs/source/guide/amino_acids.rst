@@ -36,7 +36,7 @@ Below is a list of the amino acids that cocktail-shaker currently supports.
 +------------------+---------------------------+
 | PhenylAlanine    | CC1=CC=CC=C1              |
 +------------------+---------------------------+
-| Proline          | TBD                       |
+| Proline          | C2CCCN2                   |
 +------------------+---------------------------+
 | Serine           | CO                        |
 +------------------+---------------------------+
@@ -48,6 +48,3 @@ Below is a list of the amino acids that cocktail-shaker currently supports.
 +------------------+---------------------------+
 | Valine            | C(C)C                    |
 +------------------+---------------------------+
-
-All amino acids have been thoroughly tested with the exception of Proline, and Proline will be on it's way the minute I
-can ge the bonding just right.

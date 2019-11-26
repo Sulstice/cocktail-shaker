@@ -1,7 +1,7 @@
 .. _peptidebuilder:
 
-API Documentation
-=================
+Peptide Builder API
+===================
 
 This page introduces the functionality of the peptide molecule object and provides a deeper look into what it can accomplish in the future.
 

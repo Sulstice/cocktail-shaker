@@ -1,7 +1,7 @@
 .. _cocktail:
 
-API Documentation
-=================
+Cocktail API
+============
 
 This page introduces the functionality of the cocktail object and provides a deeper look into what it can accomplish in the future.
 
