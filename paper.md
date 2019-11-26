@@ -4,15 +4,19 @@ tags:
   - Python
   - Cheminformatics
   - RDKit
+  - Peptides
 authors:
   - name: Suliman Sharif
     orcid: 0000-0002-1342-9258
-
+    affiliation: 1
+affiliations:
+ - name: No Affiliations
+   index: 1
 date: 23 November 2019
 bibliography: paper.bib
 ---
 
-# Statement of Need
+# Introduction
 
 Without expensive software, the rapid creation and design of peptide ligand libraries has been a
 challenge for many drug discovery scientists. Currently, proteins and peptide-based therapeutics consist of 10% of the 
