@@ -7,6 +7,13 @@
 # Imports
 # ---------
 from rdkit import Chem
+
+# Suppress RDKit's StdOut and StdErr
+from rdkit import RDLogger
+lg = RDLogger.logger()
+lg.setLevel(RDLogger.CRITICAL)
+
+
 import ruamel.yaml as yaml
 import itertools
 import progressbar
@@ -14,28 +21,6 @@ import progressbar
 # Cocktail Shaker Imports
 # -----------------------
 from .validation import MoleculeValidator
-
-def load_datasources():
-
-    """
-
-    Load all the datasources for running this package in local context.
-
-    This might slow down performance later -- we can opt in to load sources of data dependent on the functional group.
-
-    """
-    from pathlib import Path
-    datasource_location = Path(__file__).absolute().parent
-    with open(str(datasource_location) + "/datasources/R_Groups.yaml") as stream:
-        try:
-            global R_GROUP_DATASOURCE
-            R_GROUP_DATASOURCE = yaml.safe_load(stream)
-
-            global R_GROUPS
-            R_GROUPS = R_GROUP_DATASOURCE['R_Groups']
-        except yaml.YAMLError as exc:
-            print ("Datasources not loading correctly, Please contact lead developer")
-            print(exc)
 
 class Cocktail(object):
     """
@@ -68,10 +53,14 @@ class Cocktail(object):
         # I will allow the user to pass a string but for easier sake down the road
         # I will reimplement it as a list.
 
-        load_datasources()
         self.peptide_backbone = str(peptide_backbone)
         self.ligand_library = ligand_library
-        self.peptide_backbone_length = int(max(map(int, re.findall(r"\d+",self.peptide_backbone))))
+
+        # Detect the proline amino acid on the N-terminus, set the max peptide length accordingly.
+        if self.peptide_backbone[0:6] == 'N2CCCC2':
+            self.peptide_backbone_length = int(max(map(int, re.findall(r"\d+", self.peptide_backbone[7:]))))
+
+        self.peptide_backbone_length = int(max(map(int, re.findall(r"\d+", self.peptide_backbone))))
         self.enable_isomers = enable_isomers
         self.include_amino_acids = include_amino_acids
 

@@ -65,6 +65,7 @@ Comprehensive API documentation with information on every function, class and me
     guide/functional_groups
     guide/amino_acids
     guide/cocktail
+    guide/peptide_builder
     guide/examples
     guide/contributing
 

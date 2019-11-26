@@ -38,3 +38,8 @@ def test_peptide_molecule_backbone():
     assert peptide_molecule == 'NC([*:1])C(NC([*:2])C(NC([*:3])C(NC([*:4])C(NC([*:5])C(NC([*:6])C(NC([*:7])C(NC([*:8])C(NC([*:9])C(NC([*:10])C(NC([*:11])C(NC([*:12])C(NC([*:13])C(NC([*:14])C(NC([*:15])C(NC([*:16])C(NC([*:17])C(NC([*:18])C(NC([*:19])C(NC([*:20])C(NCC(O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O)=O'
     assert peptide_backbone_length == 20
 
+def test_proline_addition():
+
+    peptide_backbone = PeptideMolecule(2, include_proline = True)
+
+    assert str(peptide_backbone) == 'N2CCCC2C(NC([*:1])C(NC([*:2])C(O)=O)=O)=O'
