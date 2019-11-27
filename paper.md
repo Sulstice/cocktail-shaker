@@ -10,7 +10,7 @@ authors:
     orcid: 0000-0002-1342-9258
     affiliation: 1
 affiliations:
- - name: No Affiliations
+ - name: None
    index: 1
 date: 23 November 2019
 bibliography: paper.bib
