@@ -20,16 +20,16 @@ bibliography: paper.bib
 
 Without expensive software, the rapid creation and design of peptide ligand libraries has been a
 challenge for many drug discovery scientists. Currently, proteins and peptide-based therapeutics consist of 10% of the 
-pharmaceutical market and will make up a larger proportion of the market in the future [1, 2]. With increasing interest
+pharmaceutical market and will make up a larger proportion of the market in the future [@Craig:2013-1; @Bruno:2013-2]. With increasing interest
 eludes to increasing high throughput screening of peptides computationally. There exists two platforms: Molecular Operating 
-Environment (MOE) [3] and Rapid Peptides Generator (RPG) [4] but both have drawbacks. MOE works efficiently in creating peptide molecule 3D chemical 
+Environment (MOE) [@Reynolds:2010-3] and Rapid Peptides Generator (RPG) [@Maillet:2020-4] but both have drawbacks. MOE works efficiently in creating peptide molecule 3D chemical 
 files in one particular format (mol2) but also at the high price cost for a licence. RPG, although free of charge, does not account
 for non-natural amino acids and production of multiple chemical files. In this study, I present the first open source python package,
  ```Cocktail Shaker```, developed for exploring, expanding, and synthesizing chemical peptide data.
 
 # Methodology and Implementation
 
-```Cocktail Shaker``` operates within the RDKit platform [5] and is designed for the chemically-oriented
+```Cocktail Shaker``` operates within the RDKit platform [@Landrum:2019-5] and is designed for the chemically-oriented
 computational research community. RDKit utilizes C-based functions for speed and rapid creation of molecule objects.
 The toolkit offers a variety of utilities that includes: parsing and producing ready-to-use scientific files
 designed for any chemical software, employing click chemistry methods for ease of exchange compounds, chemical data writing, 
@@ -68,11 +68,3 @@ We acknowledge contributions from Ryland Forsythe as an academic consultation, M
 for technical documentation, and Elena Chow for her work on the graphics. 
 
 # References
-
-1. Craik DJ, Fairlie DP, Liras S, Price D. The future of peptide-based drugs. Chem Biol Drug Des. 2013;81(1):136–47. Epub 2012/12/21. pmid:23253135.
-2. Bruno BJ, Miller GD, Lim CS. Basics and recent advances in peptide and protein drug delivery. Ther Deliv. 2013;4(11):1443–67. Epub 2013/11/16. pmid:24228993; PubMed Central PMCID: PMCPMC3956587.
-3. Reynolds CH, Merz KM, Ringe D, eds. (2010). Drug Design: Structure- and Ligand-Based Approaches (1 ed.). Cambridge, UK: Cambridge University Press. ISBN 978-0521887236.
-4. Nicolas Maillet, Rapid Peptides Generator: fast and efficient in silico protein digestion, NAR Genomics and Bioinformatics, Volume 2, Issue 1, March 2020, lqz004, https://doi.org/10.1093/nargab/lqz004
-5. Landrum, Greg, RDKit: Open-Source Cheminformatics Software, release 2019 
-   
-   
