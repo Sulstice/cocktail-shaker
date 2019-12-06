@@ -9,11 +9,11 @@
 from rdkit import Chem
 from pathlib import Path
 import progressbar
-from .request_handler import CactusRequestHandler, Resolver
+from request_handler import CactusRequestHandler, Resolver
 
 class FileNotSupportedError(Exception):
 
-    __version_error_parser__ = 1.0
+    __version_error_parser__ = "1.1.0"
     __allow_update__ = False
 
     """
@@ -33,7 +33,7 @@ class FileWriter(object):
 
     """
 
-    __version_parser__ = 1.0
+    __version_parser__ = "1.1.0"
     __allow_update__ = False
     _CACTUS_FILE_FORMATS = ['alc', 'cdxml', 'cerius', 'charmm', 'cif', 'cml', 'gjf', 'gromacs', 'hyperchem', 'jme', 'mol',
                      'mol2', 'mrv', 'pdb', 'sdf3000', 'sln', 'xyz']
@@ -184,7 +184,7 @@ class FileWriter(object):
 
 class FileParser(object):
 
-    __version_parser__ = 1.0
+    __version_parser__ = "1.1.0"
     __allow_update__ = False
 
     FILE_EXTENSIONS = ['.sdf','.txt', '.text', '.mol', '.mol2']

@@ -12,7 +12,7 @@ import progressbar
 
 class RaiseMoleculeError(Exception):
 
-    __version_error_parser__ = 1.0
+    __version_error_parser__ = "1.1.0"
     __allow_update__ = False
 
     """

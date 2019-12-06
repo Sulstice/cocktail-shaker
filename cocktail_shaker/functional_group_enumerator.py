@@ -20,7 +20,7 @@ import progressbar
 
 # Cocktail Shaker Imports
 # -----------------------
-from .validation import MoleculeValidator
+from validation import MoleculeValidator
 
 class Cocktail(object):
     """
@@ -29,7 +29,7 @@ class Cocktail(object):
 
     """
 
-    __version_parser__ = 1.0
+    __version_parser__ = "1.1.0"
     __allow_update__ = False
 
     def __init__(self, peptide_backbone, ligand_library = [], enable_isomers = False, include_amino_acids = False):
@@ -54,6 +54,7 @@ class Cocktail(object):
         # I will reimplement it as a list.
 
         self.peptide_backbone = str(peptide_backbone)
+        print(peptide_backbone)
         self.ligand_library = ligand_library
 
         # Detect the proline amino acid on the N-terminus, set the max peptide length accordingly.

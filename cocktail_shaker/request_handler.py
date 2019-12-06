@@ -6,7 +6,7 @@
 
 class RequestError(Exception):
 
-    __version_error_parser__ = 1.0
+    __version_error_parser__ = "1.1.0"
     __allow_update__ = False
 
     """
@@ -21,7 +21,7 @@ class RequestError(Exception):
 class CactusRequestHandler(object):
 
 
-    __version__ = 1.0
+    __version__ = "1.1.0"
     __allow_update__ = False
 
     """
@@ -60,7 +60,7 @@ class CactusRequestHandler(object):
 
 class Resolver(object):
 
-    __version__ = 1.0
+    __version__ = "1.1.0"
     __allow_update__ = False
 
     """
