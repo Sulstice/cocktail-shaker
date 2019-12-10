@@ -49,7 +49,8 @@ class CactusRequestHandler(object):
 
         try:
             request = urlopen(self.url)
-        except RequestError:
+        except RequestError as e:
+            print ("StackTrace: %s" % e)
             print ("Error handling request, please try again or contact Suliman Sharif")
 
         if request.getcode() != 200:
