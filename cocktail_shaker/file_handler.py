@@ -115,6 +115,9 @@ class FileWriter(object):
 
         three_d_molecules_text = []
 
+        # import
+        import time
+
 
         for i in progressbar.progressbar(range(len(self.molecules))):
             # Our request will use smiles.
@@ -129,6 +132,7 @@ class FileWriter(object):
             resolver = Resolver(response)
             mol2_text = resolver.cactus_mol2_resolver()
             three_d_molecules_text.append(mol2_text)
+            time.sleep(1)
 
         if not self.fragmentation:
             writer = open(self.name + "." + self.option, "w")
