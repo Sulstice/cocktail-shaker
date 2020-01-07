@@ -13,7 +13,7 @@ MolVS==0.1.1
 more-itertools==7.2.0
 numpy==1.17.3
 olefile==0.46
-packaging==19.2
+packaging==20.0
 pandas==0.25.3
 Pillow==6.2.1
 pluggy==0.13.1
