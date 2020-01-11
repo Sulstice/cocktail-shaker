@@ -37,7 +37,7 @@ install:
 - python setup.py install
 - pip install python-coveralls
 - pip install coveralls
-- pip install coverage       # Add me to install coverage.py
+- pip install coverage==4.5.4      # Add me to install coverage.py
 - pip install nose           # Add me to install nose
 
 before_script:
