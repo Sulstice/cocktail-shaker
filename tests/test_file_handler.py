@@ -9,7 +9,7 @@
 import os
 from cocktail_shaker.functional_group_enumerator import Cocktail
 from cocktail_shaker.file_handler import FileParser, FileWriter
-from cocktail_shaker.peptide_builder import PeptideMolecule
+from cocktail_shaker.peptide_builder import PeptideBuilder
 
 def test_encoding_checker():
 
@@ -36,7 +36,7 @@ def test_file_production():
 
     """
 
-    peptide_backbone = PeptideMolecule(1)
+    peptide_backbone = PeptideBuilder(1)
     cocktail = Cocktail(
         peptide_backbone,
         ligand_library = ['Br']

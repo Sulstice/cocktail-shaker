@@ -9,7 +9,7 @@
 # -------
 import ruamel.yaml as yaml
 from cocktail_shaker.functional_group_enumerator import Cocktail
-from cocktail_shaker.peptide_builder import PeptideMolecule
+from cocktail_shaker.peptide_builder import PeptideBuilder
 
 
 # Load datasources
@@ -42,7 +42,7 @@ def test_cocktail_shake():
     Verify Cocktail Shaker is working extensively and also include the stress testing.
 
     """
-    peptide_backbone = PeptideMolecule(1)
+    peptide_backbone = PeptideBuilder(1)
     cocktail = Cocktail(
         peptide_backbone,
         ligand_library = ['Br']
@@ -52,7 +52,7 @@ def test_cocktail_shake():
     assert len(combinations) == 1
     assert combinations[0] == 'NC(Br)C(=O)NCC(=O)O'
 
-    peptide_backbone = PeptideMolecule(2)
+    peptide_backbone = PeptideBuilder(2)
     cocktail = Cocktail(
         peptide_backbone,
         ligand_library = ['Br', 'I']
@@ -63,7 +63,7 @@ def test_cocktail_shake():
     assert 'NC(Br)C(=O)NC(I)C(=O)NCC(=O)O' in combinations
     assert 'NC(I)C(=O)NC(Br)C(=O)NCC(=O)O' in combinations
 
-    peptide_backbone = PeptideMolecule(2)
+    peptide_backbone = PeptideBuilder(2)
     cocktail = Cocktail(
         peptide_backbone,
         ligand_library = ['Br', 'I', 'F', 'N', 'C', 'Cl']
@@ -71,7 +71,7 @@ def test_cocktail_shake():
     combinations = cocktail.shake()
     assert len(combinations) == 30
 
-    peptide_backbone = PeptideMolecule(6)
+    peptide_backbone = PeptideBuilder(6)
     cocktail = Cocktail(peptide_backbone,
                         ligand_library = ['Br', 'I', 'F', 'N', 'C', 'Cl']
                         )
@@ -86,7 +86,7 @@ def test_cocktail_enumerate():
 
     """
 
-    peptide_backbone = PeptideMolecule(1)
+    peptide_backbone = PeptideBuilder(1)
     cocktail = Cocktail(
         peptide_backbone,
         ligand_library = ['Br']
@@ -106,7 +106,7 @@ def test_cocktail_isomers():
 
     """
 
-    peptide_backbone = PeptideMolecule(2)
+    peptide_backbone = PeptideBuilder(2)
     cocktail = Cocktail(
         peptide_backbone,
         ligand_library = ['I', 'Br'],
@@ -126,7 +126,7 @@ def test_amino_acids():
 
     """
 
-    peptide_backbone = PeptideMolecule(1)
+    peptide_backbone = PeptideBuilder(1)
     cocktail = Cocktail(
         peptide_backbone,
         ligand_library = [],
@@ -152,3 +152,51 @@ def test_amino_acids():
     assert 'NC(CCC(=O)O)C(=O)NCC(=O)O' in combinations
     assert '[H]C(N)C(=O)NCC(=O)O' in combinations
     assert 'CC(O)C(N)C(=O)NCC(=O)O' in combinations
+
+def test_circular_peptide_production():
+
+    """
+
+    Test the Circular peptide production
+
+    """
+    peptide_backbone = PeptideBuilder(
+        length_of_peptide = 4,
+        circular = True,
+    )
+
+    assert 'O=C1C([*:1])NC(=O)C([*:2])NC(=O)C([*:3])NC(=O)C([*:4])N1' == peptide_backbone
+
+
+def test_drug_filters():
+
+    """
+
+    Test the drug filters
+
+    """
+
+    peptide_backbone = PeptideBuilder(
+        length_of_peptide = 4,
+        circular = True,
+    )
+
+    cocktail = Cocktail(peptide_backbone, ligand_library = ["Br", "Cl", "I", "F"])
+
+    combinations = cocktail.shake(compound_filters=["Lipinski"])
+    assert 'O=C1NC(Br)C(=O)NC(I)C(=O)NC(Cl)C(=O)NC1F' in combinations
+
+    combinations = cocktail.shake(compound_filters=["Ghose"])
+    assert len(combinations) == 0
+
+    combinations = cocktail.shake(compound_filters=["Veber"])
+    assert 'O=C1NC(I)C(=O)NC(Br)C(=O)NC1F' in combinations
+
+    combinations = cocktail.shake(compound_filters=["Rule of 3"])
+    assert len(combinations) == 0
+
+    combinations = cocktail.shake(compound_filters=["REOS"])
+    assert 'O=C1NC(Br)C(=O)NC(I)C(=O)NC1Cl' in combinations
+
+    combinations = cocktail.shake(compound_filters=["Drug-like"])
+    assert len(combinations) == 0

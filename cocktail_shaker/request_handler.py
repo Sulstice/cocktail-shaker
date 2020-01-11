@@ -45,7 +45,6 @@ class CactusRequestHandler(object):
         # imports
         # -------
         from urllib.request import urlopen
-        from lxml import etree
 
         try:
             request = urlopen(self.url)

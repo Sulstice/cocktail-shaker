@@ -17,6 +17,7 @@ lg.setLevel(RDLogger.CRITICAL)
 import ruamel.yaml as yaml
 import itertools
 import progressbar
+import functools
 
 # Cocktail Shaker Imports
 # -----------------------
@@ -54,7 +55,6 @@ class Cocktail(object):
         # I will reimplement it as a list.
 
         self.peptide_backbone = str(peptide_backbone)
-        print(peptide_backbone)
         self.ligand_library = ligand_library
 
         # Detect the proline amino acid on the N-terminus, set the max peptide length accordingly.
@@ -65,17 +65,27 @@ class Cocktail(object):
         self.enable_isomers = enable_isomers
         self.include_amino_acids = include_amino_acids
 
+        # Experimental cache argument.
+        self.cache = False
+
         self.combinations = []
 
         if (self.peptide_backbone_length > len(self.ligand_library) or not ligand_library) and self.include_amino_acids == False:
             print ("Cocktail Shaker Error: Peptide Backbone Length needs to be less than or equal to for your library")
             raise IndexError
 
-    def shake(self):
+    def shake(self, store_as_pickle = False, compound_filters = []):
 
         """
 
         Generate all combinations of a molecule
+
+        Arguments:
+            store_as_pickle (Bool): If the user wants to store the results into a pickle file.
+            compound_filters (List): List of filters that the user would like to apply to their library.
+
+        Returns:
+            results (List): List of compounds generated into SMILES format.
 
         """
 
@@ -101,15 +111,16 @@ class Cocktail(object):
                                                                Chem.MolFromSmiles('[*:'+ str(j+1)+']'),
                                                                Chem.MolFromSmiles(str(combination[j])))
 
-                peptide_molecule = Chem.MolToSmiles(modified_molecule[0], isomericSmiles=True)
+                peptide_molecule = Chem.MolToSmiles(modified_molecule[0], isomericSmiles=True, canonical=True)
 
             # Enable StereoChemistry
             if self.enable_isomers:
 
+                from rdkit.Chem import EnumerateStereoisomers
                 molecule = Chem.MolFromSmiles(str(peptide_molecule))
-                options = Chem.EnumerateStereoisomers.StereoEnumerationOptions(unique=True, tryEmbedding=True)
-                isomers = tuple(Chem.EnumerateStereoisomers.EnumerateStereoisomers(molecule, options=options))
-                for smile in sorted(Chem.MolToSmiles(isomer, isomericSmiles=True) for isomer in isomers):
+                options = EnumerateStereoisomers.StereoEnumerationOptions(unique=True, tryEmbedding=True)
+                isomers = tuple(EnumerateStereoisomers.EnumerateStereoisomers(molecule, options=options))
+                for smile in sorted(Chem.MolToSmiles(isomer, isomericSmiles=True,  canonical=True) for isomer in isomers):
                     results.append(str(smile))
             else:
                 results.append(str(peptide_molecule))
@@ -122,6 +133,18 @@ class Cocktail(object):
 
         # Store in combinations if enumeration
         self.combinations = results
+
+        # Handle storage into a pickle file.
+        if store_as_pickle:
+
+            import pickle
+            with open("cocktail_shaker.pickle", 'wb') as cache_handle:
+                print("saving result to cache '%s'" % "cocktail_shaker.pickle")
+                pickle.dump(results, cache_handle)
+
+        if compound_filters:
+            results = self._apply_drug_filters(compound_filters)
+            self.combinations = results
 
         return results
 
@@ -217,5 +240,141 @@ class Cocktail(object):
 
         return natural_amino_acids
 
-        
+    def _apply_drug_filters(self, filters):
 
+        """
+
+        Applies a drug filter or more and returns the modified compound library.
+
+        Arguments:
+            filters (List): List of filters that you would like to apply.
+
+        Reference:
+            filters = [
+                        "Lipinski",
+                        "Ghose",
+                        "Veber",
+                        "Rule of 3",
+                        "REOS",
+                        "Drug-like",
+                        "All",
+            ]
+
+        """
+
+        from rdkit.Chem import Descriptors
+
+        print ("Applying Drug Filters...")
+
+        # Store our final list
+        results = []
+
+        # Boolean for filters
+        lipinski = False
+        rule_of_3 = False
+        ghose_filter = False
+        veber_filter = False
+        reos_filter = False
+        drug_like_filter = False
+        apply_all_filters = False
+
+        # Determine which filters to apply
+        if "Lipinski" in filters:
+            lipinski = True
+        if "Rule of 3" in filters:
+            rule_of_3 = True
+        if "Ghose" in filters:
+            ghose_filter = True
+        if "Veber" in filters:
+            veber_filter = True
+        if "REOS" in filters:
+            reos_filter = True
+        if "Drug-Like"in filters:
+            drug_like_filter = True
+        if "All" in filters or lipinski and reos_filter and rule_of_3 and ghose_filter and veber_filter and drug_like_filter:
+            apply_all_filters = True
+            lipinski = True
+            rule_of_3 = True
+            ghose_filter = True
+            veber_filter = True
+            reos_filter = True
+            drug_like_filter = True
+
+        for i in progressbar.progressbar(range(len(self.combinations))):
+
+            lipinski_pass = False
+            ghose_pass = False
+            veber_pass = False
+            rule_of_3_pass = False
+            reos_pass = False
+            drug_like_pass = False
+
+
+            molecule_smiles = self.combinations[i]
+            molecule = Chem.MolFromSmiles(molecule_smiles)
+
+            # Default Descriptors
+            molecular_weight = Descriptors.ExactMolWt(molecule)
+            logp = Descriptors.MolLogP(molecule)
+            h_bond_donor = Descriptors.NumHDonors(molecule)
+            h_bond_acceptors = Descriptors.NumHAcceptors(molecule)
+            rotatable_bonds = Descriptors.NumRotatableBonds(molecule)
+            number_of_atoms = Chem.rdchem.Mol.GetNumAtoms(molecule)
+            molar_refractivity = Chem.Crippen.MolMR(molecule)
+            topological_surface_area_mapping = Chem.QED.properties(molecule).PSA
+            formal_charge = Chem.rdmolops.GetFormalCharge(molecule)
+            heavy_atoms = Chem.rdchem.Mol.GetNumHeavyAtoms(molecule)
+            num_of_rings = Chem.rdMolDescriptors.CalcNumRings(molecule)
+
+            # Lipinski
+            if lipinski:
+                if molecular_weight <= 500 and logp <= 5 and h_bond_donor <= 5 and h_bond_acceptors <= 5 and rotatable_bonds <= 5:
+                    if apply_all_filters:
+                        lipinski_pass = True
+                    else:
+                        results.append(molecule_smiles)
+
+            # Ghose Filter
+            if ghose_filter:
+                if molecular_weight >= 160 and molecular_weight <= 480 and logp >= 0.4 and logp <= 5.6 and number_of_atoms >= 20 and number_of_atoms <= 70 and molar_refractivity >= 40 and molar_refractivity <= 130:
+                    if apply_all_filters:
+                        ghose_pass = True
+                    else:
+                        results.append(molecule_smiles)
+
+            # Veber Filter
+            if veber_filter:
+                if rotatable_bonds <= 10 and topological_surface_area_mapping <= 140:
+                    if apply_all_filters:
+                        veber_pass = True
+                    else:
+                        results.append(molecule_smiles)
+
+            # Rule of 3
+            if rule_of_3:
+                if molecular_weight <= 300 and logp <= 3 and h_bond_donor <= 3 and h_bond_acceptors <= 3 and rotatable_bonds <= 3:
+                    if apply_all_filters:
+                        rule_of_3_passs = True
+                    else:
+                        results.append(molecule_smiles)
+
+            # REOS Filter
+            if reos_filter:
+                if molecular_weight >= 200 and molecular_weight <= 500 and logp >= int(0 - 5) and logp <= 5 and h_bond_donor >= 0 and h_bond_donor <= 5 and h_bond_acceptors >= 0 and h_bond_acceptors <= 10 and formal_charge >= int(0-2) and formal_charge <= 2 and rotatable_bonds >= 0 and rotatable_bonds <= 8 and heavy_atoms >= 15 and heavy_atoms <= 50:
+                    if apply_all_filters:
+                        reos_pass = True
+                    else:
+                        results.append(molecule_smiles)
+
+            #Drug Like Filter
+            if drug_like_filter:
+                if molecular_weight < 400 and num_of_rings > 0 and rotatable_bonds < 5 and h_bond_donor <= 5 and h_bond_acceptors <= 10 and logp < 5:
+                    if apply_all_filters:
+                        drug_like_pass = True
+                    else:
+                        results.append(molecule_smiles)
+
+            if lipinski_pass and ghose_pass and veber_pass and rule_of_3_pass and reos_pass and drug_like_pass:
+                results.append(molecule_smiles)
+
+        return results
