@@ -18,8 +18,8 @@ yourself.
 If the SMILES fail to load and is *not* supported, then ``MoleculeError`` will be raised instead.
 
 >>> from cocktail_shaker import Cocktail
->>> from cocktail_shaker import PeptideMolecule
->>> peptide_molecule = PeptideMolecule(2)
+>>> from cocktail_shaker import PeptideBuilder
+>>> peptide_molecule = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_molecule, ligand_library=['Br', 'I'])
 >>> print (cocktail)
 >>> CocktailObject
@@ -30,7 +30,7 @@ if a generated molecule is legitimate. By using both validation methods, cocktai
 
 .. attribute:: peptide_molecule
 
-  The peptide backbone string generated from PeptideMolecule
+  The peptide backbone string generated from PeptideBuilder
 
 .. attribute:: ligand_library
 
@@ -60,8 +60,8 @@ cocktail-shaker shows the functional groups that can be detected and then swaps 
 If the shake fails to work, then ``MoleculeError`` will be raised instead. In this case, contact the lead developer.
 
 >>> from cocktail_shaker import Cocktail
->>> from cocktail_shaker import PeptideMolecule
->>> peptide_molecule = PeptideMolecule(2)
+>>> from cocktail_shaker import PeptideBuilder
+>>> peptide_molecule = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_molecule, ligand_library=['Br', 'I'])
 >>> print (cocktail.shake())
 >>> ['NC(Br)C(=O)NC(I)C(=O)NCC(=O)O', 'NC(I)C(=O)NC(Br)C(=O)NCC(=O)O']
@@ -71,9 +71,8 @@ before appended the list.
 
 There are some minor restrictions in the first release of this package as described below.
 
-1. Performance is notable with higher amounts of peptides especially rendering in 3D takes ~ 2 days.
+1. Performance is notable with higher amounts of peptides especially rendering in 3D takes ~ 2 days for 1,000,000 ish compounds.
 2. The limit of functional groups cocktail shaker is valid i.e Azides and Phosphorous groups
-3. Circular peptides are also not supported yet.
 
 Because cocktail-shaker uses SMART pattern recognition to detect functional groups, it is limited by how fast we can
 support new groups and thoroughly test them. The library is looking to expand into more classes and a variety of
@@ -82,6 +81,37 @@ groups.
 Please refer to :ref:`functional groups <functionalgroups>` to see what cocktail-shaker supports.
 Please refer to :ref:`amino acids <aminoacids>` to see what cocktail-shaker supports.
 
+.. attribute:: store_as_pickle (optional)
+
+    If the user wants to save the result into a pickle file as a "cache". A file named "cocktail_shake.pickle" will be generated.
+
+>>> from cocktail_shaker import Cocktail
+>>> from cocktail_shaker import PeptideBuilder
+>>> peptide_molecule = PeptideBuilder(2)
+>>> cocktail = Cocktail(peptide_molecule, ligand_library=['Br', 'I'])
+>>> print (cocktail.shake(store_as_pickle= True))
+>>> cocktail_shaker.pickle
+
+.. attribute:: compound_filters (optional)
+
+    Filter the library generated in accordance with different filtering rules. Currently, the list of filters we support are
+
+    "Lipinski",
+    "Ghose",
+    "Veber",
+    "Rule of 3",
+    "REOS",
+    "Drug-like",
+    "All" (if you would like all the filters applied),
+
+>>> from cocktail_shaker import Cocktail
+>>> from cocktail_shaker import PeptideBuilder
+>>> peptide_molecule = PeptideBuilder(2)
+>>> cocktail = Cocktail(peptide_molecule, ligand_library=['Br', 'I', 'F', 'Cl'])
+>>> print (cocktail.shake(compound_filters=["Lipsinski"]))
+>>> ['O=C1NC(Cl)C(=O)NC(I)C(=O)NC1F', 'O=C1NC(Br)C(=O)NC(I)C(=O)NC1Cl', 'O=C1NC(Br)C(=O)NC(I)C(=O)NC1F',
+>>>  'O=C1NC(Cl)C(=O)NC(Br)C(=O)NC1F', 'O=C1NC(I)C(=O)NC(Br)C(=O)NC1F', 'O=C1NC(Br)C(=O)NC(Cl)C(=O)NC1F',
+>>>  'O=C1NC(I)C(=O)NC(Cl)C(=O)NC1F', 'O=C1NC(I)C(=O)NC(Br)C(=O)NC1Cl']
 
 The "Enumerate" Function
 ------------------------
@@ -95,7 +125,7 @@ You instantiate a ``Cocktail`` object by parsing in a list of smiles and then "e
 If the enumerate fails to work then ``MoleculeError`` will be raised instead. In this case, please contact the lead developer.
 
 >>> from cocktail_shaker import Cocktail
->>> from cocktail_shaker import PeptideMolecule   >>> peptide_backbone = PeptideMolecule(2)
+>>> from cocktail_shaker import PeptideBuilder   >>> peptide_backbone = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
 >>> combinations = cocktail.shake()
 >>> print (combinations)
@@ -115,7 +145,7 @@ Alternatively, if you would like you can pass in the enumeration_complexity argu
 are generated.
 
 >>> from cocktail_shaker import Cocktail
->>> from cocktail_shaker import PeptideMolecule   >>> peptide_backbone = PeptideMolecule(2)
+>>> from cocktail_shaker import PeptideBuilder   >>> peptide_backbone = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
 >>> combinations = cocktail.shake()
 >>> print (combinations)
@@ -133,7 +163,7 @@ are generated.
 Cocktail Shaker also allows you to pass in the dimensionality of the enumeration.
 
 >>> from cocktail_shaker import Cocktail
->>> from cocktail_shaker import PeptideMolecule   >>> peptide_backbone = PeptideMolecule(2)
+>>> from cocktail_shaker import PeptideBuilder   >>> peptide_backbone = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
 >>> combinations = cocktail.shake()
 >>> enumerations = cocktail.enumerate(dimensionality='2D')

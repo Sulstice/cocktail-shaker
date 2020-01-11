@@ -11,8 +11,8 @@ Stereoisomers
 Using the stereoisomer function with Cocktail Shaker
 
 >>> from cocktail_shaker import Cocktail
->>> from cocktail_shaker import PeptideMolecule
->>> peptide_backbone = PeptideMolecule(1)
+>>> from cocktail_shaker import PeptideBuilder
+>>> peptide_backbone = PeptideBuilder(1)
 >>> cocktail = Cocktail(
 >>>     peptide_backbone,
 >>>     ligand_library = ['Br'],
@@ -29,8 +29,8 @@ Amino Acids
 Using the include amino acid function
 
 >>> from cocktail_shaker import Cocktail
->>> from cocktail_shaker import PeptideMolecule
->>> peptide_backbone = PeptideMolecule(1)
+>>> from cocktail_shaker import PeptideBuilder
+>>> peptide_backbone = PeptideBuilder(1)
 >>> cocktail = Cocktail(
 >>>     peptide_backbone,
 >>>     include_amino_acids = True

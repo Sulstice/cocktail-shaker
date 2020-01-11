@@ -12,8 +12,8 @@ Basic Usage
 The simplest way to use cocktail-shaker is to create a cocktail object with the ``shake`` function and create new compounds:
 
     >>> from cocktail_shaker import Cocktail
-    >>> from cocktail_shaker import PeptideMolecule
-    >>> peptide_backbone = PeptideMolecule(2)
+    >>> from cocktail_shaker import PeptideBuilder
+    >>> peptide_backbone = PeptideBuilder(2)
     >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
     >>> combinations = cocktail.shake()
     >>> print (combinations)

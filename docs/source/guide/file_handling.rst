@@ -34,8 +34,8 @@ by providing the path to the file, compounds to be written, and the extension yo
 If the file being written is *not* supported, then ``FileNotSupportedError`` will be raised instead.
 
 >>> from cocktail_shaker import Cocktail, FileWriter
->>> from cocktail_shaker import PeptideMolecule
->>> peptide_backbone = PeptideMolecule(2)
+>>> from cocktail_shaker import PeptideBuilder
+>>> peptide_backbone = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
 >>> combinations = cocktail.shake()
 >>> FileWriter('new_compounds', combinations, '.sdf')
@@ -44,8 +44,8 @@ Generates an SDF File....
 However, if you would like to generate the files into separate files, then you can pass in the fragmentation parameter.
 
 >>> from cocktail_shaker import Cocktail, FileWriter
->>> from cocktail_shaker import PeptideMolecule
->>> peptide_backbone = PeptideMolecule(2)
+>>> from cocktail_shaker import PeptideBuilder
+>>> peptide_backbone = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
 >>> combinations = cocktail.shake()
 >>> FileWriter('new_compounds', combinations, '.sdf', fragmentation=2)
