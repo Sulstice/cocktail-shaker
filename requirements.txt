@@ -14,7 +14,7 @@ more-itertools==7.2.0
 numpy==1.17.3
 olefile==0.46
 packaging==19.2
-pandas==0.25.3
+pandas==1.0.0
 Pillow==6.2.1
 pluggy==0.13.1
 progressbar==2.5
