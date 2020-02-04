@@ -8,6 +8,7 @@ Cocktail Shaker: Drug Expansion and Enumeration for Peptides!
 [![Gitter](https://badges.gitter.im/Cocktail-Shaker/community.svg)](https://gitter.im/Cocktail-Shaker/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Zenodo](https://zenodo.org/badge/170644606.svg)](https://zenodo.org/badge/latestdoi/170644606)
 [![Documentation Status](https://readthedocs.org/projects/cocktail-shaker/badge/?version=latest)](https://cocktail-shaker.readthedocs.io/en/latest/?badge=latest)
+[![status](https://joss.theoj.org/papers/c2e1d3c408a5729d832b34ac680d6305/status.svg)](https://joss.theoj.org/papers/c2e1d3c408a5729d832b34ac680d6305)
 
 <p align="center">
   <img width="200" height="300" src="images/logoshaker.png">
