@@ -39,7 +39,7 @@ Features
 - Ability to recognize and expand libraries of compounds some of which include halogens, acyl halides, aldehydes.
 - Ability to enumerate in 1D, and 2D structures and produce those compounds.
 - Supports Python versions 3.3+.
-- Released under the `MIT license`_.
+- Released under the `MPL license`_.
 
 User guide
 ----------

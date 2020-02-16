@@ -5,6 +5,10 @@ Installation
 
 cocktail-shaker supports Python versions 3.3+. Pyhton's required dependencies, most notably RDKit, must be installed.
 
+Dependencies can be located in either `setup.py`, `requirements.txt`, or a pdf generated graph of the cocktail shaker dependency.
+
+.. _`Dependency Graph`: https://github.com/Sulstice/Cocktail-Shaker/dependencies_cocktail_shaker.pdf
+
 Option 1 (Recommended): Use Pip 
 -------------------------------
 
