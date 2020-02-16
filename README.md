@@ -8,6 +8,7 @@ Cocktail Shaker: Drug Expansion and Enumeration for Peptides!
 [![Gitter](https://badges.gitter.im/Cocktail-Shaker/community.svg)](https://gitter.im/Cocktail-Shaker/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Zenodo](https://zenodo.org/badge/170644606.svg)](https://zenodo.org/badge/latestdoi/170644606)
 [![Documentation Status](https://readthedocs.org/projects/cocktail-shaker/badge/?version=latest)](https://cocktail-shaker.readthedocs.io/en/latest/?badge=latest)
+[![status](https://joss.theoj.org/papers/c2e1d3c408a5729d832b34ac680d6305/status.svg)](https://joss.theoj.org/papers/c2e1d3c408a5729d832b34ac680d6305)
 
 <p align="center">
   <img width="200" height="300" src="images/logoshaker.png">
@@ -16,10 +17,6 @@ Cocktail Shaker: Drug Expansion and Enumeration for Peptides!
 cocktail-shaker is a **high-performance drug enumeration and expansion
 library**. cocktail-shaker leverages the computational power of
 **RDKit** to create and enumerate large volumes of drug compounds. 
-- File parsing of SDF
-- File writing in a variety of formats some of which include: cif, sdf, pdb, mol, mol2, and more.
-- Ability to recognize and expand libraries of compounds some of which include: halogens, acyl halides, aldehydes. 
-- Ability to enumerate in 1D and 2D structures and produce those compounds.
 
 Announcements
 =============
