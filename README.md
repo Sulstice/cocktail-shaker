@@ -51,31 +51,18 @@ high-level python code to take care a lot of the underpinnings of RDKit.
 Installation 
 ==================
 
-cocktail-shaker runs on Python 3.5+ and depends on RDKit version (make sure you have this installed!).
+Cocktail-shaker runs on Python 3.5+ and within a conda environment due to the RDKit dependency. A conda installation is coming soon (as soon as I figure it out). 
 
-To setup and install a conda env on the MacOS/Linux, first download Conda:
+For the time being, here is the following:
 
-Linux: 
-``` $ wget/curl http://repo.continuum.io/miniconda/Miniconda3-4.1.11-Linux-x86_64.sh -O miniconda.sh ```
+- [Anaconda](https://docs.anaconda.com/anaconda/install/)
+- [RDKit](https://www.rdkit.org/docs/Install.html) Version: 2019.09.1
 
-MacOSx:
-``` $ curl http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh ```
+Cocktail shaker is distributed through PyPi and can be installed via:
 
-Run the Installation:
+`your_env/bin/python -m pip install cocktail-shaker`
 
-``` $ sh Miniconda3-latest-MacOSX-x86_64.sh ```
 
-Create a conda environment: 
-
-``` $ /anaconda3/bin/conda create -n your_env_name python=3.5 anaconda ```
-
-To install RDKit, set up an environment through this:
-
-``` $ conda install -q -c rdkit rdkit ```
-
-cocktail-shaker can be installed either via \`pip\`:
-
-``` $ your_env_name/bin/python -m pip install cocktail-shaker```
 
 Development Installation
 ========================
