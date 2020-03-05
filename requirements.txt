@@ -12,7 +12,7 @@ MarkupSafe==1.1.1
 MolVS==0.1.1
 more-itertools==7.2.0
 numpy==1.17.3
-packaging==19.2
+packaging==20.3
 pandas==0.25.3
 progressbar==2.5
 progressbar2==3.47.0
