@@ -21,8 +21,8 @@ Cocktail Shaker is a **high-performance drug enumeration and expansion library**
 Cocktail Shaker leverages the computational power of  **RDKit** to create and enumerate large volumes of drug compounds.
 
 >>> from cocktail_shaker import Cocktail, FileWriter
->>> from cocktail_shaker import PeptideMolecule
->>> peptide_backbone = PeptideMolecule(2)
+>>> from cocktail_shaker import PeptideBuilder
+>>> peptide_backbone = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
 >>> combinations = cocktail.shake()
 >>> FileWriter('example', combinations, 'mol2')
