@@ -66,7 +66,6 @@ Comprehensive API documentation with information on every function, class and me
     guide/amino_acids
     guide/cocktail
     guide/peptide_builder
-    guide/examples
     guide/contributing
 
 Cocktail Shaker's license
