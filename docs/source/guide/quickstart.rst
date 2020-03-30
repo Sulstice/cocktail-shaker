@@ -59,7 +59,7 @@ Using the stereoisomer function with Cocktail Shaker
 
 
 More Examples of Cocktail Shaker
------------
+--------------------------------
 
 Using the include amino acid function
 
@@ -78,3 +78,19 @@ Using the include amino acid function
 >>>  '[H]C(N)C(=O)NCC(=O)O', 'CSCCC(N)C(=O)NCC(=O)O', 'NC(CO)C(=O)NCC(=O)O', 'CC(C)C(N)C(=O)NCC(=O)O',
 >>>  'NC(CCc1c[nH]c2ccccc12)C(=O)NCC(=O)O', 'CC(C)CC(N)C(=O)NCC(=O)O']
 
+Using the Cocktail Shaker to generate a library of halogens & single atoms with then converting into a Pandas DataFrame
+
+>>> from peptide_builder import PeptideBuilder
+>>> from functional_group_enumerator import Cocktail
+>>> import pandas as pd
+>>>
+>>>
+>>> peptide_molecule = PeptideBuilder(length_of_peptide=7)
+>>> cocktail = Cocktail(peptide_backbone=peptide_molecule,
+>>>                     ligand_library=["Br", "Cl", "I", "F", "O", "N", "C"],
+>>>                     include_amino_acids=False,
+>>>                     enable_isomers=False)
+>>> molecules = cocktail.shake()
+>>>
+>>> dataframe = pd.DataFrame(molecules, columns=["Smiles"])
+>>> dataframe.to_hdf('data.h5', key='s', mode='w')
