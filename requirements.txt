@@ -1,7 +1,7 @@
 alabaster==0.7.12
 attrs==19.3.0
 Babel==2.7.0
-certifi==2019.9.11
+certifi==2020.4.5.1
 chardet==3.0.4
 idna==2.8
 imagesize==1.1.0
