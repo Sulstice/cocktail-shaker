@@ -8,7 +8,6 @@
 # imports
 # -------
 from rdkit import Chem
-import progressbar
 
 class RaiseMoleculeError(Exception):
 

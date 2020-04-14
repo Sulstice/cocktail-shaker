@@ -16,7 +16,6 @@ lg.setLevel(RDLogger.CRITICAL)
 
 import ruamel.yaml as yaml
 import itertools
-from progressbar import progressbar
 import functools
 
 # Cocktail Shaker Imports
@@ -101,9 +100,9 @@ class Cocktail(object):
 
         combinations = list(itertools.permutations(self.ligand_library, self.peptide_backbone_length))
 
-        print ("Generating Compounds...")
+        print ("Generating %s Compounds..." % str(len(combinations)))
 
-        for i in progressbar(range(len(combinations))):
+        for i in (range(len(combinations))):
             combination = list(combinations[i])
             peptide_molecule = str(peptide)
             for j in range(0, len(combination)):
@@ -170,7 +169,7 @@ class Cocktail(object):
         # Enumeration comes from the user iwatobipen
         # https://iwatobipen.wordpress.com/2018/11/15/generate-possible-list-of-smlies-with-rdkit-rdkit/
 
-        print ("Enumerating Compunds....")
+        print ("Enumerating %s Compounds...." % len(self.combinations))
 
         if enumeration_complexity.lower() == 'low':
             complexity = 100
@@ -182,7 +181,7 @@ class Cocktail(object):
             complexity = 10
 
         enumerated_molecules = []
-        for i in progressbar(range(len(self.combinations))):
+        for i in range(len(self.combinations)):
             for _ in range(complexity):
                 molecule = Chem.MolFromSmiles(self.combinations[i])
                 smiles_enumerated = Chem.MolToSmiles(molecule, doRandom=True)
@@ -301,7 +300,7 @@ class Cocktail(object):
             reos_filter = True
             drug_like_filter = True
 
-        for i in progressbar.progressbar(range(len(self.combinations))):
+        for i in range(len(self.combinations)):
 
             lipinski_pass = False
             ghose_pass = False

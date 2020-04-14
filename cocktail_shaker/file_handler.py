@@ -8,7 +8,6 @@
 # -------
 from rdkit import Chem
 from pathlib import Path
-from progressbar import progressbar
 from .request_handler import CactusRequestHandler, Resolver
 
 class FileNotSupportedError(Exception):
@@ -115,7 +114,7 @@ class FileWriter(object):
 
         three_d_molecules_text = []
 
-        for i in progressbar(range(len(self.molecules))):
+        for i in range(len(self.molecules)):
             # Our request will use smiles.
             molecule = self.molecules[i]
             url = self._construct_api_url(molecule, file_format=self.option)
