@@ -14,7 +14,6 @@ more-itertools==7.2.0
 numpy==1.17.3
 packaging==19.2
 pandas==0.25.3
-progressbar==2.5
 progressbar2==3.47.0
 py==1.8.0
 Pygments==2.4.2

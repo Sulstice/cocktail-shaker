@@ -20,7 +20,8 @@ import progressbar
 import functools
 
 # Cocktail Shaker Imports
-# -----------------------
+# ---
+# --------------------
 from .validation import MoleculeValidator
 
 class Cocktail(object):
