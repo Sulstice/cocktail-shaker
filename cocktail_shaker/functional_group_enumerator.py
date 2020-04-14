@@ -16,7 +16,7 @@ lg.setLevel(RDLogger.CRITICAL)
 
 import ruamel.yaml as yaml
 import itertools
-import progressbar
+from progressbar import progressbar
 import functools
 
 # Cocktail Shaker Imports
@@ -103,7 +103,7 @@ class Cocktail(object):
 
         print ("Generating Compounds...")
 
-        for i in progressbar.progressbar(range(len(combinations))):
+        for i in progressbar(range(len(combinations))):
             combination = list(combinations[i])
             peptide_molecule = str(peptide)
             for j in range(0, len(combination)):
@@ -182,7 +182,7 @@ class Cocktail(object):
             complexity = 10
 
         enumerated_molecules = []
-        for i in progressbar.progressbar(range(len(self.combinations))):
+        for i in progressbar(range(len(self.combinations))):
             for _ in range(complexity):
                 molecule = Chem.MolFromSmiles(self.combinations[i])
                 smiles_enumerated = Chem.MolToSmiles(molecule, doRandom=True)
