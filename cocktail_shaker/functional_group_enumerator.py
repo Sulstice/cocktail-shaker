@@ -195,7 +195,10 @@ class Cocktail(object):
                     return enumerated_molecules
 
         # Validate Smiles
-        MoleculeValidator(enumerated_molecules, smiles=True)
+        if dimensionality == '2D':
+            MoleculeValidator(enumerated_molecules, smiles=False)
+        else:
+            MoleculeValidator(enumerated_molecules, smiles=True)
 
         return enumerated_molecules
 

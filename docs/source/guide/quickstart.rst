@@ -79,6 +79,7 @@ Using the include amino acid function
 >>>  'NC(CCc1c[nH]c2ccccc12)C(=O)NCC(=O)O', 'CC(C)CC(N)C(=O)NCC(=O)O']
 
 Using the Cocktail Shaker to generate a library of halogens & single atoms with then converting into a Pandas DataFrame
+Note to use this example you will need to install an extra dependency of 'tables' for handling h4 data.
 
 >>> from peptide_builder import PeptideBuilder
 >>> from functional_group_enumerator import Cocktail

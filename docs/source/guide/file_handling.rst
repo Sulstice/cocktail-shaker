@@ -38,7 +38,7 @@ If the file being written is *not* supported, then ``FileNotSupportedError`` wil
 >>> peptide_backbone = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
 >>> combinations = cocktail.shake()
->>> FileWriter('new_compounds', combinations, '.sdf')
+>>> FileWriter('new_compounds', combinations, 'sdf')
 Generates an SDF File....
 
 However, if you would like to generate the files into separate files, then you can pass in the fragmentation parameter.
@@ -48,7 +48,7 @@ However, if you would like to generate the files into separate files, then you c
 >>> peptide_backbone = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
 >>> combinations = cocktail.shake()
->>> FileWriter('new_compounds', combinations, '.sdf', fragmentation=2)
+>>> FileWriter('new_compounds', combinations, 'sdf', fragmentation=2)
 Generates 2 SDF Files....
 
 .. attribute:: name

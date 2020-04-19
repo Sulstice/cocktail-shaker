@@ -89,8 +89,9 @@ Please refer to :ref:`amino acids <aminoacids>` to see what cocktail-shaker supp
 >>> from cocktail_shaker import PeptideBuilder
 >>> peptide_molecule = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_molecule, ligand_library=['Br', 'I'])
->>> print (cocktail.shake(store_as_pickle= True))
->>> cocktail_shaker.pickle
+>>> cocktail.shake(store_as_pickle = True)
+Generates a Pickle File
+
 
 .. attribute:: compound_filters (optional)
 
@@ -125,24 +126,28 @@ You instantiate a ``Cocktail`` object by parsing in a list of smiles and then "e
 If the enumerate fails to work then ``MoleculeError`` will be raised instead. In this case, please contact the lead developer.
 
 >>> from cocktail_shaker import Cocktail
->>> from cocktail_shaker import PeptideBuilder   >>> peptide_backbone = PeptideBuilder(2)
+>>> from cocktail_shaker import PeptideBuilder
+>>> peptide_backbone = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
 >>> combinations = cocktail.shake()
 >>> print (combinations)
 >>> ['NC(Br)C(=O)NC(I)C(=O)NCC(=O)O', 'NC(I)C(=O)NC(Br)C(=O)NCC(=O)O']
 >>> enumerations = cocktail.enumerate()
 >>> print (enumerations)
->>> ['IC(C(NCC(=O)O)=O)NC(=O)C(Br)N', 'N(CC(O)=O)C(C(I)NC(=O)C(N)Br)=O', 'NC(C(NC(I)C(NCC(=O)O)=O)=O)Br',
+>>> [..., 'IC(C(NCC(=O)O)=O)NC(=O)C(Br)N', 'N(CC(O)=O)C(C(I)NC(=O)C(N)Br)=O', 'NC(C(NC(I)C(NCC(=O)O)=O)=O)Br',
 >>>  'OC(=O)CNC(C(NC(C(N)Br)=O)I)=O', 'IC(NC(C(N)Br)=O)C(NCC(=O)O)=O', 'N(C(=O)C(N)Br)C(C(NCC(=O)O)=O)I',
 >>>  'O=C(C(N)Br)NC(I)C(NCC(=O)O)=O', 'C(C(O)=O)NC(C(NC(C(N)Br)=O)I)=O', 'OC(=O)CNC(=O)C(NC(=O)C(Br)N)I',
 >>>  'N(C(=O)C(I)NC(=O)C(Br)N)CC(O)=O', 'O=C(C(Br)NC(C(I)N)=O)NCC(=O)O', 'O=C(NCC(=O)O)C(Br)NC(C(N)I)=O',
 >>>  'N(CC(=O)O)C(C(Br)NC(C(N)I)=O)=O', 'N(C(C(=O)NCC(=O)O)Br)C(C(I)N)=O', 'O=C(CNC(C(Br)NC(=O)C(I)N)=O)O',
 >>>  'OC(CNC(C(Br)NC(C(N)I)=O)=O)=O', 'OC(CNC(C(Br)NC(=O)C(I)N)=O)=O', 'C(NC(C(I)N)=O)(C(=O)NCC(=O)O)Br',
->>>  'BrC(C(NCC(O)=O)=O)NC(C(N)I)=O', 'O=C(C(Br)NC(C(N)I)=O)NCC(O)=O']
+>>>  'BrC(C(NCC(O)=O)=O)NC(C(N)I)=O', 'O=C(C(Br)NC(C(N)I)=O)NCC(O)=O', ...]
+>>> print (len(enumerations))
+>>> 192
 
 
 Alternatively, if you would like you can pass in the enumeration_complexity argument to change how many enumerations
-are generated.
+are generated. The number output can vary based on the enumeration algorithm installed and you might not be able to reproduce the
+same output twice so use with caution.
 
 >>> from cocktail_shaker import Cocktail
 >>> from cocktail_shaker import PeptideBuilder   >>> peptide_backbone = PeptideBuilder(2)
@@ -163,7 +168,8 @@ are generated.
 Cocktail Shaker also allows you to pass in the dimensionality of the enumeration.
 
 >>> from cocktail_shaker import Cocktail
->>> from cocktail_shaker import PeptideBuilder   >>> peptide_backbone = PeptideBuilder(2)
+>>> from cocktail_shaker import PeptideBuilder
+>>> peptide_backbone = PeptideBuilder(2)
 >>> cocktail = Cocktail(peptide_backbone,ligand_library = ['Br', 'I'])
 >>> combinations = cocktail.shake()
 >>> enumerations = cocktail.enumerate(dimensionality='2D')
