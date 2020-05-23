@@ -28,6 +28,9 @@ Announcements
 Using Cocktail Shaker
 =====================
 
+[![asciicast](https://asciinema.org/a/7h2s2BQKBWeVuASnutnNjagDW.svg)](https://asciinema.org/a/7h2s2BQKBWeVuASnutnNjagDW)
+
+
 cocktail-shaker is a young library under heavy development at this time.
 It targets two categories of users:
 
