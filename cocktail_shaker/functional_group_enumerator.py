@@ -58,10 +58,8 @@ class Cocktail(object):
         self.ligand_library = ligand_library
 
         # Detect the proline amino acid on the N-terminus, set the max peptide length accordingly.
-        if self.peptide_backbone[0:6] == 'N2CCCC2':
-            self.peptide_backbone_length = int(max(map(int, re.findall(r"\d+", self.peptide_backbone[7:]))))
-
         self.peptide_backbone_length = int(max(map(int, re.findall(r"\d+", self.peptide_backbone))))
+
         self.enable_isomers = enable_isomers
         self.include_amino_acids = include_amino_acids
 
