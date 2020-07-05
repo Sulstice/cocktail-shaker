@@ -36,6 +36,7 @@ designed for any chemical software, employing click chemistry methods for ease o
 and chemical representation enumeration employed for machine learning.
 
 ```Cocktail Shaker``` consists of three major class objects available to the user: PeptideMolecule, CocktailShaker, and FileWriter.
+
 Using string manipulation Peptide Molecule can build SMILES strings with allocated slots defined by the user. The user can
 then enter the produced SMILES into the CocktailShaker object with a library of ligands represented by smiles and optional arguments
 of whether to include generation of stereoisomers and/or natural amino acids.  
