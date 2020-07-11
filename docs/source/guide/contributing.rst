@@ -50,7 +50,7 @@ Tips
 - Read the GitHub help page on `Using pull requests`_.
 
 .. _`source code`: https://github.com/Sulstice/Cocktail-Shaker.git
-.. _`Fork the CIRpy repository on GitHub`: https://github.com/Sulstice/Cocktail-Shaker/fork
+.. _`Fork the Cocktail-Shaker repository on GitHub`: https://github.com/Sulstice/Cocktail-Shaker/fork
 .. _`Submit a pull request`: https://github.com/Sulstice/Cocktail-Shaker/compare/
 .. _`squashing your commits`: http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
 .. _`PEP8`: https://www.python.org/dev/peps/pep-0008

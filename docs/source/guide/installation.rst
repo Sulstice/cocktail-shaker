@@ -29,7 +29,7 @@ Option 2: Download the Latest Release
 
 Alternatively, you can get cocktail-shaker by manually `download the latest release`_ and installing it yourself::
 
-    tar -xzvf cocktail_shaker-1.0.0tar.gz
+    tar -xzvf cocktail_shaker-1.1.6tar.gz
     cd cocktail_shaker-1.0.0
     python setup.py install
 

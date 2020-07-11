@@ -29,6 +29,15 @@ FileParser will then return a list of SMILES.
 The FileWriter Module
 ---------------------
 
+The FileWriter module uses the NIH web cactus resolver under the hood to generate the 2D or 3D data. By issuing requests
+of the compound in SMILES and returning a XML formatted data struct of the 2D/3D coordinates in whatever chemical format
+indicated by the user. Unfortunately, the cactus resolver can only process one api call at a time and not bulk requests.
+This means that sending combinations worth of 1000+ -> 1000+ api requests might not be in your best interest and
+eventually the server will deny any requests.
+
+This feature is still in development so use at your own discretion.
+
+
 You instantiate a ``FileWriter``
 by providing the path to the file, compounds to be written, and the extension you would like the files in.
 If the file being written is *not* supported, then ``FileNotSupportedError`` will be raised instead.
