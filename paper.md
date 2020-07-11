@@ -30,7 +30,7 @@ for non-natural amino acids and production of multiple chemical files. In this s
 # Methodology and Implementation
 
 ```Cocktail Shaker``` operates within the RDKit platform [@Landrum:2019-5] and is designed for the chemically-oriented
-computational research community. RDKit utilizes C-based functions for speed and rapid creation of molecule objects.
+computational research community. RDKit utilizes C++-based functions for speed and rapid creation of molecule objects.
 The toolkit offers a variety of utilities that includes: parsing and producing ready-to-use scientific files
 designed for any chemical software, employing click chemistry methods for ease of exchange compounds, chemical data writing, 
 and chemical representation enumeration employed for machine learning.
