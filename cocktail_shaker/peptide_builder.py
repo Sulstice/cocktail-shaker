@@ -166,7 +166,7 @@ class PeptideBuilder(object):
 
         """
 
-        pass
+        raise NotImplementedError
 
     def build_n_terminus(self):
 
@@ -176,5 +176,5 @@ class PeptideBuilder(object):
 
         """
 
-        pass
+        raise NotImplementedError
 

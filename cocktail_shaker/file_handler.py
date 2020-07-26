@@ -8,7 +8,7 @@
 # -------
 from rdkit import Chem
 from pathlib import Path
-from .request_handler import CactusRequestHandler, Resolver
+from request_handler import CactusRequestHandler, Resolver
 
 class FileNotSupportedError(Exception):
 
@@ -285,7 +285,7 @@ class FileParser(object):
 
         """
 
-        pass
+        raise NotImplementedError
 
     def parse_mol2(self):
 
@@ -298,7 +298,7 @@ class FileParser(object):
 
         """
 
-        pass
+        raise NotImplementedError
 
     def parse_txt(self):
 
@@ -307,7 +307,7 @@ class FileParser(object):
         Parse a text file.
 
         """
-        pass
+        raise NotImplementedError
 
     def parse_string(self):
 
@@ -317,4 +317,4 @@ class FileParser(object):
 
         """
 
-        pass
+        raise NotImplementedError

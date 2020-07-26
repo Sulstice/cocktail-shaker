@@ -41,7 +41,7 @@ ENTRY_POINTS = {
 # ----
 setup(
     name="cocktail_shaker",
-    version="1.1.6",
+    version="1.1.8",
     packages=['cocktail_shaker'],
     license='MIT',
     author="Suliman Sharif",
