@@ -21,7 +21,7 @@ import functools
 # Cocktail Shaker Imports
 # ---
 # --------------------
-from validation import MoleculeValidator
+from .validation import MoleculeValidator
 
 class Cocktail(object):
     """

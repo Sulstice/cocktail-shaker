@@ -8,7 +8,7 @@
 # -------
 from rdkit import Chem
 from pathlib import Path
-from request_handler import CactusRequestHandler, Resolver
+from .request_handler import CactusRequestHandler, Resolver
 
 class FileNotSupportedError(Exception):
 
