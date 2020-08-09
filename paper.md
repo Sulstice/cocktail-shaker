@@ -39,11 +39,10 @@ and chemical representation enumeration employed for machine learning.
 
 Using string manipulation PeptideMolecule can build SMILES strings with allocated slots defined by the user. The user can
 then enter the produced SMILES into the CocktailShaker object with a library of ligands represented by smiles and optional arguments
-of whether to include generation of stereoisomers and/or natural amino acids.  
-Cocktail Shaker will generate all combinations of the library and allocate them to a slot within the peptide. This process of 
+of whether to include generation of stereoisomers and/or natural amino acids. ```Cocktail Shaker``` will generate all combinations of the library and allocate them to a slot within the peptide. This process of 
 string manipulation is presented in ```Figure 1```.
 
-![Full string manipulation diagram of how cocktail shaker works with a ligand library of just bromine and iodine. 1D representations are labeled above with their 2D depictions displayed below.](https://raw.githubusercontent.com/Sulstice/cocktail-shaker/master/images/figure_1.png)
+![Full string manipulation diagram of how ```Cocktail Shaker``` works with a ligand library of just bromine and iodine. 1D representations are labeled above with their 2D depictions displayed below.](https://raw.githubusercontent.com/Sulstice/cocktail-shaker/master/images/figure_1.png)
   
 
 ```Cocktail Shaker``` also allows for File Writing of the molecules into a wide array of chemical formats (found in the documentation).
@@ -56,11 +55,11 @@ allows the user the flexibility to write a variety of files to implement in thei
 Using  ```Cocktail Shaker```, individual research groups and companies can quickly construct private compound collections and progressively improve public
 libraries with increased variations of chemical compound data.
 
-```Cocktail Shaker``` with its first version release provides a basis drug expansion and enumeration. For future
+```Cocktail Shaker``` with its first version release provides a basis for drug expansion and enumeration. For future
 releases ```Cocktail Shaker``` will be expanding into specifying shapes of compounds and, recently partnered with MolPort,
 vendor information on any compound generated. It was presented at the RDKit UGM conference at the University of Hamburg
-to the cheminformatics community with positive feedback with it's second version 1.0.1. With incorporated feedback it will now be
-released with version 1.1.0. With more contributions ```Cocktail Shaker``` will be an exciting time for drug library creation 
+to the cheminformatics community with positive feedback with its second version 1.0.1. With incorporated feedback it will now be
+released with version 1.1.0. With more contributions ```Cocktail Shaker``` will be an exciting tool for drug library creation 
 and drug discovery for scientists and engineers alike. 
 
 # Acknowledgements
