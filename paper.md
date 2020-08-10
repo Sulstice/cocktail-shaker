@@ -20,8 +20,7 @@ bibliography: paper.bib
 
 Without expensive software, the rapid creation and design of peptide ligand libraries has been a
 challenge for many drug discovery scientists. Currently, protein- and peptide-based therapeutics constitute 10% of the 
-pharmaceutical market and will make up a larger proportion of the market in the future [@Craig:2013-1; @Bruno:2013-2]. With increasing interest
-eludes to increasing high throughput screening of peptides computationally. Currently, two platforms for this purpose exist: Molecular Operating 
+pharmaceutical market and will make up a larger proportion of the market in the future [@Craig:2013-1; @Bruno:2013-2]. With the demand for designing new peptide therapeutics on the rise, new high throughput peptide-specific informatic tools are needed. Currently, two platforms for this purpose exist: Molecular Operating 
 Environment (MOE) [@Reynolds:2010-3] and Rapid Peptides Generator (RPG) [@Maillet:2020-4] but both have drawbacks. MOE works efficiently for creating peptide molecule 3D chemical 
 files in one particular format (mol2), but at the high cost for a licence. RPG, although free of charge, does not account
 for non-natural amino acids and production of multiple chemical files. In this study, I present the first open source python package,
