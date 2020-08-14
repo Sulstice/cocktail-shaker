@@ -58,7 +58,7 @@ libraries with increased variations of chemical compound data.
 releases ```Cocktail Shaker``` will be expanding into specifying shapes of compounds and, recently partnered with MolPort,
 vendor information on any compound generated. It was presented at the RDKit UGM conference at the University of Hamburg
 to the cheminformatics community with positive feedback with its second version 1.0.1. With incorporated feedback it will now be
-released with version 1.1.0. With more contributions ```Cocktail Shaker``` will be an exciting tool for drug library creation 
+released with version 1.1.8. With more contributions ```Cocktail Shaker``` will be an exciting tool for drug library creation 
 and drug discovery for scientists and engineers alike. 
 
 # Acknowledgements
