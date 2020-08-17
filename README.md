@@ -62,7 +62,7 @@ Cocktail-shaker runs on Python 3.5+ and within a conda environment due to the RD
 For the time being, here is the following:
 
 - [Anaconda](https://docs.anaconda.com/anaconda/install/)
-- [RDKit](https://www.rdkit.org/docs/Install.html) Version: 2019.09.1
+- [RDKit](https://www.rdkit.org/docs/Install.html) Version: 2019.09.1+
 
 Cocktail shaker is distributed through PyPi and can be installed via:
 
