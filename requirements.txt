@@ -2,7 +2,7 @@ alabaster==0.7.12
 attrs==19.3.0
 Babel==2.7.0
 certifi==2019.9.11
-chardet==3.0.4
+chardet==4.0.0
 idna==2.8
 imagesize==1.1.0
 importlib-metadata==0.23
