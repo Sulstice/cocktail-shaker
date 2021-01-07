@@ -26,7 +26,7 @@ ruamel.yaml==0.16.5
 ruamel.yaml.clib==0.2.0
 six==1.13.0
 snowballstemmer==2.0.0
-Sphinx==2.2.1
+Sphinx==3.4.3
 sphinx-bootstrap-theme==0.7.1
 urllib3==1.25.7
 wcwidth==0.1.7
