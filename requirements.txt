@@ -10,7 +10,7 @@ Jinja2==2.10.3
 lxml==4.4.1
 MarkupSafe==1.1.1
 MolVS==0.1.1
-more-itertools==7.2.0
+more-itertools==8.9.0
 numpy==1.17.3
 packaging==19.2
 pandas==0.25.3
