@@ -3,7 +3,7 @@ attrs==19.3.0
 Babel==2.7.0
 certifi==2019.9.11
 chardet==3.0.4
-idna==2.8
+idna==3.6
 imagesize==1.1.0
 importlib-metadata==0.23
 Jinja2==2.10.3
